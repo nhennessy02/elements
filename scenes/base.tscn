@@ -1,3 +1,7 @@
-[gd_scene format=3 uid="uid://b5ljf4tv31tnm"]
+[gd_scene load_steps=2 format=3 uid="uid://b5ljf4tv31tnm"]
+
+[ext_resource type="PackedScene" uid="uid://6mvccc721663" path="res://assets/animated_sprite_2d.tscn" id="1_x6og1"]
 
 [node name="root" type="Node2D"]
+
+[node name="testsprite" parent="." instance=ExtResource("1_x6og1")]
