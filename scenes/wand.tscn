@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://ccv77gx8m4wua"]
 
-[ext_resource type="Script" path="res://assets/scripts/wand.gd" id="1_ws3qu"]
+[ext_resource type="Script" path="res://assets/scripts/wand.gd" id="1_2578d"]
 [ext_resource type="Texture2D" uid="uid://camk3hrei8bev" path="res://assets/sprites/wand_placeholder.png" id="2_fhstu"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_6c8jq"]
@@ -15,12 +15,14 @@ animations = [{
 }]
 
 [node name="Wand" type="Node2D"]
-script = ExtResource("1_ws3qu")
+script = ExtResource("1_2578d")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+rotation = 1.5708
 sprite_frames = SubResource("SpriteFrames_6c8jq")
 centered = false
 offset = Vector2(-18, -200)
 
 [node name="ProjectileSpawnPoint" type="Node2D" parent="."]
-position = Vector2(0, -200)
+position = Vector2(200, 0)
