@@ -1,13 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://b5ljf4tv31tnm"]
+[gd_scene load_steps=3 format=3 uid="uid://b5ljf4tv31tnm"]
 
 [ext_resource type="PackedScene" uid="uid://c53dvgtfs8iqn" path="res://scenes/player.tscn" id="1_s3y6j"]
 [ext_resource type="PackedScene" uid="uid://ccv77gx8m4wua" path="res://scenes/wand.tscn" id="2_oyvwe"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_slw07"]
-size = Vector2(1533.75, 48)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_8wqbf"]
-size = Vector2(78, 564)
 
 [node name="root" type="Node2D"]
 
@@ -18,29 +12,3 @@ position = Vector2(0, -82)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(0.75, 0.75)
-
-[node name="Wall" type="RigidBody2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall"]
-position = Vector2(-1.75, -408)
-shape = SubResource("RectangleShape2D_slw07")
-debug_color = Color(0.180392, 0.513726, 1, 0.419608)
-
-[node name="Wall2" type="RigidBody2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall2"]
-position = Vector2(-2.125, 208)
-shape = SubResource("RectangleShape2D_slw07")
-debug_color = Color(0.180392, 0.513726, 1, 0.419608)
-
-[node name="Wall3" type="RigidBody2D" parent="."]
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Wall3"]
-position = Vector2(-732, -102)
-shape = SubResource("RectangleShape2D_8wqbf")
-
-[node name="Wall4" type="RigidBody2D" parent="."]
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Wall4"]
-position = Vector2(726, -104)
-shape = SubResource("RectangleShape2D_8wqbf")

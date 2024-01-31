@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://c53dvgtfs8iqn"]
+[gd_scene load_steps=5 format=3 uid="uid://c53dvgtfs8iqn"]
 
 [ext_resource type="Texture2D" uid="uid://d3pstt0sstor3" path="res://assets/sprites/player_placeholder.png" id="1_ig48g"]
+[ext_resource type="Script" path="res://assets/scripts/player.gd" id="1_l8vaj"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_iisd3"]
 animations = [{
@@ -17,6 +18,7 @@ animations = [{
 radius = 53.4603
 
 [node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_l8vaj")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
