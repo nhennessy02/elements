@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://ccv77gx8m4wua"]
 
 [ext_resource type="Script" path="res://assets/scripts/wand.gd" id="1_2578d"]
-[ext_resource type="PackedScene" uid="uid://bv0585bqktpfy" path="res://prefabs/base_projectile.tscn" id="2_bp4b6"]
+[ext_resource type="PackedScene" uid="uid://bv0585bqktpfy" path="res://prefabs/player/base_projectile.tscn" id="2_bp4b6"]
 [ext_resource type="Texture2D" uid="uid://camk3hrei8bev" path="res://assets/sprites/wand_placeholder.png" id="2_fhstu"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_6c8jq"]

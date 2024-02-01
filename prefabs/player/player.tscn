@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://c53dvgtfs8iqn"]
+[gd_scene load_steps=7 format=3 uid="uid://c53dvgtfs8iqn"]
 
 [ext_resource type="Texture2D" uid="uid://d3pstt0sstor3" path="res://assets/sprites/player_placeholder.png" id="1_ig48g"]
 [ext_resource type="Script" path="res://assets/scripts/player.gd" id="1_l8vaj"]
 [ext_resource type="Script" path="res://assets/scripts/damageable_player.gd" id="3_1jh4r"]
+[ext_resource type="PackedScene" uid="uid://ccv77gx8m4wua" path="res://prefabs/player/wand.tscn" id="4_bkdhc"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_iisd3"]
 animations = [{
@@ -33,3 +34,5 @@ shape = SubResource("CircleShape2D_mre33")
 
 [node name="HealthTracker" type="Node" parent="."]
 script = ExtResource("3_1jh4r")
+
+[node name="Wand" parent="." instance=ExtResource("4_bkdhc")]

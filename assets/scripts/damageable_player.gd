@@ -1,9 +1,8 @@
 extends Node
 
-class_name DamageablePlayer
-
 # SPECIFICALLY FOR THE PLAYER
 
+class_name DamageablePlayer
 @export var health : int = 5;
 
 # Enemies and enemy bullets will call this when colliding with the player
