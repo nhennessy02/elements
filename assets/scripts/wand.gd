@@ -1,13 +1,12 @@
 extends Node2D
 
-var projectileScene
+@export var projectileScene : PackedScene
 
 @onready var spawnPoint = $ProjectileSpawnPoint
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	projectileScene = preload("res://scenes/base_projectile.tscn")
-
+	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
