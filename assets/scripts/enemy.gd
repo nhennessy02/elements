@@ -22,4 +22,4 @@ func _physics_process(delta):
 func _on_hit_box_body_entered(body):
 	for child in body.get_children():
 		if child is DamageablePlayer:
-			child.hit(damage)
+			child.hit(damage) # calls hit in damageable_player.gd
