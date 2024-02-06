@@ -1,38 +1,32 @@
-[gd_scene load_steps=7 format=3 uid="uid://c53dvgtfs8iqn"]
+[gd_scene load_steps=6 format=3 uid="uid://c53dvgtfs8iqn"]
 
-[ext_resource type="Texture2D" uid="uid://d3pstt0sstor3" path="res://assets/sprites/player_placeholder.png" id="1_ig48g"]
 [ext_resource type="Script" path="res://assets/scripts/player.gd" id="1_l8vaj"]
+[ext_resource type="Texture2D" uid="uid://coo1w6yil0l76" path="res://assets/sprites/player_static.png" id="2_oxea1"]
 [ext_resource type="Script" path="res://assets/scripts/damageable_player.gd" id="3_1jh4r"]
 [ext_resource type="PackedScene" uid="uid://ccv77gx8m4wua" path="res://prefabs/player/wand.tscn" id="4_bkdhc"]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_iisd3"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("1_ig48g")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_mre33"]
-radius = 53.4603
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_iname"]
+radius = 48.0
+height = 148.0
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
+texture_filter = 1
 collision_layer = 3
 collision_mask = 0
 script = ExtResource("1_l8vaj")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
-position = Vector2(0, -27)
-sprite_frames = SubResource("SpriteFrames_iisd3")
+position = Vector2(189, -60)
+texture = ExtResource("2_oxea1")
+offset = Vector2(-189, 33)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_mre33")
+position = Vector2(0, -17)
+shape = SubResource("CapsuleShape2D_iname")
 
 [node name="HealthTracker" type="Node" parent="."]
 script = ExtResource("3_1jh4r")
 
 [node name="Wand" parent="." instance=ExtResource("4_bkdhc")]
+position = Vector2(0, 26)
