@@ -6,6 +6,7 @@ var fire_timer : float = 0
 var can_fire : bool = true
 
 @export var projectileScene : PackedScene
+@export var rayScene : PackedScene
 
 @onready var spawnPoint = $ProjectileSpawnPoint
 
@@ -28,13 +29,19 @@ func _process(delta):
 	if Input.is_action_pressed("fire_wand") and can_fire: #left mouse click
 		fire()
 
+
+
 func fire():
 	
 	# reset timer
 	fire_timer = 0
-	
 	var projectile = projectileScene.instantiate()
 	get_tree().current_scene.add_child(projectile)
 	projectile.global_position = spawnPoint.global_position #sets spawnpoint at the spawnpoint node
 	projectile.global_rotation = self.global_rotation
 	
+	#var ray = rayScene.instantiate()
+	#get_tree().current_scene.add_child(ray)
+	#ray.global_position = spawnPoint.global_position
+	#ray.global_rotation = spawnPoint.global_rotation
+

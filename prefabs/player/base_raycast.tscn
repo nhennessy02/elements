@@ -3,5 +3,17 @@
 [ext_resource type="Script" path="res://assets/scripts/Ray.gd" id="1_ccgo6"]
 
 [node name="Ray" type="RayCast2D"]
-target_position = Vector2(95, 0)
+target_position = Vector2(600, 0)
 script = ExtResource("1_ccgo6")
+
+[node name="Line2D" type="Line2D" parent="."]
+position = Vector2(0, 9.53674e-07)
+points = PackedVector2Array(0, -9.53674e-07, 599, -9.53674e-07)
+default_color = Color(1, 0, 0, 1)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
