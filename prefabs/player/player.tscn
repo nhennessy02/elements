@@ -36,3 +36,6 @@ shape = SubResource("CircleShape2D_mre33")
 script = ExtResource("3_1jh4r")
 
 [node name="Wand" parent="." instance=ExtResource("4_bkdhc")]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.75, 0.75)

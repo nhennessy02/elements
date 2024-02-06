@@ -1,21 +1,12 @@
 [gd_scene load_steps=3 format=3 uid="uid://b5ljf4tv31tnm"]
 
 [ext_resource type="PackedScene" uid="uid://c53dvgtfs8iqn" path="res://prefabs/player/player.tscn" id="1_g7xiw"]
-[ext_resource type="PackedScene" uid="uid://b7lfpp4hqs48i" path="res://prefabs/enemy.tscn" id="2_p30ls"]
+[ext_resource type="Script" path="res://scenes/WaveManager.gd" id="2_vxfd4"]
 
 [node name="root" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_g7xiw")]
 scale = Vector2(0.980468, 1)
 
-[node name="Enemy" parent="." instance=ExtResource("2_p30ls")]
-position = Vector2(252, 240)
-
-[node name="Enemy2" parent="." instance=ExtResource("2_p30ls")]
-position = Vector2(-550, 167)
-
-[node name="Enemy3" parent="." instance=ExtResource("2_p30ls")]
-position = Vector2(407, -200)
-
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(0.75, 0.75)
+[node name="WaveManager" type="Node" parent="."]
+script = ExtResource("2_vxfd4")
