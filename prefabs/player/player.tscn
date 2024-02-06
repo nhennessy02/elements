@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://assets/scripts/player.gd" id="1_l8vaj"]
 [ext_resource type="Script" path="res://assets/scripts/damageable_player.gd" id="3_1jh4r"]
 [ext_resource type="PackedScene" uid="uid://ccv77gx8m4wua" path="res://prefabs/player/wand.tscn" id="4_bkdhc"]
-[ext_resource type="Script" path="res://prefabs/player/Inventory.gd" id="5_5e60y"]
+[ext_resource type="Script" path="res://assets/scripts/Inventory.gd" id="5_5e60y"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_iisd3"]
 animations = [{
