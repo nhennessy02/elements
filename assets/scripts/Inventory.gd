@@ -22,21 +22,33 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	#if Input.is_action_just_pressed("select"):
+	#	print("select has been pressed")
+	#	itemPickup()
+	pass
+	
+	
+func _physics_process(delta):
 	if Input.is_action_just_pressed("select"):
 		print("select has been pressed")
 		itemPickup()
-	pass
+	
+	
+	#make an array that stores what items are under the player add and remove them with the on body/area entered and exited and use that array in item pick up
 func _on_area_2d_area_entered(area):
+	print("area entered")
 	print(area)
-	pass # Replace with function body.
+
 
 func _on_area_2d_body_entered(body):
+	if body.is_in_group("Player"):
+		return
+	print("Item entered")
 	print(body)
-	pass # Replace with function body.
 
 
 func itemPickup():
-	var areas = pickupZone.get_overlapping_bodies()
+	var areas = pickupZone.get_overlapping_areas()
 	print(areas)
 	var item = ""
 	for child in areas:
@@ -47,7 +59,7 @@ func itemPickup():
 		break
 	if item == "":
 		return
-	item.pickedUp();
+	#item.pickedUp();
 
 func comboLookup(array):
 	array.sort_custom(func(a,b): a < b)
