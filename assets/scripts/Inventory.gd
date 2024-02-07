@@ -25,7 +25,16 @@ func _process(delta):
 	pass
 
 func itemPickup():
-	var bodies = pickupZone.get_overlapping_bodies()
+	var bodies = pickupZone.get_overlapping_areas()
+	var item = ""
+	for child in bodies:
+		for node in child.get_children():
+			if node is Item:
+				item = node
+			break
+		break
+	if item == "":
+		return
 	
 
 func comboLookup(array):
