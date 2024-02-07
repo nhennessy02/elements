@@ -40,3 +40,9 @@ script = ExtResource("3_1jh4r")
 
 [node name="Inventory" type="Node" parent="."]
 script = ExtResource("5_5e60y")
+
+[node name="Area2D" type="Area2D" parent="Inventory"]
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Inventory/Area2D"]
+shape = SubResource("CircleShape2D_mre33")

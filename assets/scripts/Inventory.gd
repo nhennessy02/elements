@@ -13,6 +13,7 @@ extends Node
 
 enum Element { PESTILENCE = 1, HEMOMANCY = 2, CONVALESCENCE = 3, BONECRAFT = 4, OCCULTISM = 5}
 var inventory = []
+@onready var pickupZone = $Area2D
 
 
 # Called when the node enters the scene tree for the first time.
@@ -22,6 +23,10 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
+
+func itemPickup():
+	var bodies = pickupZone.get_overlapping_bodies()
+	
 
 func comboLookup(array):
 	array.sort_custom(func(a,b): a < b)
@@ -39,4 +44,3 @@ func comboLookup(array):
 		[Element.OCCULTISM]:
 			print("using Occultism")
 
-			
