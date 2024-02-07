@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://c53dvgtfs8iqn"]
+[gd_scene load_steps=9 format=3 uid="uid://c53dvgtfs8iqn"]
 
 [ext_resource type="Texture2D" uid="uid://d3pstt0sstor3" path="res://assets/sprites/player_placeholder.png" id="1_ig48g"]
 [ext_resource type="Script" path="res://assets/scripts/player.gd" id="1_l8vaj"]
@@ -19,6 +19,9 @@ animations = [{
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mre33"]
 radius = 53.4603
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wyean"]
+radius = 88.278
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 collision_layer = 3
@@ -42,7 +45,9 @@ script = ExtResource("3_1jh4r")
 script = ExtResource("5_5e60y")
 
 [node name="Area2D" type="Area2D" parent="Inventory"]
-monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Inventory/Area2D"]
-shape = SubResource("CircleShape2D_mre33")
+shape = SubResource("CircleShape2D_wyean")
+
+[connection signal="area_entered" from="Inventory/Area2D" to="Inventory" method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="Inventory/Area2D" to="Inventory" method="_on_area_2d_body_entered"]

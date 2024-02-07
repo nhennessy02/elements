@@ -22,20 +22,32 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if Input.is_action_just_pressed("select"):
+		print("select has been pressed")
+		itemPickup()
 	pass
+func _on_area_2d_area_entered(area):
+	print(area)
+	pass # Replace with function body.
+
+func _on_area_2d_body_entered(body):
+	print(body)
+	pass # Replace with function body.
+
 
 func itemPickup():
-	var bodies = pickupZone.get_overlapping_areas()
+	var areas = pickupZone.get_overlapping_bodies()
+	print(areas)
 	var item = ""
-	for child in bodies:
-		for node in child.get_children():
+	for child in areas:
+		for node in child.get_children(): #is_in_group
 			if node is Item:
 				item = node
 			break
 		break
 	if item == "":
 		return
-	
+	item.pickedUp();
 
 func comboLookup(array):
 	array.sort_custom(func(a,b): a < b)
@@ -52,4 +64,3 @@ func comboLookup(array):
 			print("using Bonecraft")
 		[Element.OCCULTISM]:
 			print("using Occultism")
-
