@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://b5ljf4tv31tnm"]
 
 [ext_resource type="PackedScene" uid="uid://c53dvgtfs8iqn" path="res://prefabs/player/player.tscn" id="1_g7xiw"]
-[ext_resource type="PackedScene" path="res://prefabs/enemy.tscn" id="2_p30ls"]
+[ext_resource type="PackedScene" uid="uid://b7lfpp4hqs48i" path="res://prefabs/enemy.tscn" id="2_p30ls"]
 
 [node name="root" type="Node2D"]
 

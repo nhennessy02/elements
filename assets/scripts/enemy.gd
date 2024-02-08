@@ -3,7 +3,7 @@ extends CharacterBody2D
 # Used for every enemy
 # Change these variables in the Inspector
 @export var speed : float = 200.0
-@export var damage : int = 5
+@export var damage : int = 1
 
 # We assign this in _ready()
 var player

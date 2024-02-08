@@ -8,8 +8,8 @@ var spawn_timer : float = 0.0
 
 # Spawn position logic
 var rng = RandomNumberGenerator.new()
-var spawn_range_width : float = 300		# FIX VALUE
-var spawn_range_height : float = 500	# FIX VALUE
+var spawn_range_width : float 
+var spawn_range_height : float
 var distance_multiplier : float = 1.5
 
 # Random Wave Generator
@@ -47,6 +47,11 @@ const i_grouped : int = 3	# Index of the bool that determines grouped vs random 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	# Initialize spawn bounds
+	spawn_range_width = get_viewport().get_visible_rect().size.x
+	spawn_range_height = get_viewport().get_visible_rect().size.y
+	
+	# Reference to player used to position other spawns
 	player = get_tree().get_nodes_in_group("Player")[0]
 	
 	# If there is a custom wave run it
