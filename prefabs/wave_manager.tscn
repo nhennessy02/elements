@@ -1,10 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://j27r6tyk1vro"]
+[gd_scene load_steps=2 format=3 uid="uid://j27r6tyk1vro"]
 
-[ext_resource type="Script" path="res://scenes/WaveManager.gd" id="1_33piu"]
-[ext_resource type="PackedScene" uid="uid://c53dvgtfs8iqn" path="res://prefabs/player/player.tscn" id="2_8bp4t"]
-[ext_resource type="PackedScene" uid="uid://b7lfpp4hqs48i" path="res://prefabs/enemy.tscn" id="3_xfpbi"]
+[ext_resource type="Script" path="res://assets/scripts/WaveManager.gd" id="1_33piu"]
 
 [node name="WaveManager" type="Node"]
 script = ExtResource("1_33piu")
-player = ExtResource("2_8bp4t")
-test_enemy = ExtResource("3_xfpbi")

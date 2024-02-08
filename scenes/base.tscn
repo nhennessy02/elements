@@ -1,12 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://b5ljf4tv31tnm"]
+[gd_scene load_steps=2 format=3 uid="uid://b5ljf4tv31tnm"]
 
 [ext_resource type="PackedScene" uid="uid://c53dvgtfs8iqn" path="res://prefabs/player/player.tscn" id="1_g7xiw"]
-[ext_resource type="Script" path="res://scenes/WaveManager.gd" id="2_vxfd4"]
 
 [node name="root" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_g7xiw")]
 scale = Vector2(0.980468, 1)
-
-[node name="WaveManager" type="Node" parent="."]
-script = ExtResource("2_vxfd4")
