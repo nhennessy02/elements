@@ -13,6 +13,7 @@ extends Node
 
 enum Element { PESTILENCE = 1, HEMOMANCY = 2, CONVALESCENCE = 3, BONECRAFT = 4, OCCULTISM = 5}
 var inventory = []
+var groundItems = []
 @onready var pickupZone = $Area2D
 
 
@@ -35,16 +36,18 @@ func _physics_process(delta):
 	
 	
 	#make an array that stores what items are under the player add and remove them with the on body/area entered and exited and use that array in item pick up
-func _on_area_2d_area_entered(area):
-	print("area entered")
-	print(area)
-
 
 func _on_area_2d_body_entered(body):
-	if body.is_in_group("Player"):
-		return
-	print("Item entered")
-	print(body)
+	if body.is_in_group("Item"):
+		groundItems.append(body)
+		print("Item entered")
+		print(body)
+
+func _on_area_2d_body_exited(body):
+	if body.is_in_group("Item"):
+		groundItems.erase(body)
+		print("Item exited")
+		print(body)
 
 
 func itemPickup():
@@ -76,3 +79,5 @@ func comboLookup(array):
 			print("using Bonecraft")
 		[Element.OCCULTISM]:
 			print("using Occultism")
+
+

@@ -7,16 +7,14 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_dm1pk"]
 radius = 36.4966
 
-[node name="BaseItem" type="Node2D" groups=["Item"]]
+[node name="BaseItem" type="StaticBody2D" groups=["Item"]]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(9.53674e-07, -0.500003)
 scale = Vector2(54, 51)
 texture = SubResource("CanvasTexture_eo3oy")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_dm1pk")
 
 [node name="Item" type="Node" parent="."]
