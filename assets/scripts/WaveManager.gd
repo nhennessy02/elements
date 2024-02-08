@@ -12,6 +12,15 @@ var spawn_range_width : float = 300		# FIX VALUE
 var spawn_range_height : float = 500	# FIX VALUE
 var distance_multiplier : float = 1.5
 
+# Random Wave Generator
+@export var r_stages_min : int = 5
+@export var r_stages_max : int = 10
+@export var r_count_min : int = 3
+@export var r_count_max : int = 8
+@export var r_time_min : float = 2.5
+@export var r_time_max : float = 7.0
+@export var random_enemy_array : Array[PackedScene]
+
 # References to other entities
 var player
 
@@ -39,7 +48,14 @@ const i_grouped : int = 3	# Index of the bool that determines grouped vs random 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	player = get_tree().get_nodes_in_group("Player")[0]
-	next_wave()
+	
+	# If there is a custom wave run it
+	if wave_stages.size() > 0:
+		next_wave()
+	
+	# Otherwise run a random wave
+	else:
+		random_wave()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -70,13 +86,44 @@ func next_wave():
 	current_stage_index = 0
 	call_wave_element(current_stage_index)
 
+func random_wave():
+	wave_over = false
+	current_stage_index = 0
+	
+	# Determine number of stages in the wave
+	var r_stages : int = rng.randi_range(r_stages_min, r_stages_max)
+	
+	# Generate random wave array
+	for stage in r_stages:
+		# Construct the array which will have its values later redefined
+		var new_data = [r_count_min, random_enemy_array[0], r_time_min, false]
+		wave_stages.append(new_data)
+		
+		# Get random values for int variables
+		wave_stages[stage][i_count] = rng.randi_range(r_count_min, r_count_max)
+		wave_stages[stage][i_time] = rng.randf_range(r_time_min, r_time_max)
+		
+		# Get a random enemy type to spawn from the array in the inspector
+		var r_enemy_index = rng.randi_range(0, random_enemy_array.size() - 1)
+		wave_stages[stage][i_type] = random_enemy_array[r_enemy_index]
+		
+		# 50/50 whether the enemies are grouped or randomly placed
+		if rng.randi_range(0, 1) == 0:
+			wave_stages[stage][i_grouped] = true
+		else:
+			wave_stages[stage][i_grouped] = false
+	
+	call_wave_element(current_stage_index)
+
 # Gets information from the waves array to spawn new enemies as part of the wave
 func call_wave_element(index: int):
+	# Load stage information from the wave array
 	enemy_count = wave_stages[index][i_count]
 	enemy_type = wave_stages[index][i_type]
 	time_between_spawns = wave_stages[index][i_time]
 	spawns_grouped = wave_stages[index][i_grouped]
 	
+	# Set new time between stages
 	spawn_time = time_between_spawns
 	
 	# If the spawned enemies appear in a similar location

@@ -10,4 +10,4 @@
 scale = Vector2(0.980468, 1)
 
 [node name="WaveManager" parent="." instance=ExtResource("2_1ewqc")]
-wave_stages = Array[Array]([[5, ExtResource("3_awdl3"), 2.0, true], [5, ExtResource("3_awdl3"), 0.0, false]])
+random_enemy_array = Array[PackedScene]([ExtResource("3_awdl3")])
