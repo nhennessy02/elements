@@ -3,7 +3,7 @@ extends Node
 #This script should handle
 #1. loading in the json of elements and their properties into an object of some sort
 #2. handle your characters inventory of up to three elements
-#2a. picking up elements
+#2a. picking up elements - kinda got working
 #2b. swaping elements if you're already at three
 #2c. dropping elements
 #3. handle the combination of elements and load the combo into your wand
@@ -49,20 +49,36 @@ func _on_area_2d_body_exited(body):
 		print("Item exited")
 		print(body)
 
+func _on_area_2d_area_entered(area):
+	if area.is_in_group("Item"):
+		groundItems.append(area)
+		print("Item entered")
+		print(area)
+
+func _on_area_2d_area_exited(area):
+	if area.is_in_group("Item"):
+		groundItems.erase(area)
+		print("Item exited")
+		print(area)
 
 func itemPickup():
-	var areas = pickupZone.get_overlapping_areas()
-	print(areas)
-	var item = ""
-	for child in areas:
-		for node in child.get_children(): #is_in_group
+	var item
+	print(groundItems)
+	for element in groundItems:
+		for node in element.get_children():
 			if node is Item:
 				item = node
+				#if inventory.size() == 3
+					#swap items
+				inventory.append(element)
+				break
+		if item:
 			break
-		break
-	if item == "":
+	if not item:
 		return
-	#item.pickedUp();
+	item.pickedUp()
+	print(inventory)
+	
 
 func comboLookup(array):
 	array.sort_custom(func(a,b): a < b)
@@ -79,5 +95,8 @@ func comboLookup(array):
 			print("using Bonecraft")
 		[Element.OCCULTISM]:
 			print("using Occultism")
+
+
+
 
 
