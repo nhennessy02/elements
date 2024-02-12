@@ -63,14 +63,15 @@ func _on_area_2d_area_exited(area):
 
 func itemPickup():
 	var item
-	print(groundItems)
+
 	for element in groundItems:
 		for node in element.get_children():
 			if node is Item:
 				item = node
 				#if inventory.size() == 3
 					#swap items
-				inventory.append(element)
+				# save information about the item in the inventory array
+				#inventory.append(element)
 				break
 		if item:
 			break
