@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://coyg8cd0eilum"]
 
 [ext_resource type="PackedScene" uid="uid://c53dvgtfs8iqn" path="res://prefabs/player/player.tscn" id="1_pkeck"]
-[ext_resource type="PackedScene" uid="uid://cdt4nfib7v0a0" path="res://prefabs/base_item.tscn" id="2_52ngw"]
+[ext_resource type="PackedScene" uid="uid://rtck8bqo3jek" path="res://prefabs/base_item.tscn" id="2_52ngw"]
 
 [node name="ItemTestScene" type="Node2D"]
 

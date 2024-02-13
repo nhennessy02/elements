@@ -8,7 +8,6 @@
 texture_filter = 1
 script = ExtResource("1_2578d")
 projectileScene = ExtResource("2_bp4b6")
-rayScene = ExtResource("3_uwvhe")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("3_tqtnw")
