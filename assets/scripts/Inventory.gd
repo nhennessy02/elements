@@ -14,7 +14,7 @@ extends Node
 enum Element { PESTILENCE = 1, HEMOMANCY = 2, CONVALESCENCE = 3, BONECRAFT = 4, OCCULTISM = 5}
 var inventory = []
 var groundItems = []
-@onready var pickupZone = $Area2D
+@onready var pickupZone = $"../Area2D"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
