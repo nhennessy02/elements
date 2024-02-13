@@ -37,11 +37,12 @@ func _process(delta):
 	if Input.is_action_pressed("fire_wand") and can_fire: #left mouse click
 		fire()
 
+
+
 func fire():
 	
 	# reset timer
 	fire_timer = 0
-	
 	var projectile = projectileScene.instantiate()
 	get_tree().current_scene.add_child(projectile)
 	projectile.global_position = spawnPoint.global_position #sets spawnpoint at the spawnpoint node
