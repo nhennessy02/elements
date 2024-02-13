@@ -4,10 +4,12 @@ extends Node2D
 @export var fire_rate : float = 0.4 
 var fire_timer : float = 0
 var can_fire : bool = true
+var mousePos
 
 @export var projectileScene : PackedScene
 
-@onready var spawnPoint = $ProjectileSpawnPoint
+@onready var sprite = $Sprite2D
+@onready var spawnPoint = $Sprite2D/ProjectileSpawnPoint
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -15,7 +17,14 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	look_at(get_global_mouse_position())
+	mousePos = get_global_mouse_position()
+	
+	#Flip to face the mouse
+	if mousePos.x < global_position.x:
+		sprite.flip_v = true
+	else:
+		sprite.flip_v = false
+	look_at(mousePos)
 	
 	# Firing Cooldown
 	fire_timer += delta
@@ -38,4 +47,5 @@ func fire():
 	get_tree().current_scene.add_child(projectile)
 	projectile.global_position = spawnPoint.global_position #sets spawnpoint at the spawnpoint node
 	projectile.global_rotation = self.global_rotation
+	
 	
