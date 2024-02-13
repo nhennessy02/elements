@@ -6,7 +6,6 @@ var fire_timer : float = 0
 var can_fire : bool = true
 
 @export var projectileScene : PackedScene
-@export var rayScene : PackedScene
 
 @onready var spawnPoint = $ProjectileSpawnPoint
 
@@ -40,8 +39,3 @@ func fire():
 	projectile.global_position = spawnPoint.global_position #sets spawnpoint at the spawnpoint node
 	projectile.global_rotation = self.global_rotation
 	
-	#var ray = rayScene.instantiate()
-	#get_tree().current_scene.add_child(ray)
-	#ray.global_position = spawnPoint.global_position
-	#ray.global_rotation = spawnPoint.global_rotation
-
