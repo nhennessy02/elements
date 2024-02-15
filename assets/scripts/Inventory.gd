@@ -11,7 +11,7 @@ extends Node
 #3b. create the correct object/scene - not started
 #3c. give the object/scene to the wand to use - not started
 
-enum Element { PESTILENCE = 1, HEMOMANCY = 2, CONVALESCENCE = 3, BONECRAFT = 4, OCCULTISM = 5}
+enum Element { PESTILENCE = 0, HEMOMANCY = 1, CONVALESCENCE = 2, BONECRAFT = 3, OCCULTISM = 4}
 var inventory = []
 var groundItems = []
 @onready var pickupZone = $"../Area2D"
