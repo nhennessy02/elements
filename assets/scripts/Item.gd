@@ -6,7 +6,7 @@ var id;
 
 @onready var sprite = $"../Sprite2D"
 #get some sprites only pestilence and hemomancy have temporary sprites
-var spriteArray = [load("res://assets/sprites/elements/pestilence_bubble.png"),load("res://assets/sprites/elements/hemomancy_bubble.png"),load("res://assets/sprites/elements/hemomancy_ui.png"),load("res://assets/sprites/elements/pestilence_ui.png"),load("res://assets/sprites/elements/occultism_bubble.png")]
+var spriteArray = [load("res://assets/sprites/elements/pestilence_bubble.png"),load("res://assets/sprites/elements/hemomancy_bubble.png"),load("res://assets/sprites/elements/convalescence_bubble.png"),load("res://assets/sprites/elements/bonecraft_bubble.png"),load("res://assets/sprites/elements/occultism_bubble.png")]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
