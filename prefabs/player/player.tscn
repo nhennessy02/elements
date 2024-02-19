@@ -11,7 +11,7 @@ radius = 46.0
 height = 146.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w8su0"]
-size = Vector2(92, 20)
+size = Vector2(92, 29)
 
 [sub_resource type="Animation" id="Animation_hmyht"]
 length = 0.001
@@ -185,7 +185,7 @@ collision_mask = 4
 shape = SubResource("CapsuleShape2D_g1ww4")
 
 [node name="WorldCollisionBox" type="CollisionShape2D" parent="."]
-position = Vector2(0, 47)
+position = Vector2(0, 42.5)
 shape = SubResource("RectangleShape2D_w8su0")
 debug_color = Color(0.988235, 0.0509804, 0.215686, 0.419608)
 
