@@ -1,16 +1,11 @@
 [gd_scene load_steps=3 format=3 uid="uid://86g2dj3tqv3o"]
 
-[ext_resource type="TileSet" uid="uid://c0unetnyso0ou" path="res://assets/tilesets/graveyard.tres" id="1_qc6fm"]
+[ext_resource type="PackedScene" uid="uid://cjm8hsedcxsca" path="res://prefabs/tilemaps/graveyard.tscn" id="1_kw16u"]
 [ext_resource type="PackedScene" uid="uid://c53dvgtfs8iqn" path="res://prefabs/player/player.tscn" id="2_m1bkm"]
 
 [node name="TilemapTest" type="Node2D"]
 
-[node name="TileMap" type="TileMap" parent="."]
-texture_filter = 1
-tile_set = ExtResource("1_qc6fm")
-format = 2
-layer_0/name = "main"
-layer_0/tile_data = PackedInt32Array(-65536, 0, 1, -1, 0, 1, -65535, 65536, 1, 1, 0, 1, 0, 65536, 1, 65535, 65536, 1, -65537, 65536, 0, -65534, 65536, 1342177280, 2, 65536, 1342177280, 65536, 65536, 805306368, 131071, 65536, 805306368, -2, 65536, 1610612736, -131070, 131072, 0, 65538, 131072, 1342177280, 131070, 131072, 805306368, -65538, 131072, 1610612736, -131072, 65536, 2, 65537, 131072, 805306369, 65534, 131072, 1610612738, -131071, 131072, 2)
+[node name="TileMap" parent="." instance=ExtResource("1_kw16u")]
 
 [node name="Player" parent="." instance=ExtResource("2_m1bkm")]
 position = Vector2(105, -11)
