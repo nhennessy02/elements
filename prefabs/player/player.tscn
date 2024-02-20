@@ -224,6 +224,9 @@ parameters/conditions/idle = false
 parameters/conditions/running = false
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position_smoothing_enabled = true
 
+[connection signal="health_changed" from="HealthTracker" to="." method="_on_health_tracker_health_changed"]
+[connection signal="inventory_changed" from="Inventory" to="." method="_on_inventory_inventory_changed"]
 [connection signal="area_entered" from="Area2D" to="Inventory" method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="Area2D" to="Inventory" method="_on_area_2d_area_exited"]
