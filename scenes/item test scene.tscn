@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://coyg8cd0eilum"]
+[gd_scene load_steps=4 format=3 uid="uid://coyg8cd0eilum"]
 
 [ext_resource type="PackedScene" uid="uid://c53dvgtfs8iqn" path="res://prefabs/player/player.tscn" id="1_pkeck"]
 [ext_resource type="PackedScene" uid="uid://rtck8bqo3jek" path="res://prefabs/base_item.tscn" id="2_52ngw"]
+[ext_resource type="PackedScene" uid="uid://dtco1a3e2pu54" path="res://prefabs/ui.tscn" id="3_a6bev"]
 
 [node name="ItemTestScene" type="Node2D"]
 
@@ -25,3 +26,8 @@ position = Vector2(-387, 145)
 
 [node name="BaseItem5" parent="." instance=ExtResource("2_52ngw")]
 position = Vector2(-99, -250)
+
+[node name="UI" parent="." instance=ExtResource("3_a6bev")]
+
+[connection signal="health_changed" from="Player" to="UI" method="_on_player_health_changed"]
+[connection signal="inventory_changed" from="Player" to="UI" method="_on_player_inventory_changed"]

@@ -14,4 +14,6 @@ scale = Vector2(0.980468, 1)
 random_enemy_array = Array[PackedScene]([ExtResource("3_awdl3")])
 
 [node name="UI" parent="." instance=ExtResource("4_0w8rl")]
-unique_name_in_owner = true
+
+[connection signal="health_changed" from="Player" to="UI" method="_on_player_health_changed"]
+[connection signal="inventory_changed" from="Player" to="UI" method="_on_player_inventory_changed"]

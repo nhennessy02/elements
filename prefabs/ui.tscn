@@ -17,9 +17,13 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="Control"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -98.0
+offset_right = 154.0
+grow_vertical = 0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_constants/margin_left = 32
@@ -27,7 +31,33 @@ theme_override_constants/margin_top = 32
 theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 32
 
-[node name="Label" type="Label" parent="Control/MarginContainer"]
+[node name="HealthLabel" type="Label" parent="Control/MarginContainer"]
+unique_name_in_owner = true
 layout_mode = 2
-text = "Health: "
+text = "Health: 3"
 label_settings = SubResource("LabelSettings_ha46s")
+
+[node name="ElementTextureContainer" type="HBoxContainer" parent="Control"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -212.0
+offset_top = -72.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="Element2" type="TextureRect" parent="Control/ElementTextureContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Element1" type="TextureRect" parent="Control/ElementTextureContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Element0" type="TextureRect" parent="Control/ElementTextureContainer"]
+unique_name_in_owner = true
+layout_mode = 2

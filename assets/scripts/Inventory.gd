@@ -16,9 +16,6 @@ var inventory = []
 var groundItems = []
 @onready var pickupZone = $"../Area2D"
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -26,12 +23,6 @@ func _process(delta):
 		print("select has been pressed")
 		itemPickup()
 
-func _physics_process(delta):
-	#if Input.is_action_just_pressed("select"):
-	#	print("select has been pressed")
-	#	itemPickup()
-	pass
-	
 	#make an array that stores what items are under the player add and remove them with the on body/area entered and exited and use that array in item pick up
 
 func _on_area_2d_area_entered(area):
@@ -50,27 +41,27 @@ func _on_area_2d_area_exited(area):
 
 func itemPickup():
 	var item
-
 	for element in groundItems:
 		for node in element.get_children():
 			if node is Item:
 				item = node
 				if inventory.size() == 3:
 					var temp = item.getId()
-					item.setId(inventory[0])
-					inventory[0] = temp
+					item.setId(inventory.pop_front())
+					inventory.push_back(temp) 					
+					inventory_changed.emit(inventory)
 					#swap items
-				# save information about the item in the inventory array
+					# save information about the item in the inventory array
 				else:
 					inventory.append(item.id)
 					item.pickedUp()
+					inventory_changed.emit(inventory)
 				break
 		if item:
 			break
 	if not item:
 		return
 	print(inventory)
-	
 
 func comboLookup(array):
 	array.sort_custom(func(a,b): a < b)
@@ -88,7 +79,7 @@ func comboLookup(array):
 		[Element.OCCULTISM]:
 			print("using Occultism")
 
-
+signal inventory_changed(value)
 
 
 

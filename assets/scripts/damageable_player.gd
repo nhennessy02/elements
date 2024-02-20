@@ -5,15 +5,15 @@ extends Node
 class_name DamageablePlayer
 @export var health : int = 3;
 
-@onready var ui : UI = %UI
-func _ready():
-	print(ui);
+signal health_changed(value : int)
+
+	
 # Enemies and enemy bullets will call this when colliding with the player
 func hit(damage : int):
 	
 	# Take Damage
 	health -= damage
-	ui.update_health_label(health)
+	health_changed.emit(health)
 	
 	# Still alive...?
 	if health <= 0:

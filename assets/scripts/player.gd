@@ -30,3 +30,12 @@ func _physics_process(delta):
 	
 	# Smoothes movement while colliding with walls, etc.
 	move_and_slide()
+
+#outgoing signals
+signal health_changed(value : int)
+func _on_health_tracker_health_changed(value):
+	health_changed.emit(value)
+	
+signal inventory_changed(value)
+func _on_inventory_inventory_changed(value):
+	inventory_changed.emit(value)
