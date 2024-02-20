@@ -5,9 +5,11 @@
 
 [node name="ItemTestScene" type="Node2D"]
 
-[node name="Camera2D" type="Camera2D" parent="."]
-
 [node name="Player" parent="." instance=ExtResource("1_pkeck")]
+
+[node name="Camera2D2" type="Camera2D" parent="Player"]
+enabled = false
+position_smoothing_enabled = true
 
 [node name="BaseItem" parent="." instance=ExtResource("2_52ngw")]
 position = Vector2(379, 144)
