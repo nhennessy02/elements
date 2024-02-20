@@ -10,8 +10,9 @@ var mousePos
 
 @onready var sprite = $Sprite2D
 @onready var spawnPoint = $Sprite2D/ProjectileSpawnPoint
+@onready var animPlayer = $AnimationPlayer
 
-# Called when the node enters the scene tree for the first time.
+# Called when the node enters the scene tree for thes first time.
 func _ready():
 	pass
 
@@ -30,6 +31,7 @@ func _process(delta):
 	fire_timer += delta
 	if fire_timer >= fire_rate:
 		can_fire = true
+		animPlayer.play("idle")
 	else:
 		can_fire = false
 	
@@ -43,6 +45,10 @@ func fire():
 	
 	# reset timer
 	fire_timer = 0
+	
+	#play animation
+	animPlayer.play("fire")
+	
 	var projectile = projectileScene.instantiate()
 	get_tree().current_scene.add_child(projectile)
 	projectile.global_position = spawnPoint.global_position #sets spawnpoint at the spawnpoint node
