@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://bv0585bqktpfy"]
+[gd_scene load_steps=9 format=3 uid="uid://bv0585bqktpfy"]
 
 [ext_resource type="Script" path="res://assets/scripts/Projectile.gd" id="1_fhnml"]
 [ext_resource type="Texture2D" uid="uid://c6g0ofaqx8mq5" path="res://assets/sprites/projectile_placeholder.png" id="2_0uowf"]
+[ext_resource type="Texture2D" uid="uid://dswr104hq8cn3" path="res://assets/sprites/projectile_placeholder_particle.png" id="3_om2ta"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_qqfa8"]
 animations = [{
@@ -16,6 +17,25 @@ animations = [{
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tw3tc"]
 size = Vector2(24, 24)
+
+[sub_resource type="Curve" id="Curve_o1xiu"]
+_data = [Vector2(0, 0.8), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_3tk7s"]
+curve = SubResource("Curve_o1xiu")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ttxkb"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 100.0
+initial_velocity_max = 150.0
+gravity = Vector3(0, 0, 0)
+linear_accel_min = 50.0
+linear_accel_max = 50.0
+radial_accel_min = -75.0
+radial_accel_max = -75.0
+scale_curve = SubResource("CurveTexture_3tk7s")
 
 [node name="Projectile" type="Node2D"]
 script = ExtResource("1_fhnml")
@@ -34,4 +54,17 @@ position = Vector2(8, 0)
 shape = SubResource("RectangleShape2D_tw3tc")
 debug_color = Color(0.996078, 0, 0.184314, 0.419608)
 
+[node name="HitParticles" type="GPUParticles2D" parent="."]
+z_index = 2
+texture_filter = 1
+emitting = false
+amount = 10
+process_material = SubResource("ParticleProcessMaterial_ttxkb")
+texture = ExtResource("3_om2ta")
+lifetime = 0.7
+one_shot = true
+speed_scale = 0.75
+explosiveness = 1.0
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="finished" from="HitParticles" to="." method="_on_hit_particles_finished"]

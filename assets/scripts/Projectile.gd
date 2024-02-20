@@ -15,25 +15,21 @@ func _process(delta):
 
 # Calls when the bullet collides with another object
 func _on_area_2d_body_entered(body):
-	
-	# Boolean that lets the bullet be destroyed if it collides with something
-	# other than an enemy
-	var hit_wall : bool = false
+	$HitParticles.emitting = true
 	
 	# Call the enemy's "hit" function when it collides
 	for child in body.get_children():
 		if child is Damageable:
+		# Only deal damage if the thing is able to be damaged
 			child.hit(damage)
 			
-			# Destroys the bullet on hit
-			# REPLACE WITH ENTITY POOLING
-			queue_free()
-		
-		else:
-			hit_wall = true
+	# Make the projectile invisible
+	$AnimatedSprite2D.visible = false
 	
-	# Hit a wall
-	if hit_wall:
-		# Destroys the bullet on hit
-		# REPLACE WITH ENTITY POOLING
-		queue_free()
+# When the particles are finished emitting, delete the projectile object
+# Prevents the particles from being destroyed early
+# REPLACE WITH ENTITY POOLING
+func _on_hit_particles_finished():
+	queue_free()
+
+

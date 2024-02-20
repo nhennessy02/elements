@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://c53dvgtfs8iqn"]
+[gd_scene load_steps=18 format=3 uid="uid://c53dvgtfs8iqn"]
 
 [ext_resource type="Script" path="res://assets/scripts/player.gd" id="1_l8vaj"]
 [ext_resource type="Texture2D" uid="uid://coo1w6yil0l76" path="res://assets/sprites/player_static.png" id="2_oxea1"]
@@ -7,9 +7,12 @@
 [ext_resource type="Texture2D" uid="uid://db2msbgy42dkt" path="res://assets/sprites/player_walk.png" id="4_jxc0e"]
 [ext_resource type="Script" path="res://assets/scripts/Inventory.gd" id="5_5e60y"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_iname"]
-radius = 48.0
-height = 148.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g1ww4"]
+radius = 46.0
+height = 146.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w8su0"]
+size = Vector2(92, 29)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wyean"]
 radius = 88.278
@@ -167,8 +170,8 @@ transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 texture_filter = 1
-collision_layer = 3
-collision_mask = 0
+scale = Vector2(0.75, 0.75)
+collision_layer = 2
 script = ExtResource("1_l8vaj")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -177,9 +180,18 @@ position = Vector2(189, -60)
 texture = ExtResource("2_oxea1")
 offset = Vector2(-189, 33)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -17)
-shape = SubResource("CapsuleShape2D_iname")
+[node name="DamageCollisionBox" type="StaticBody2D" parent="."]
+position = Vector2(1, -16)
+collision_layer = 2
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageCollisionBox"]
+shape = SubResource("CapsuleShape2D_g1ww4")
+
+[node name="WorldCollisionBox" type="CollisionShape2D" parent="."]
+position = Vector2(0, 42.5)
+shape = SubResource("RectangleShape2D_w8su0")
+debug_color = Color(0.988235, 0.0509804, 0.215686, 0.419608)
 
 [node name="HealthTracker" type="Node" parent="."]
 script = ExtResource("3_1jh4r")
