@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://coyg8cd0eilum"]
+
+[ext_resource type="PackedScene" uid="uid://c53dvgtfs8iqn" path="res://prefabs/player/player.tscn" id="1_pkeck"]
+[ext_resource type="PackedScene" uid="uid://cdt4nfib7v0a0" path="res://prefabs/player/base_item.tscn" id="2_52ngw"]
+
+[node name="ItemTestScene" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_pkeck")]
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+
+[node name="BaseItem" parent="." instance=ExtResource("2_52ngw")]
+position = Vector2(379, 144)

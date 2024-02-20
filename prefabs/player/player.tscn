@@ -1,10 +1,11 @@
-[gd_scene load_steps=18 format=3 uid="uid://c53dvgtfs8iqn"]
+[gd_scene load_steps=20 format=3 uid="uid://c53dvgtfs8iqn"]
 
 [ext_resource type="Script" path="res://assets/scripts/player.gd" id="1_l8vaj"]
 [ext_resource type="Texture2D" uid="uid://coo1w6yil0l76" path="res://assets/sprites/player_static.png" id="2_oxea1"]
 [ext_resource type="Script" path="res://assets/scripts/damageable_player.gd" id="3_1jh4r"]
 [ext_resource type="PackedScene" uid="uid://ccv77gx8m4wua" path="res://prefabs/player/wand.tscn" id="4_bkdhc"]
 [ext_resource type="Texture2D" uid="uid://db2msbgy42dkt" path="res://assets/sprites/player_walk.png" id="4_jxc0e"]
+[ext_resource type="Script" path="res://assets/scripts/Inventory.gd" id="5_5e60y"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g1ww4"]
 radius = 46.0
@@ -12,6 +13,9 @@ height = 146.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w8su0"]
 size = Vector2(92, 29)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wyean"]
+radius = 88.278
 
 [sub_resource type="Animation" id="Animation_hmyht"]
 length = 0.001
@@ -193,8 +197,17 @@ debug_color = Color(0.988235, 0.0509804, 0.215686, 0.419608)
 script = ExtResource("3_1jh4r")
 
 [node name="Wand" parent="." instance=ExtResource("4_bkdhc")]
-position = Vector2(0, 26)
 fire_rate = 0.25
+
+[node name="Inventory" type="Node" parent="."]
+script = ExtResource("5_5e60y")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_mask = 16
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_wyean")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -211,3 +224,6 @@ parameters/conditions/idle = false
 parameters/conditions/running = false
 
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[connection signal="area_entered" from="Area2D" to="Inventory" method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="Inventory" method="_on_area_2d_area_exited"]
