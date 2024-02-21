@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://di7gknw70p3rn"]
+
+[ext_resource type="Texture2D" uid="uid://b1tgcwoe8tkn" path="res://assets/ui element sprites/enemy_indicator.png" id="1_gmru1"]
+
+[node name="EnemyIndicator" type="Sprite2D"]
+texture = ExtResource("1_gmru1")
