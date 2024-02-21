@@ -19,25 +19,28 @@ var groundItems = []
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
+	#handles picking up objects from the ground
 	if Input.is_action_just_pressed("select"):
-		print("select has been pressed")
+		#print("select has been pressed")
 		itemPickup()
-
-	#make an array that stores what items are under the player add and remove them with the on body/area entered and exited and use that array in item pick up
+	
+	#handles creating combinations
+	#if Input.is_action_just_pressed("inventory_1"):
+	
 
 func _on_area_2d_area_entered(area):
 	if area.is_in_group("Item"):
 		groundItems.append(area)
-		print("Item entered")
-		print(area.get_node("Item").getId())
-		print(area)
+		#print("Item entered")
+		#print(area.get_node("Item").getId())
+		#print(area)
 
 func _on_area_2d_area_exited(area):
 	if area.is_in_group("Item"):
 		groundItems.erase(area)
-		print("Item exited")
-		print(area.get_node("Item").getId())
-		print(area)
+		#print("Item exited")
+		#print(area.get_node("Item").getId())
+		#print(area)
 
 func itemPickup():
 	var item
@@ -61,7 +64,9 @@ func itemPickup():
 			break
 	if not item:
 		return
-	print(inventory)
+	#print(inventory)
+
+
 
 func comboLookup(array):
 	array.sort_custom(func(a,b): a < b)

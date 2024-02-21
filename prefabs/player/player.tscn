@@ -203,6 +203,9 @@ fire_rate = 0.25
 [node name="Inventory" type="Node" parent="."]
 script = ExtResource("5_5e60y")
 
+[node name="Timer" type="Timer" parent="Inventory"]
+one_shot = true
+
 [node name="Area2D" type="Area2D" parent="."]
 collision_mask = 16
 monitorable = false
