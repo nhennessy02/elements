@@ -1,8 +1,8 @@
 [gd_scene load_steps=17 format=3 uid="uid://c53dvgtfs8iqn"]
 
-[ext_resource type="Script" path="res://assets/scripts/player.gd" id="1_l8vaj"]
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_80cnj"]
 [ext_resource type="Texture2D" uid="uid://coo1w6yil0l76" path="res://assets/sprites/player_static.png" id="2_oxea1"]
-[ext_resource type="Script" path="res://assets/scripts/damageable_player.gd" id="3_1jh4r"]
+[ext_resource type="Script" path="res://scripts/damageable_player.gd" id="3_b1bwl"]
 [ext_resource type="PackedScene" uid="uid://ccv77gx8m4wua" path="res://prefabs/player/wand.tscn" id="4_bkdhc"]
 [ext_resource type="Texture2D" uid="uid://db2msbgy42dkt" path="res://assets/sprites/player_walk.png" id="4_jxc0e"]
 
@@ -163,9 +163,8 @@ transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 texture_filter = 1
-collision_layer = 3
-collision_mask = 0
-script = ExtResource("1_l8vaj")
+collision_layer = 2
+script = ExtResource("1_80cnj")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
@@ -178,7 +177,7 @@ position = Vector2(0, -17)
 shape = SubResource("CapsuleShape2D_iname")
 
 [node name="HealthTracker" type="Node" parent="."]
-script = ExtResource("3_1jh4r")
+script = ExtResource("3_b1bwl")
 
 [node name="Wand" parent="." instance=ExtResource("4_bkdhc")]
 position = Vector2(0, 26)

@@ -13,4 +13,4 @@ func hit(damage : int):
 	# Still alive...?
 	if health <= 0:
 		# Replace with more robust enemy death
-		get_parent().queue_free()
+		get_parent().die()

@@ -1,13 +1,13 @@
 [gd_scene load_steps=4 format=3 uid="uid://bsxgga6abhfef"]
 
+[ext_resource type="PackedScene" uid="uid://c47i80j2hwowg" path="res://prefabs/scene elements/entity_manager.tscn" id="1_sj0kl"]
 [ext_resource type="PackedScene" uid="uid://c53dvgtfs8iqn" path="res://prefabs/player/player.tscn" id="1_wt1xb"]
-[ext_resource type="PackedScene" uid="uid://j27r6tyk1vro" path="res://prefabs/wave_manager.tscn" id="2_1ewqc"]
-[ext_resource type="PackedScene" uid="uid://b7lfpp4hqs48i" path="res://prefabs/enemy.tscn" id="3_awdl3"]
+[ext_resource type="PackedScene" uid="uid://j27r6tyk1vro" path="res://prefabs/scene elements/wave_manager.tscn" id="2_1ewqc"]
 
 [node name="WaveTest" type="Node2D"]
 
-[node name="Player" parent="." instance=ExtResource("1_wt1xb")]
-scale = Vector2(0.980468, 1)
+[node name="EntityManager" parent="." instance=ExtResource("1_sj0kl")]
 
 [node name="WaveManager" parent="." instance=ExtResource("2_1ewqc")]
-random_enemy_array = Array[PackedScene]([ExtResource("3_awdl3")])
+
+[node name="Player" parent="." instance=ExtResource("1_wt1xb")]
