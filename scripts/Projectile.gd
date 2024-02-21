@@ -1,6 +1,7 @@
 extends Node2D
 
 var direction
+var active : bool = true
 
 @export var speed : float = 500
 @export var damage : int = 4
@@ -19,9 +20,10 @@ func _on_area_2d_body_entered(body):
 	
 	# Call the enemy's "hit" function when it collides
 	for child in body.get_children():
-		if child is Damageable:
+		if child is Damageable and active:
 		# Only deal damage if the thing is able to be damaged
 			child.hit(damage)
+			active = false
 			
 	# Make the projectile invisible
 	$AnimatedSprite2D.visible = false
