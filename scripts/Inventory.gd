@@ -13,21 +13,71 @@ extends Node
 
 enum Element { PESTILENCE = 0, HEMOMANCY = 1, CONVALESCENCE = 2, BONECRAFT = 3, OCCULTISM = 4}
 var inventory = []
+var combo = []
 var groundItems = []
+var pickedSlot0 : bool = false
+var pickedSlot1 : bool = false
+var pickedSlot2 : bool = false
 @onready var pickupZone = $"../Area2D"
+@onready var comboTimer = $Timer
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	#handles picking up objects from the ground
 	if Input.is_action_just_pressed("select"):
-		#print("select has been pressed")
 		itemPickup()
+		#print("select has been pressed")
 	
-	#handles creating combinations
-	#if Input.is_action_just_pressed("inventory_1"):
-	
+	#this second is about creating combinations 
+	#control either through press 1 2 and or 3 then send the combo after a timer - coded this way
+	#or hold a button, key or right click, press 1 2 and or 3 then release to send combo
+	if Input.is_action_just_pressed("slot0") and not pickedSlot0 and inventory.size() >= 1:
+		comboTimer.start()
+		combo.append(inventory[0])
+		pickedSlot0 = true
+	if Input.is_action_just_pressed("slot1") and not pickedSlot1 and inventory.size() >= 2:
+		comboTimer.start()
+		combo.append(inventory[1])
+		pickedSlot1 = true
+	if Input.is_action_just_pressed("slot2") and not pickedSlot2 and inventory.size() >= 3:
+		comboTimer.start()
+		combo.append(inventory[2])
+		pickedSlot2 = true
+	if pickedSlot0 and pickedSlot1 and pickedSlot2:
+		comboTimer.stop()
+		comboLookup(combo)
+		combo = []
 
+func _on_timer_timeout():
+	comboLookup(combo)
+	pickedSlot0 = false
+	pickedSlot1 = false
+	pickedSlot2 = false
+	combo = []	
+
+func comboLookup(array):
+	array.sort_custom(func(a,b): a < b)
+	match array:
+		[]:
+			print("using Nothing")
+		[Element.PESTILENCE]:
+			print("using Pestilence")
+		[Element.HEMOMANCY]:
+			print("using Hemomancy")
+		[Element.CONVALESCENCE]:
+			print("using Convalescence")
+		[Element.BONECRAFT]:
+			print("using Bonecraft")
+		[Element.OCCULTISM]:
+			print("using Occultism")
+		[Element.PESTILENCE,Element.HEMOMANCY]:
+			print("using Leeching Shot")
+		_:
+			print("couldn't decipher combo")
+	
+	
+# this second is about picking up items
 func _on_area_2d_area_entered(area):
 	if area.is_in_group("Item"):
 		groundItems.append(area)
@@ -66,25 +116,9 @@ func itemPickup():
 		return
 	#print(inventory)
 
-
-
-func comboLookup(array):
-	array.sort_custom(func(a,b): a < b)
-	match array:
-		[]:
-			print("using Nothing")
-		[Element.PESTILENCE]:
-			print("using Pestilence")
-		[Element.HEMOMANCY]:
-			print("using Hemomancy")
-		[Element.CONVALESCENCE]:
-			print("using Convalescence")
-		[Element.BONECRAFT]:
-			print("using Bonecraft")
-		[Element.OCCULTISM]:
-			print("using Occultism")
-
 signal inventory_changed(value)
+
+
 
 
 
