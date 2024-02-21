@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://rtck8bqo3jek"]
 
 [ext_resource type="Texture2D" uid="uid://bveb47lhblcqp" path="res://assets/sprites/elements/pestilence_bubble.png" id="1_sxtuc"]
-[ext_resource type="Script" path="res://assets/scripts/item.gd" id="2_41ebv"]
+[ext_resource type="Script" path="res://scripts/Item.gd" id="2_41ebv"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dm1pk"]
 radius = 36.4966

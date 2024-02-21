@@ -56,8 +56,8 @@ func _ready():
 		entity_manager = null
 	
 	# Initialize spawn bounds
-	spawn_range_width = get_viewport().get_visible_rect().size.x
-	spawn_range_height = get_viewport().get_visible_rect().size.y
+	spawn_range_width = get_viewport().get_visible_rect().size.x / 2
+	spawn_range_height = get_viewport().get_visible_rect().size.y / 2
 	
 	# Reference to player used to position other spawns
 	player = get_tree().get_nodes_in_group("Player")[0]
