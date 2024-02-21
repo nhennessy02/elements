@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://c53dvgtfs8iqn"]
+[gd_scene load_steps=21 format=3 uid="uid://c53dvgtfs8iqn"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_l8vaj"]
 [ext_resource type="Texture2D" uid="uid://coo1w6yil0l76" path="res://assets/sprites/player_static.png" id="2_oxea1"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://ccv77gx8m4wua" path="res://prefabs/player/wand.tscn" id="4_bkdhc"]
 [ext_resource type="Texture2D" uid="uid://db2msbgy42dkt" path="res://assets/sprites/player_walk.png" id="4_jxc0e"]
 [ext_resource type="Script" path="res://scripts/Inventory.gd" id="5_5e60y"]
+[ext_resource type="PackedScene" uid="uid://bbfq4dms15rbu" path="res://prefabs/ui.tscn" id="7_hwjsq"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g1ww4"]
 radius = 46.0
@@ -223,9 +224,13 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/conditions/idle = false
 parameters/conditions/running = false
 
+[node name="UI" parent="." instance=ExtResource("7_hwjsq")]
+
 [node name="Camera2D" type="Camera2D" parent="."]
 position_smoothing_enabled = true
 
+[connection signal="health_changed" from="." to="UI" method="_on_player_health_changed"]
+[connection signal="inventory_changed" from="." to="UI" method="_on_player_inventory_changed"]
 [connection signal="health_changed" from="HealthTracker" to="." method="_on_health_tracker_health_changed"]
 [connection signal="inventory_changed" from="Inventory" to="." method="_on_inventory_inventory_changed"]
 [connection signal="area_entered" from="Area2D" to="Inventory" method="_on_area_2d_area_entered"]
