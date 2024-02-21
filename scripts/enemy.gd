@@ -18,7 +18,7 @@ var entity_manager
 var total_steering_force : Vector2 = Vector2.ZERO
 @export var max_force : Vector2 = Vector2(200.0, 200.0)
 
-func _ready():
+func _ready(): # LACKS DEFAULTS IN CASE OF MISSING PLAYER OR ENTITY MANAGER
 	entity_manager = get_tree().get_first_node_in_group("EntityManager")
 	
 	# Finds the player and gets a reference to it
