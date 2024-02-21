@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://b7lfpp4hqs48i"]
+[gd_scene load_steps=8 format=3 uid="uid://b7lfpp4hqs48i"]
 
-[ext_resource type="Script" path="res://assets/scripts/enemy.gd" id="1_lkg61"]
+[ext_resource type="Script" path="res://scripts/enemy.gd" id="1_irabe"]
+[ext_resource type="Script" path="res://scripts/PhysicsObject.gd" id="1_tbypf"]
 [ext_resource type="Texture2D" uid="uid://d1c56h8iqg4od" path="res://assets/sprites/enemy_ghost.png" id="2_0s7uf"]
-[ext_resource type="Script" path="res://assets/scripts/damageable.gd" id="3_4tqxg"]
+[ext_resource type="PackedScene" uid="uid://tsnqt7x4rvnp" path="res://prefabs/entity elements/damageable.tscn" id="3_3sgpk"]
+[ext_resource type="Script" path="res://scripts/TestEnemy.gd" id="5_o0du0"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_guw66"]
 radius = 48.2597
@@ -10,10 +12,9 @@ radius = 48.2597
 [sub_resource type="CircleShape2D" id="CircleShape2D_qdjwe"]
 radius = 48.0416
 
-[node name="Enemy" type="CharacterBody2D"]
-collision_layer = 5
-collision_mask = 0
-script = ExtResource("1_lkg61")
+[node name="Enemy" type="CharacterBody2D" groups=["Enemy"]]
+collision_layer = 4
+script = ExtResource("1_irabe")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_0s7uf")
@@ -26,10 +27,14 @@ collision_mask = 2
 shape = SubResource("CircleShape2D_guw66")
 
 [node name="HurtBox" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource("CircleShape2D_qdjwe")
 
-[node name="Damageable" type="Node" parent="."]
-script = ExtResource("3_4tqxg")
+[node name="Damageable" parent="." instance=ExtResource("3_3sgpk")]
+
+[node name="PhysicsObject" type="Node" parent="."]
+script = ExtResource("1_tbypf")
+
+[node name="Behavior" type="Node" parent="."]
+script = ExtResource("5_o0du0")
 
 [connection signal="body_entered" from="HitBox" to="." method="_on_hit_box_body_entered"]

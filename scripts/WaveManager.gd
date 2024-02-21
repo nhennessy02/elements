@@ -45,8 +45,16 @@ const i_type : int = 1		# Index of the enemy TYPE
 const i_time : int = 2		# Index of the TIME before next enemies are spawned
 const i_grouped : int = 3	# Index of the bool that determines grouped vs random positioning
 
+var entity_manager
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	# Entity manager reference
+	if get_tree().get_first_node_in_group("EntityManager"):
+		entity_manager = get_tree().get_first_node_in_group("EntityManager")
+	else:
+		entity_manager = null
+	
 	# Initialize spawn bounds
 	spawn_range_width = get_viewport().get_visible_rect().size.x
 	spawn_range_height = get_viewport().get_visible_rect().size.y
@@ -91,6 +99,7 @@ func next_wave():
 	current_stage_index = 0
 	call_wave_element(current_stage_index)
 
+# Creates a random wave if there is no wave built in the inspector
 func random_wave():
 	wave_over = false
 	current_stage_index = 0
@@ -196,9 +205,11 @@ func spawn(type: PackedScene):
 	# Creates an enemy in the scene
 	var enemy = type.instantiate()
 	add_child(enemy)
+	entity_manager.append_enemy(enemy)
 	
 	# Randomly determine enemy position
 	enemy.global_position = random_spawn_point() + add_pos_variation()
+	enemy.physics_object.position = random_spawn_point() + add_pos_variation()
 
 # Spawns an enemy of a given type at a set position
 func spawn_at_pos(type: PackedScene, position: Vector2, has_variation: bool = false):
@@ -207,15 +218,17 @@ func spawn_at_pos(type: PackedScene, position: Vector2, has_variation: bool = fa
 	add_child(enemy)
 	
 	# Determine enemy position
+	entity_manager.append_enemy(enemy)
 	enemy.global_position = position
+	enemy.physics_object.position = position
 	
 	# Add random variation if needed
 	if has_variation:
 		enemy.global_position += add_pos_variation()
+		enemy.physics_object.position += add_pos_variation()
 
-# REPLACE LOGIC USING A REFERENCE TO AN ENEMY MANAGER
 # Sets wave_over to true if there are no more enemies to spawn, and the rest are dead
 func check_if_wave_over():
-	var enemies_left = self.get_children().size()
-	if enemies_left == 0 and spawning_over:
+	var enemies_left = entity_manager.enemy_array
+	if enemies_left.size() == 0 and spawning_over:
 		wave_over = true

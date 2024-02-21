@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://wxb0fpraqn3p"]
 
-[ext_resource type="Script" path="res://assets/scripts/Ray.gd" id="1_ccgo6"]
+[ext_resource type="Script" path="res://scripts/Ray.gd" id="1_ccgo6"]
 
 [node name="Ray" type="RayCast2D"]
 target_position = Vector2(600, 0)
