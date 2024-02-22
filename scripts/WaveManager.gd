@@ -192,15 +192,13 @@ func random_spawn_point():
 	return current_spawn_point
 
 # Adds variation to the spawn points of enemies
-func add_pos_variation(range_min: float = -100, range_max: float = 100):
+func add_pos_variation(range_min: float = -25, range_max: float = 25):
 	# Introduce variation
 	var x_pos_variation = rng.randf_range(range_min, range_max)
 	var y_pos_variation = rng.randf_range(range_min, range_max)
 	
 	# Reposition if out of bounds
 	var spawn_vec : Vector2 = Vector2(x_pos_variation, y_pos_variation)
-	spawn_vec = move_in_bounds(spawn_vec)
-	spawn_vec = away_from_player(spawn_vec)
 	
 	# Return Vector2 position
 	return spawn_vec
@@ -263,7 +261,7 @@ func spawn(type: PackedScene):
 	enemy.physics_object.position = random_spawn_point() + add_pos_variation()
 
 # Spawns an enemy of a given type at a set position
-func spawn_at_pos(type: PackedScene, position: Vector2, has_variation: bool = false):
+func spawn_at_pos(type: PackedScene, position: Vector2, has_variation: bool = true):
 	# Creates an enemy in the scene
 	var enemy = type.instantiate()
 	add_child(enemy)

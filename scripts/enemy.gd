@@ -13,6 +13,11 @@ var player:
 
 # Gives references to other entities
 var entity_manager
+var wave_manager : Node
+
+# Half of the width and height
+var halfwidth_x : float
+var halfwidth_y : float
 
 # Used to calculate movement/forces
 var total_steering_force : Vector2 = Vector2.ZERO
@@ -20,6 +25,11 @@ var total_steering_force : Vector2 = Vector2.ZERO
 
 func _ready(): # LACKS DEFAULTS IN CASE OF MISSING PLAYER OR ENTITY MANAGER
 	entity_manager = get_tree().get_first_node_in_group("EntityManager")
+	
+	# Gets the bounds
+	wave_manager = get_parent()
+	halfwidth_x = wave_manager.bounds_x
+	halfwidth_y = wave_manager.bounds_y
 	
 	# Finds the player and gets a reference to it
 	player = entity_manager.player

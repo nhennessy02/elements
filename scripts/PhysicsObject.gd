@@ -26,6 +26,16 @@ func _process(delta):
 	# Update enemy position
 	owner.global_position = position
 	
+	# Keep enemies in bounds
+	if position.x >= owner.halfwidth_x:
+		position.x = owner.halfwidth_x
+	if position.x <= -owner.halfwidth_x:
+		position.x = -owner.halfwidth_x
+	if position.y >= owner.halfwidth_y:
+		position.y = owner.halfwidth_y
+	if position.y <= -owner.halfwidth_y:
+		position.y = -owner.halfwidth_y
+	
 	# Zero acceleration
 	acceleration = Vector2.ZERO
 
