@@ -26,6 +26,10 @@ var wander_pos : Vector2
 var wander_angle : float
 var wander_radius : float
 
+# Avoid Obstacle Variables
+var avoid_future_time : float = 0.2
+var avoid_radius : float = 100.0
+
 # Used to calculate movement/forces
 var total_steering_force : Vector2 = Vector2.ZERO
 @export var max_force : Vector2 = Vector2(200.0, 200.0)
@@ -94,6 +98,33 @@ func separate():
 	# Return total separate force
 	return seperate_force;
 
+# Avoid obstacles in the entity manager
+func avoid_obstacle():
+	var avoid_force : Vector2 = Vector2.ZERO
+	var vec_to_obstacle : Vector2 = Vector2.ZERO
+	var right_dot : float
+	var forward_dot : float
+	
+	var future_pos = calc_future_position(avoid_future_time)
+	var future_sqr_dist : float = (future_pos - physics_object.position).length()
+	future_sqr_dist += avoid_radius
+	
+	# Avoids all obstacles with varying weight depending on their distance
+	for obstacle in entity_manager.obstacles:
+		vec_to_obstacle = obstacle.position - physics_object.position
+		forward_dot = vec_to_obstacle.dot(physics_object.position)
+		
+		if forward_dot >= 0 and forward_dot * forward_dot <= future_sqr_dist:
+			right_dot = vec_to_obstacle.dot(Vector2.RIGHT)
+			
+			if abs(right_dot) <= avoid_radius:
+				if right_dot < 0: # TURN RIGHT
+					avoid_force += Vector2.RIGHT * speed * (1/forward_dot)
+				else: # TURN LEFT
+					avoid_force += -Vector2.RIGHT * speed * (1/forward_dot)
+	
+	return avoid_force
+
 func wander(future_time: float = 0.5, wander_radius: float = 2.0):
 	wander_pos = calc_future_position(future_time)
 	
@@ -112,12 +143,3 @@ func calc_future_position(time: float = 0.5):
 func die():
 	entity_manager.remove_enemy(self)
 	queue_free()
-
-# Track colliding with wall bool on enter/exit wall
-func _on_world_hit_box_body_entered(body):
-	halted = true
-	physics_object.position = position
-	physics_object.velocity = Vector2.ZERO
-	physics_object.acceleration = Vector2.ZERO
-func _on_world_hit_box_body_exited(body):
-	halted = false
