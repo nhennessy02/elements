@@ -19,31 +19,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 4
+size_flags_horizontal = 0
 size_flags_vertical = 4
 
-[node name="Map" type="TextureRect" parent="Control"]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -308.0
-offset_top = 44.0
-offset_right = -52.0
-offset_bottom = 300.0
-grow_horizontal = 0
+[node name="MapSprite" type="Sprite2D" parent="Control"]
+position = Vector2(1746, 166)
 texture = ExtResource("2_o1pro")
-
-[node name="DrawSpace" type="Control" parent="."]
-layout_mode = 3
-anchor_left = 0.84
-anchor_top = 0.041
-anchor_right = 0.973
-anchor_bottom = 0.278
-offset_left = 127.2
-offset_top = 127.72
-offset_right = -0.160156
-offset_bottom = -0.240021
-grow_horizontal = 0
-size_flags_horizontal = 4
-size_flags_vertical = 4

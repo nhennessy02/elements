@@ -3,4 +3,5 @@
 [ext_resource type="Texture2D" uid="uid://b1tgcwoe8tkn" path="res://assets/ui element sprites/enemy_indicator.png" id="1_gmru1"]
 
 [node name="EnemyIndicator" type="Sprite2D"]
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_gmru1")
