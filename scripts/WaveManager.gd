@@ -49,8 +49,9 @@ const i_grouped : int = 3	# Index of the bool that determines grouped vs random 
 var entity_manager
 
 # Spawning Bounds
-@export var bounds_x : float = 3000.0
-@export var bounds_y : float = 2500.0
+@export var bounds_x : float = 1000.0
+@export var bounds_y : float = 1000.0
+var acceptable_spawn_dist : float = 600
 
 # Called when the node enters the scene tree for the first time.
 func _ready():	
@@ -183,37 +184,61 @@ func random_spawn_point():
 		8: # Bottom Right
 			current_spawn_point += Vector2(spawn_range_width, spawn_range_height) * distance_multiplier
 	
-	# Reposition if out of bounds
-	if current_spawn_point.x < -bounds_x: 
-		current_spawn_point.x = -bounds_x
-	if current_spawn_point.x > bounds_x:
-		current_spawn_point.x = bounds_x
-	if current_spawn_point.y < -bounds_y:
-		current_spawn_point.y = -bounds_y
-	if current_spawn_point.y > bounds_y:
-		current_spawn_point.y = bounds_y
+	# Reposition if necessary
+	current_spawn_point = move_in_bounds(current_spawn_point)
+	current_spawn_point = away_from_player(current_spawn_point)
 	
 	# Return Vector2 position
 	return current_spawn_point
 
 # Adds variation to the spawn points of enemies
-# CURRENTLY CAN SPAWN ON TOP OF OTHER ENEMIES / OBJECTS
 func add_pos_variation(range_min: float = -100, range_max: float = 100):
 	# Introduce variation
 	var x_pos_variation = rng.randf_range(range_min, range_max)
 	var y_pos_variation = rng.randf_range(range_min, range_max)
 	
 	# Reposition if out of bounds
-	if x_pos_variation < -bounds_x: 
-		x_pos_variation = -bounds_x
-	if x_pos_variation > bounds_x:
-		x_pos_variation = bounds_x
-	if y_pos_variation < -bounds_y:
-		y_pos_variation = -bounds_y
-	if y_pos_variation > bounds_y:
-		y_pos_variation = bounds_y
+	var spawn_vec : Vector2 = Vector2(x_pos_variation, y_pos_variation)
+	spawn_vec = move_in_bounds(spawn_vec)
+	spawn_vec = away_from_player(spawn_vec)
 	
-	return Vector2(x_pos_variation, y_pos_variation)
+	# Return Vector2 position
+	return spawn_vec
+
+# Reposition a spawning vector if out of bounds
+func move_in_bounds(current_pos: Vector2):
+	if current_pos.x < -bounds_x: 
+		current_pos.x = -bounds_x
+	if current_pos.x > bounds_x:
+		current_pos.x = bounds_x
+	if current_pos.y < -bounds_y:
+		current_pos.y = -bounds_y
+	if current_pos.y > bounds_y:
+		current_pos.y = bounds_y
+	return current_pos
+
+func away_from_player(current_pos: Vector2):
+	# If the spawn point is too close to the player move it
+	if current_pos.distance_to(player.position) < acceptable_spawn_dist:
+		
+		var far_x : float = 0
+		var far_y : float = 0
+		
+		# Get X and Y coordinates far away from the player
+		if player.position.x > 0:
+			far_x = player.position.x - acceptable_spawn_dist
+		else:
+			far_x = player.position.x + acceptable_spawn_dist
+		if player.position.y > 0:
+			far_y = player.position.y - acceptable_spawn_dist
+		else:
+			far_y = player.position.y + acceptable_spawn_dist
+		
+		# Update spawn position vector
+		current_pos.x = far_x
+		current_pos.y = far_y
+	
+	return current_pos
 
 # Spawns a group of enemies in random positions
 func spawn_enemies(count: int, type: PackedScene):
