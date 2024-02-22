@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://cp51bocqom0aj"]
+[gd_scene load_steps=7 format=3 uid="uid://cp51bocqom0aj"]
 
 [ext_resource type="PackedScene" uid="uid://cjm8hsedcxsca" path="res://prefabs/tilemaps/graveyard.tscn" id="1_bewk5"]
 [ext_resource type="PackedScene" uid="uid://c53dvgtfs8iqn" path="res://prefabs/player/player.tscn" id="2_u5jwy"]
 [ext_resource type="PackedScene" uid="uid://c47i80j2hwowg" path="res://prefabs/scene elements/entity_manager.tscn" id="3_7cmxo"]
 [ext_resource type="PackedScene" uid="uid://j27r6tyk1vro" path="res://prefabs/scene elements/wave_manager.tscn" id="4_xmt36"]
 [ext_resource type="PackedScene" uid="uid://rtck8bqo3jek" path="res://prefabs/base_item.tscn" id="5_6k6wa"]
+[ext_resource type="PackedScene" uid="uid://dvoh7cvb6e6sa" path="res://prefabs/ui elements/wave_counter.tscn" id="6_s7j4q"]
 
 [node name="Sprint2Build" type="Node2D"]
 
@@ -14,6 +15,8 @@ layer_0/tile_data = PackedInt32Array(-65536, 0, 1, -65535, 0, 1, 1, 0, 1, 0, 0, 
 [node name="EntityManager" parent="." instance=ExtResource("3_7cmxo")]
 
 [node name="WaveManager" parent="." instance=ExtResource("4_xmt36")]
+r_stages_min = 4
+r_stages_max = 8
 bounds_x = 1400.0
 bounds_y = 1170.0
 
@@ -34,3 +37,5 @@ position = Vector2(106, 369)
 
 [node name="Player" parent="." instance=ExtResource("2_u5jwy")]
 position = Vector2(435, -30)
+
+[node name="WaveCounter" parent="." instance=ExtResource("6_s7j4q")]

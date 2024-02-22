@@ -28,6 +28,9 @@ var player
 @export var wave_stages : Array[Array]
 var current_stage_index : int	# the index of the active stage of the wave in the array
 
+# Wave Counter
+@onready var wave_counter_ui = $WaveCounter
+
 # When creating a wave in the inspector: 
 # 1) create a new element in the array
 # 2) add 4 elements to the new array
@@ -53,6 +56,9 @@ var entity_manager
 @export var bounds_y : float = 1000.0
 var acceptable_spawn_dist : float = 600
 
+# Tracks if Random Waves are being generated
+var random : bool = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready():	
 	# Entity manager reference
@@ -70,18 +76,25 @@ func _ready():
 	
 	# If there is a custom wave run it
 	if wave_stages.size() > 0:
+		wave_counter_ui.update_wave_ui()
 		next_wave()
 	
 	# Otherwise run a random wave
 	else:
+		wave_counter_ui.update_wave_ui()
 		random_wave()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	# Go to the element combination scene after the wave is completed
 	if wave_over:
-		# REPLACE WITH SCENE TRANSITION
-		get_tree().quit() 
+		# If there is a custom wave run it
+		if !random:
+			next_wave()
+		# Otherwise run a random wave
+		else:
+			wave_counter_ui.update_wave_ui()
+			random_wave()
 	
 	# During a wave...
 	else:
@@ -108,6 +121,7 @@ func next_wave():
 # Creates a random wave if there is no wave built in the inspector
 func random_wave():
 	wave_over = false
+	random = true
 	current_stage_index = 0
 	
 	# Determine number of stages in the wave

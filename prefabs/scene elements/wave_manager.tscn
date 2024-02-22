@@ -1,10 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://j27r6tyk1vro"]
+[gd_scene load_steps=4 format=3 uid="uid://j27r6tyk1vro"]
 
 [ext_resource type="Script" path="res://scripts/WaveManager.gd" id="1_33piu"]
 [ext_resource type="PackedScene" uid="uid://b7lfpp4hqs48i" path="res://prefabs/enemy.tscn" id="2_ylx4r"]
+[ext_resource type="PackedScene" uid="uid://dvoh7cvb6e6sa" path="res://prefabs/ui elements/wave_counter.tscn" id="3_ukvtm"]
 
 [node name="WaveManager" type="Node"]
 script = ExtResource("1_33piu")
 random_enemy_array = Array[PackedScene]([ExtResource("2_ylx4r")])
 bounds_x = 2000.0
 bounds_y = 1500.0
+
+[node name="WaveCounter" parent="." instance=ExtResource("3_ukvtm")]
