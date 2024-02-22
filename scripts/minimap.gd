@@ -16,6 +16,7 @@ const player_idtr_vec2_multiplier : float = 8.0
 const player_idtr_lerp : float = 0.1
 
 @onready var map_sprite = $Control/MapSprite
+@onready var indicator_node = $Indicators
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -36,7 +37,7 @@ func _process(_delta):
 # Create an indicator whenever an enemy is spawned
 func create_indicator():
 	var indicator = enemy_idtr.instantiate()
-	add_child(indicator)
+	indicator_node.add_child(indicator)
 	indicator_array.append(indicator)
 
 # Delete the indicator when the enemy dies or is removed
@@ -66,6 +67,9 @@ func move_indicators():
 	# Make player's indicator move slightly depending on player's direction
 	var player_idtr_vector_adjust : Vector2 = player.direction * player_idtr_vec2_multiplier
 	player_indicator.position = player_indicator.position.lerp(player_idtr_vector_adjust + map_sprite.position, player_idtr_lerp)
+	
+	# Remove any indicators not in the array
+	delete_loose_indicators()
 
 # Controls the visibility of indicators
 func display_indicators():
@@ -78,3 +82,9 @@ func display_indicators():
 			indicator_array[i].visible = true
 		else:
 			indicator_array[i].visible = false
+	
+# Mark an indicator for deletion if it isn't in the array
+func delete_loose_indicators():
+	for child in indicator_node.get_children():
+		if !indicator_array.has(child) and child.type == "enemy":
+			child.delete = true

@@ -1,7 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://di7gknw70p3rn"]
+[gd_scene load_steps=3 format=3 uid="uid://di7gknw70p3rn"]
 
 [ext_resource type="Texture2D" uid="uid://b1tgcwoe8tkn" path="res://assets/ui element sprites/enemy_indicator.png" id="1_gmru1"]
+[ext_resource type="Script" path="res://scripts/enemy_indicator.gd" id="2_2sp3k"]
 
 [node name="EnemyIndicator" type="Sprite2D"]
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_gmru1")
+script = ExtResource("2_2sp3k")

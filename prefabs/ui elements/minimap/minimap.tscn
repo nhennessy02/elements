@@ -25,3 +25,5 @@ size_flags_vertical = 4
 [node name="MapSprite" type="Sprite2D" parent="Control"]
 position = Vector2(1746, 166)
 texture = ExtResource("2_o1pro")
+
+[node name="Indicators" type="Node" parent="."]
