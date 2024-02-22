@@ -45,10 +45,15 @@ const i_type : int = 1		# Index of the enemy TYPE
 const i_time : int = 2		# Index of the TIME before next enemies are spawned
 const i_grouped : int = 3	# Index of the bool that determines grouped vs random positioning
 
+# Entity Manager
 var entity_manager
 
+# Spawning Bounds
+@export var bounds_x : float = 3000.0
+@export var bounds_y : float = 2500.0
+
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready():	
 	# Entity manager reference
 	if get_tree().get_first_node_in_group("EntityManager"):
 		entity_manager = get_tree().get_first_node_in_group("EntityManager")
@@ -178,6 +183,16 @@ func random_spawn_point():
 		8: # Bottom Right
 			current_spawn_point += Vector2(spawn_range_width, spawn_range_height) * distance_multiplier
 	
+	# Reposition if out of bounds
+	if current_spawn_point.x < -bounds_x: 
+		current_spawn_point.x = -bounds_x
+	if current_spawn_point.x > bounds_x:
+		current_spawn_point.x = bounds_x
+	if current_spawn_point.y < -bounds_y:
+		current_spawn_point.y = -bounds_y
+	if current_spawn_point.y > bounds_y:
+		current_spawn_point.y = bounds_y
+	
 	# Return Vector2 position
 	return current_spawn_point
 
@@ -187,6 +202,17 @@ func add_pos_variation(range_min: float = -100, range_max: float = 100):
 	# Introduce variation
 	var x_pos_variation = rng.randf_range(range_min, range_max)
 	var y_pos_variation = rng.randf_range(range_min, range_max)
+	
+	# Reposition if out of bounds
+	if x_pos_variation < -bounds_x: 
+		x_pos_variation = -bounds_x
+	if x_pos_variation > bounds_x:
+		x_pos_variation = bounds_x
+	if y_pos_variation < -bounds_y:
+		y_pos_variation = -bounds_y
+	if y_pos_variation > bounds_y:
+		y_pos_variation = bounds_y
+	
 	return Vector2(x_pos_variation, y_pos_variation)
 
 # Spawns a group of enemies in random positions
