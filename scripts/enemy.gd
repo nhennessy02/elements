@@ -5,8 +5,6 @@ class_name Enemy extends CharacterBody2D
 @export var speed : float = 200.0
 @export var damage : int = 1
 
-var halted : bool = false
-
 # We assign this in _ready()
 var player:
 	get: return player
@@ -112,12 +110,3 @@ func calc_future_position(time: float = 0.5):
 func die():
 	entity_manager.remove_enemy(self)
 	queue_free()
-
-# Track colliding with wall bool on enter/exit wall
-func _on_world_hit_box_body_entered(body):
-	halted = true
-	physics_object.position = position
-	physics_object.velocity = Vector2.ZERO
-	physics_object.acceleration = Vector2.ZERO
-func _on_world_hit_box_body_exited(body):
-	halted = false

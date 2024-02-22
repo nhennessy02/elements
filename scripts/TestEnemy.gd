@@ -8,9 +8,5 @@ extends Node
 
 # Outline behaviors
 func calc_steering_forces():	
-	if owner.halted:
-		owner.total_steering_force += owner.separate() * separate_weight
-		owner.total_steering_force += owner.wander() * wander_weight
-	else:
-		owner.total_steering_force += owner.separate() * separate_weight
-		owner.total_steering_force += owner.seek(owner.player.position) * seek_weight
+	owner.total_steering_force += owner.separate() * separate_weight
+	owner.total_steering_force += owner.seek(owner.player.position) * seek_weight
