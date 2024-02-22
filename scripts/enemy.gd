@@ -5,6 +5,8 @@ class_name Enemy extends CharacterBody2D
 @export var speed : float = 200.0
 @export var damage : int = 1
 
+var halted : bool = false
+
 # We assign this in _ready()
 var player:
 	get: return player
@@ -18,6 +20,11 @@ var wave_manager : Node
 # Half of the width and height
 var halfwidth_x : float
 var halfwidth_y : float
+
+# Wandering Variables
+var wander_pos : Vector2
+var wander_angle : float
+var wander_radius : float
 
 # Used to calculate movement/forces
 var total_steering_force : Vector2 = Vector2.ZERO
@@ -87,6 +94,30 @@ func separate():
 	# Return total separate force
 	return seperate_force;
 
+func wander(future_time: float = 0.5, wander_radius: float = 2.0):
+	wander_pos = calc_future_position(future_time)
+	
+	wander_pos.x += cos(wander_angle) * wander_radius
+	wander_pos.y += sin(wander_angle) * wander_radius
+	
+	return seek(wander_pos)
+
+func change_wander_angle(wander_radius: float = 2.0):
+	wander_angle = randf_range(0.0, 360.00)
+	wander_angle = deg_to_rad(wander_angle)
+
+func calc_future_position(time: float = 0.5):
+	return physics_object.position + physics_object.velocity * time
+
 func die():
 	entity_manager.remove_enemy(self)
 	queue_free()
+
+# Track colliding with wall bool on enter/exit wall
+func _on_world_hit_box_body_entered(body):
+	halted = true
+	physics_object.position = position
+	physics_object.velocity = Vector2.ZERO
+	physics_object.acceleration = Vector2.ZERO
+func _on_world_hit_box_body_exited(body):
+	halted = false

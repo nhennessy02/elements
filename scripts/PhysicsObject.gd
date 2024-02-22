@@ -11,6 +11,8 @@ var acceleration : Vector2 = Vector2.ZERO
 
 @export var mass : float = 1.0
 
+var colliding_with_terrain : bool = false
+
 func _ready():
 	position = owner.global_position
 

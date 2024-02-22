@@ -15,7 +15,7 @@ layer_0/tile_data = PackedInt32Array(-65536, 0, 1, -65535, 0, 1, 1, 0, 1, 0, 0, 
 
 [node name="WaveManager" parent="." instance=ExtResource("4_xmt36")]
 bounds_x = 1400.0
-bounds_y = 1185.0
+bounds_y = 1170.0
 
 [node name="BaseItem" parent="." instance=ExtResource("5_6k6wa")]
 position = Vector2(332, 142)
