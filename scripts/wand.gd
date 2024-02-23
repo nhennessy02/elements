@@ -6,7 +6,8 @@ var fire_timer : float = 0
 var can_fire : bool = true
 var mousePos
 
-@export var projectileScene : PackedScene
+@export var defaultSpell : PackedScene
+var currentSpell
 
 @onready var sprite = $Sprite2D
 @onready var spawnPoint = $Sprite2D/ProjectileSpawnPoint
@@ -14,7 +15,7 @@ var mousePos
 
 # Called when the node enters the scene tree for thes first time.
 func _ready():
-	pass
+	currentSpell = defaultSpell
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -49,9 +50,14 @@ func fire():
 	#play animation
 	animPlayer.play("fire")
 	
-	var projectile = projectileScene.instantiate()
-	get_tree().current_scene.add_child(projectile)
-	projectile.global_position = spawnPoint.global_position #sets spawnpoint at the spawnpoint node
-	projectile.global_rotation = self.global_rotation
+	var spell = currentSpell.instantiate()
+	get_tree().current_scene.add_child(spell)
+	spell.global_position = spawnPoint.global_position #sets spawnpoint at the spawnpoint node
+	spell.global_rotation = self.global_rotation
 	
 	
+
+
+func _on_inventory_combo_created(name, scene):
+	currentSpell = scene
+	pass # Replace with function body.

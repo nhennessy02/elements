@@ -8,8 +8,9 @@ extends Node
 #2c. dropping elements - not started
 #3. handle the combination of elements and load the combo into your wand - not working
 #3a. search up the correct combination from given element array - not working
-#3b. create the correct object/scene - not started
-#3c. give the object/scene to the wand to use - not started
+#3b. create the correct object/scene - works alright
+#3c. give the object/scene to the wand to use - works alright
+#3d. remove the elements used from your inventory
 
 enum Element { PESTILENCE = 0, HEMOMANCY = 1, CONVALESCENCE = 2, BONECRAFT = 3, OCCULTISM = 4}
 var inventory = []
@@ -63,6 +64,7 @@ func comboLookup(array):
 			print("using Nothing")
 		[Element.PESTILENCE]:
 			print("using Pestilence")
+			combo_created.emit("Pestilence",load("res://prefabs/player/spells/pestilence.tscn"))
 		[Element.HEMOMANCY]:
 			print("using Hemomancy")
 		[Element.CONVALESCENCE]:
@@ -75,8 +77,9 @@ func comboLookup(array):
 			print("using Leeching Shot")
 		_:
 			print("couldn't decipher combo")
-	
-	
+
+signal combo_created(name, scene)
+
 # this second is about picking up items
 func _on_area_2d_area_entered(area):
 	if area.is_in_group("Item"):
