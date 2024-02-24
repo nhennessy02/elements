@@ -31,6 +31,10 @@ shape = SubResource("CircleShape2D_qdjwe")
 
 [node name="Damageable" parent="." instance=ExtResource("3_3sgpk")]
 
+[node name="FlashTimer" type="Timer" parent="Damageable"]
+wait_time = 0.1
+one_shot = true
+
 [node name="PhysicsObject" type="Node" parent="."]
 script = ExtResource("1_tbypf")
 
@@ -38,3 +42,4 @@ script = ExtResource("1_tbypf")
 script = ExtResource("5_o0du0")
 
 [connection signal="body_entered" from="HitBox" to="." method="_on_hit_box_body_entered"]
+[connection signal="timeout" from="Damageable/FlashTimer" to="Damageable" method="_on_flash_timer_timeout"]

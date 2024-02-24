@@ -58,6 +58,6 @@ func fire():
 	
 
 
-func _on_inventory_combo_created(name, scene):
+func _on_inventory_combo_created(spellName, useRate, scene):
 	currentSpell = scene
-	pass # Replace with function body.
+	fire_rate = useRate

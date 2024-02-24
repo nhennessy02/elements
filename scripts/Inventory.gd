@@ -64,7 +64,7 @@ func comboLookup(array):
 			print("using Nothing")
 		[Element.PESTILENCE]:
 			print("using Pestilence")
-			combo_created.emit("Pestilence",load("res://prefabs/player/spells/pestilence.tscn"))
+			combo_created.emit("Pestilence",3,load("res://prefabs/player/spells/pestilence.tscn"))
 		[Element.HEMOMANCY]:
 			print("using Hemomancy")
 		[Element.CONVALESCENCE]:
@@ -78,7 +78,7 @@ func comboLookup(array):
 		_:
 			print("couldn't decipher combo")
 
-signal combo_created(name, scene)
+signal combo_created(spellName,useRate,scene) #useRate is how often the spell is used in seconds
 
 # this second is about picking up items
 func _on_area_2d_area_entered(area):
