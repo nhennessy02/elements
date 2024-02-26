@@ -1,12 +1,21 @@
-[gd_scene load_steps=2 format=3 uid="uid://10bc0bmlgix5"]
+[gd_scene load_steps=3 format=3 uid="uid://10bc0bmlgix5"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_riypu"]
+[ext_resource type="PackedScene" uid="uid://bv0585bqktpfy" path="res://prefabs/player/base_projectile.tscn" id="1_dlnw3"]
+[ext_resource type="Script" path="res://scripts/spells/hemomancy.gd" id="1_nrun7"]
 
 [node name="Hemomancy" type="Node2D"]
+script = ExtResource("1_nrun7")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Projectile" parent="." instance=ExtResource("1_dlnw3")]
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Projectile2" parent="." instance=ExtResource("1_dlnw3")]
+rotation = -0.523599
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("CircleShape2D_riypu")
+[node name="Projectile3" parent="." instance=ExtResource("1_dlnw3")]
+rotation = -1.0472
+
+[node name="Projectile4" parent="." instance=ExtResource("1_dlnw3")]
+rotation = 0.523599
+
+[node name="Projectile5" parent="." instance=ExtResource("1_dlnw3")]
+rotation = 1.0472
