@@ -54,6 +54,8 @@ func fire():
 	get_tree().current_scene.add_child(spell)
 	spell.global_position = spawnPoint.global_position #sets spawnpoint at the spawnpoint node
 	spell.global_rotation = self.global_rotation
+	print("wand rotation:")
+	print(rotation_degrees)
 	
 	
 
