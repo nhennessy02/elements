@@ -20,6 +20,12 @@ position = Vector2(-237, 421)
 [node name="Item" parent="BaseItem2" index="2"]
 id = 1
 
+[node name="BaseItem6" parent="." instance=ExtResource("2_83on0")]
+position = Vector2(-237, 550)
+
+[node name="Item" parent="BaseItem6" index="2"]
+id = 1
+
 [node name="BaseItem3" parent="." instance=ExtResource("2_83on0")]
 position = Vector2(-88, 420)
 
@@ -40,6 +46,7 @@ id = 4
 
 [editable path="BaseItem"]
 [editable path="BaseItem2"]
+[editable path="BaseItem6"]
 [editable path="BaseItem3"]
 [editable path="BaseItem4"]
 [editable path="BaseItem5"]

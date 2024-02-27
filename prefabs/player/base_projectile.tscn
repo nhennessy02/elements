@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://bv0585bqktpfy"]
 
-[ext_resource type="Script" path="res://scripts/Projectile.gd" id="1_fhnml"]
+[ext_resource type="Script" path="res://scripts/projectile.gd" id="1_k5emv"]
 [ext_resource type="Texture2D" uid="uid://c6g0ofaqx8mq5" path="res://assets/sprites/projectile_placeholder.png" id="2_0uowf"]
 [ext_resource type="Texture2D" uid="uid://dswr104hq8cn3" path="res://assets/sprites/projectile_placeholder_particle.png" id="3_om2ta"]
 
@@ -38,7 +38,7 @@ radial_accel_max = -75.0
 scale_curve = SubResource("CurveTexture_wwxqm")
 
 [node name="Projectile" type="Node2D"]
-script = ExtResource("1_fhnml")
+script = ExtResource("1_k5emv")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1

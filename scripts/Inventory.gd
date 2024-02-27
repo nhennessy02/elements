@@ -74,6 +74,9 @@ func comboLookup(array):
 			print("using Bonecraft")
 		[Element.OCCULTISM]:
 			print("using Occultism")
+		[Element.HEMOMANCY,Element.HEMOMANCY]:
+			print("using Aorta")
+			combo_created.emit("Aorta",7,load("res://prefabs/player/spells/aorta.tscn"))
 		[Element.PESTILENCE,Element.HEMOMANCY]:
 			print("using Leeching Shot")
 		_:

@@ -5,17 +5,12 @@
 
 [node name="Hemomancy" type="Node2D"]
 script = ExtResource("1_nrun7")
+Projectile = ExtResource("1_dlnw3")
 
 [node name="Projectile" parent="." instance=ExtResource("1_dlnw3")]
+rotation = 0.523599
 
 [node name="Projectile2" parent="." instance=ExtResource("1_dlnw3")]
-position = Vector2(0, -40)
 
 [node name="Projectile3" parent="." instance=ExtResource("1_dlnw3")]
-position = Vector2(0, -80)
-
-[node name="Projectile4" parent="." instance=ExtResource("1_dlnw3")]
-position = Vector2(0, 40)
-
-[node name="Projectile5" parent="." instance=ExtResource("1_dlnw3")]
-position = Vector2(0, 80)
+rotation = -0.523599
