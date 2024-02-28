@@ -6,6 +6,7 @@ extends Node2D
 @export var indicator : Texture2D
 @export var wall : Texture2D
 var active = false
+var mousePos
 var max_range = 10
 var min_range = 5
 
@@ -16,12 +17,16 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if Input.is_action_pressed("fire_wand") and not active:
+		mousePos = get_global_mouse_position()
+		staticbody.global_position = mousePos
+		staticbody.look_at(Vector2(0,0))
 		pass
 		#staticbody.position = get_viewport().get_mouse_position()
 	#elif not active:
 	elif not active:
 		active = true
 		lifetimer.start()
+		staticbody.set_collision_layer_value(1, true)
 		sprite.texture = wall
 
 
