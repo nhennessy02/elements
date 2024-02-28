@@ -1,3 +1,29 @@
-[gd_scene format=3 uid="uid://dttvofkb1a3n2"]
+[gd_scene load_steps=5 format=3 uid="uid://dttvofkb1a3n2"]
+
+[ext_resource type="Texture2D" uid="uid://15c4xk5ug7y6" path="res://assets/sprites/spells/bonecraft/bonecraft_indicator.png" id="1_ppf1x"]
+[ext_resource type="Script" path="res://scripts/spells/bonecraft.gd" id="1_ttdbn"]
+[ext_resource type="Texture2D" uid="uid://035y4nhdebom" path="res://assets/sprites/spells/bonecraft/bonecraft_wall.png" id="3_lajbr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8mxfk"]
+size = Vector2(32, 128)
 
 [node name="Bonecraft" type="Node2D"]
+script = ExtResource("1_ttdbn")
+indicator = ExtResource("1_ppf1x")
+wall = ExtResource("3_lajbr")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 0
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+texture = ExtResource("1_ppf1x")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_8mxfk")
+
+[node name="LifeTimer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+
+[connection signal="timeout" from="LifeTimer" to="." method="_on_life_timer_timeout"]

@@ -72,6 +72,7 @@ func comboLookup(array):
 			print("using Convalescence")
 		[Element.BONECRAFT]:
 			print("using Bonecraft")
+			combo_created.emit("Bonecraft",5,load("res://prefabs/player/spells/bonecraft.tscn"))
 		[Element.OCCULTISM]:
 			print("using Occultism")
 		[Element.HEMOMANCY,Element.HEMOMANCY]:
