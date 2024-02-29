@@ -7,20 +7,25 @@ extends Node2D
 @export var wall : Texture2D
 var active = false
 var mousePos
-var max_range = 10
-var min_range = 5
-var centerScreenGlobalPosition = 
+var max_range = 500
+var min_range = 100
+var player
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	player = get_node("../Player")
 	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if Input.is_action_pressed("fire_wand") and not active:
 		mousePos = get_global_mouse_position()
+		if(player.position.distance_to(mousePos)>max_range):
+			mousePos = player.position + player.position.direction_to(mousePos) * max_range
+		if(player.position.distance_to(mousePos)<min_range):
+			mousePos = player.position + player.position.direction_to(mousePos) * min_range
 		staticbody.global_position = mousePos
-		staticbody.look_at(Vector2(0,0))
+		staticbody.look_at(player.position)
 		pass
 		#staticbody.position = get_viewport().get_mouse_position()
 	#elif not active:
