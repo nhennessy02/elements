@@ -9,6 +9,7 @@ var active = false
 var mousePos
 var max_range = 10
 var min_range = 5
+var centerScreenGlobalPosition = 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
