@@ -1,11 +1,10 @@
 extends Node2D
 
 @export var Projectile : PackedScene
-
+var player
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	print("hemomancy roataion:")
-	print(rotation_degrees)
+	player = get_node("../Player")
 	
 	#var projectile = Projectile.instantiate()
 	#get_tree().current_scene.add_child(projectile)
@@ -14,8 +13,8 @@ func _ready():
 	
 	#self.global_rotation=0
 	for projectile in self.get_children():
-		projectile.global_position = self.global_position
-		projectile.global_rotation = self.global_rotation + projectile.global_rotation
+		
+		projectile.rotation = player.position.angle_to(position) + projectile.global_rotation
 	#	print("projectile position and rotation")
 	#	print(projectile.rotation)
 	#	print(projectile.global_rotation)

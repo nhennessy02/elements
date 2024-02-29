@@ -67,9 +67,10 @@ func comboLookup(array):
 			combo_created.emit("Pestilence",3,load("res://prefabs/player/spells/pestilence.tscn"))
 		[Element.HEMOMANCY]:
 			print("using Hemomancy")
-			combo_created.emit("Hemomancy",0.25,load("res://prefabs/player/spells/hemomancy.tscn"))
+			#combo_created.emit("Hemomancy",0.25,load("res://prefabs/player/spells/hemomancy.tscn"))
 		[Element.CONVALESCENCE]:
 			print("using Convalescence")
+			combo_created.emit("Convalescence", 10, load("res://prefabs/player/spells/convalescence.tscn"))
 		[Element.BONECRAFT]:
 			print("using Bonecraft")
 			combo_created.emit("Bonecraft",5,load("res://prefabs/player/spells/bonecraft.tscn"))

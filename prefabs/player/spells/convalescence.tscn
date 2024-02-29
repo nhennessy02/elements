@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://co4kq48ubeeh"]
+
+[ext_resource type="Script" path="res://scripts/spells/convalescence.gd" id="1_kthkj"]
+
+[node name="Convalescence" type="Node2D"]
+script = ExtResource("1_kthkj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="ActivationTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="ActivationTimer" to="." method="_on_activation_timer_timeout"]
