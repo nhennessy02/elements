@@ -5,8 +5,6 @@ class_name Enemy extends CharacterBody2D
 @export var speed : float = 200.0
 @export var damage : int = 1
 
-var halted : bool = false
-
 # We assign this in _ready()
 var player:
 	get: return player
@@ -24,11 +22,10 @@ var halfwidth_y : float
 # Wandering Variables
 var wander_pos : Vector2
 var wander_angle : float
-var wander_radius : float
 
 # Avoid Obstacle Variables
-var avoid_future_time : float = 0.2
-var avoid_radius : float = 100.0
+var avoid_future_time : float = 0.5
+var avoid_radius : float = 50.0
 
 # Used to calculate movement/forces
 var total_steering_force : Vector2 = Vector2.ZERO
@@ -110,7 +107,7 @@ func avoid_obstacle():
 	future_sqr_dist += avoid_radius
 	
 	# Avoids all obstacles with varying weight depending on their distance
-	for obstacle in entity_manager.obstacles:
+	for obstacle in entity_manager.obstacles_array:
 		vec_to_obstacle = obstacle.position - physics_object.position
 		forward_dot = vec_to_obstacle.dot(physics_object.position)
 		
@@ -133,7 +130,7 @@ func wander(future_time: float = 0.5, wander_radius: float = 2.0):
 	
 	return seek(wander_pos)
 
-func change_wander_angle(wander_radius: float = 2.0):
+func change_wander_angle():
 	wander_angle = randf_range(0.0, 360.00)
 	wander_angle = deg_to_rad(wander_angle)
 
