@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 GameManager="*res://scripts/game_manager.gd"
 PauseMenu="*res://prefabs/pause_menu.tscn"
+EffectManager="*res://scripts/effect_manager.gd"
 
 [display]
 

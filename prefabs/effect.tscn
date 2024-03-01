@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://x4ji7phj7kf2"]
+
+[ext_resource type="Script" path="res://scripts/effect.gd" id="1_truvf"]
+
+[node name="Effect" type="Node"]
+script = ExtResource("1_truvf")
+
+[node name="DurationTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="ProcTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="DurationTimer" to="." method="_on_duration_timer_timeout"]
+[connection signal="timeout" from="ProcTimer" to="." method="_on_proc_timer_timeout"]
