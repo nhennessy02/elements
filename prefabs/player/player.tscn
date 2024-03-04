@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://db2msbgy42dkt" path="res://assets/sprites/player_walk.png" id="4_jxc0e"]
 [ext_resource type="Script" path="res://scripts/Inventory.gd" id="5_5e60y"]
 [ext_resource type="PackedScene" uid="uid://bv0585bqktpfy" path="res://prefabs/player/base_projectile.tscn" id="5_o482u"]
-[ext_resource type="PackedScene" uid="uid://bbfq4dms15rbu" path="res://prefabs/ui.tscn" id="7_hwjsq"]
+[ext_resource type="PackedScene" uid="uid://bbfq4dms15rbu" path="res://prefabs/ui elements/ui.tscn" id="7_hwjsq"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g1ww4"]
 radius = 46.0
