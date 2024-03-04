@@ -9,7 +9,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hr0cd"]
 shader = ExtResource("3_3lkc3")
 shader_parameter/from = Color(0.4, 0.215686, 0.741176, 1)
-shader_parameter/to = Color(0.678431, 0, 0.145098, 1)
+shader_parameter/to = Color(0.4, 0.215686, 0.741176, 1)
 shader_parameter/tolerance = 0.066
 
 [sub_resource type="Animation" id="Animation_kijlt"]
