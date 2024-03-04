@@ -1,14 +1,13 @@
 extends Node
 
 # Effect should probably be consistent by name for example speed always increases character speed by a fixed amount
-
+# Speed increases the character speed by 100
+# Bleed hurts for 1 damage a second for 10 seconds
 enum Effect {SPEED,BLEED}
 
 @onready var durationTimer = $DurationTimer
 @onready var procTimer = $ProcTimer
 var duration;
-var proc;
-var value;
 var effect;
 
 # Called when the node enters the scene tree for the first time.
@@ -29,6 +28,9 @@ func _process(delta):
 
 
 func _on_proc_timer_timeout():
+	match effect:
+		Effect.BLEED:
+			get_node("./Damageable").hit(1)
 	pass # Replace with function body.
 
 
