@@ -5,13 +5,13 @@ extends Node2D
 var fire_timer : float = 0
 var can_fire : bool = true
 var mousePos
-
 @export var defaultSpell : PackedScene
 var currentSpell
 
 @onready var sprite = $Sprite2D
 @onready var spawnPoint = $Sprite2D/ProjectileSpawnPoint
 @onready var animPlayer = $AnimationPlayer
+@onready var wandColor = Color(102,55,189)
 
 # Called when the node enters the scene tree for thes first time.
 func _ready():
@@ -56,6 +56,8 @@ func fire():
 	spell.global_rotation = self.global_rotation
 
 
-func _on_inventory_combo_created(spellName, useRate, scene):
+func _on_inventory_combo_created(spellName, useRate, scene, wandColor):
 	currentSpell = scene
 	fire_rate = useRate
+	sprite.material.set_shader_parameter("to",wandColor)
+	print(Vector4(wandColor.r,wandColor.b,wandColor.g,wandColor.a))

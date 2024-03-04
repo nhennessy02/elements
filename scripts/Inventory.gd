@@ -64,27 +64,27 @@ func comboLookup(array):
 			print("using Nothing")
 		[Element.PESTILENCE]:
 			print("using Pestilence")
-			combo_created.emit("Pestilence",3,load("res://prefabs/player/spells/pestilence.tscn"))
+			combo_created.emit("Pestilence",3,load("res://prefabs/player/spells/pestilence.tscn"),Color(0,0.47,0.09))
 		[Element.HEMOMANCY]:
 			print("using Hemomancy")
-			#combo_created.emit("Hemomancy",0.25,load("res://prefabs/player/spells/hemomancy.tscn"))
+			#combo_created.emit("Hemomancy",0.25,load("res://prefabs/player/spells/hemomancy.tscn"),Color(0.58,0,0.11))
 		[Element.CONVALESCENCE]:
 			print("using Convalescence")
-			combo_created.emit("Convalescence", 10, load("res://prefabs/player/spells/convalescence.tscn"))
+			combo_created.emit("Convalescence", 10, load("res://prefabs/player/spells/convalescence.tscn"),Color(0.69,0.62,0.17))
 		[Element.BONECRAFT]:
 			print("using Bonecraft")
-			combo_created.emit("Bonecraft",5,load("res://prefabs/player/spells/bonecraft.tscn"))
+			combo_created.emit("Bonecraft",5,load("res://prefabs/player/spells/bonecraft.tscn"),Color(0.58,0.56,0.50))
 		[Element.OCCULTISM]:
 			print("using Occultism")
 		[Element.HEMOMANCY,Element.HEMOMANCY]:
 			print("using Aorta")
-			combo_created.emit("Aorta",7,load("res://prefabs/player/spells/aorta.tscn"))
+			combo_created.emit("Aorta",7,load("res://prefabs/player/spells/aorta.tscn"),Color(0.45,0,0.05))
 		[Element.PESTILENCE,Element.HEMOMANCY]:
 			print("using Leeching Shot")
 		_:
 			print("couldn't decipher combo")
 
-signal combo_created(spellName,useRate,scene) #useRate is how often the spell is used in seconds
+signal combo_created(spellName,useRate,scene,wandColor) #useRate is how often the spell is used in seconds
 
 # this second is about picking up items
 func _on_area_2d_area_entered(area):
