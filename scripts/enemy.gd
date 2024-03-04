@@ -23,7 +23,7 @@ var wander_angle : float
 
 # Avoid Obstacle Variables
 var avoid_future_time : float = 0.1
-var avoid_radius : float = 500.0
+var avoid_radius : float = 800.0
 
 # Used to calculate movement/forces
 var direction : Vector2 = Vector2.ZERO
@@ -128,16 +128,17 @@ func avoid_obstacle():
 	# Avoids all obstacles with varying weight depending on their distance
 	for obstacle in entity_manager.obstacles_array:
 		vec_to_obstacle = obstacle.position - position
-		forward_dot = vec_to_obstacle.dot(position)
+		forward_dot = vec_to_obstacle.dot(self.global_transform.basis_xform(Vector2.UP))
 		
 		if forward_dot >= 0 and forward_dot * forward_dot <= future_sqr_dist:
-			right_dot = vec_to_obstacle.dot(Vector2.RIGHT)
+			right_dot = vec_to_obstacle.dot(self.global_transform.basis_xform(Vector2.RIGHT))
 			
 			if abs(right_dot) <= avoid_radius:
+				var right_vec2 = self.global_transform.basis_xform(Vector2.RIGHT)
 				if right_dot < 0: # TURN RIGHT
-					avoid_force += Vector2.RIGHT * max_force * (1/forward_dot)
+					avoid_force += right_vec2 * max_force * (1/forward_dot)
 				else: # TURN LEFT
-					avoid_force += -Vector2.RIGHT * max_force * (1/forward_dot)
+					avoid_force += -right_vec2 * max_force * (1/forward_dot)
 	
 	return avoid_force
 
