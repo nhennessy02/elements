@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://10bc0bmlgix5"]
+
+[ext_resource type="PackedScene" uid="uid://bv0585bqktpfy" path="res://prefabs/player/base_projectile.tscn" id="1_dlnw3"]
+[ext_resource type="Script" path="res://scripts/spells/hemomancy.gd" id="1_nrun7"]
+
+[node name="Hemomancy" type="Node2D"]
+script = ExtResource("1_nrun7")
+Projectile = ExtResource("1_dlnw3")

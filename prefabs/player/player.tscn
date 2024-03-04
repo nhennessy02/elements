@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://c53dvgtfs8iqn"]
+[gd_scene load_steps=22 format=3 uid="uid://c53dvgtfs8iqn"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_l8vaj"]
 [ext_resource type="Texture2D" uid="uid://coo1w6yil0l76" path="res://assets/sprites/player_static.png" id="2_oxea1"]
@@ -6,7 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://ccv77gx8m4wua" path="res://prefabs/player/wand.tscn" id="4_bkdhc"]
 [ext_resource type="Texture2D" uid="uid://db2msbgy42dkt" path="res://assets/sprites/player_walk.png" id="4_jxc0e"]
 [ext_resource type="Script" path="res://scripts/Inventory.gd" id="5_5e60y"]
-[ext_resource type="PackedScene" uid="uid://bbfq4dms15rbu" path="res://prefabs/ui elements/ui.tscn" id="7_hwjsq"]
+[ext_resource type="PackedScene" uid="uid://bv0585bqktpfy" path="res://prefabs/player/base_projectile.tscn" id="5_o482u"]
+[ext_resource type="PackedScene" uid="uid://bbfq4dms15rbu" path="res://prefabs/ui.tscn" id="7_hwjsq"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g1ww4"]
 radius = 46.0
@@ -199,9 +200,13 @@ script = ExtResource("3_1jh4r")
 
 [node name="Wand" parent="." instance=ExtResource("4_bkdhc")]
 fire_rate = 0.25
+defaultSpell = ExtResource("5_o482u")
 
 [node name="Inventory" type="Node" parent="."]
 script = ExtResource("5_5e60y")
+
+[node name="Timer" type="Timer" parent="Inventory"]
+one_shot = true
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_mask = 16
@@ -232,6 +237,8 @@ position_smoothing_enabled = true
 [connection signal="health_changed" from="." to="UI" method="_on_player_health_changed"]
 [connection signal="inventory_changed" from="." to="UI" method="_on_player_inventory_changed"]
 [connection signal="health_changed" from="HealthTracker" to="." method="_on_health_tracker_health_changed"]
+[connection signal="combo_created" from="Inventory" to="Wand" method="_on_inventory_combo_created"]
 [connection signal="inventory_changed" from="Inventory" to="." method="_on_inventory_inventory_changed"]
+[connection signal="timeout" from="Inventory/Timer" to="Inventory" method="_on_timer_timeout"]
 [connection signal="area_entered" from="Area2D" to="Inventory" method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="Area2D" to="Inventory" method="_on_area_2d_area_exited"]
