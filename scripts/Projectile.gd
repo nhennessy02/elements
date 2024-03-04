@@ -8,6 +8,7 @@ var active : bool = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$AnimationPlayer.play("basic")
 	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -26,7 +27,7 @@ func _on_area_2d_body_entered(body):
 			active = false
 			
 	# Make the projectile invisible
-	$AnimatedSprite2D.visible = false
+	$Sprite2D.visible = false
 	
 # When the particles are finished emitting, delete the projectile object
 # Prevents the particles from being destroyed early

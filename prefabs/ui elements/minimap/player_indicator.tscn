@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bc082kcjphfg2"]
+
+[ext_resource type="Texture2D" uid="uid://bm5rrpvkhxt3r" path="res://assets/ui element sprites/player_indicator.png" id="1_6sk2y"]
+
+[node name="PlayerIndicator" type="Sprite2D"]
+texture = ExtResource("1_6sk2y")
