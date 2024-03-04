@@ -38,8 +38,7 @@ func _process(delta):
 	# Input event
 	if Input.is_action_pressed("fire_wand") and can_fire: #left mouse click
 		fire()
-
-
+		
 
 func fire():
 	
@@ -54,4 +53,5 @@ func fire():
 	projectile.global_position = spawnPoint.global_position #sets spawnpoint at the spawnpoint node
 	projectile.global_rotation = self.global_rotation
 	
+# func colorchange():
 	
