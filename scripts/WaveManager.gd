@@ -28,6 +28,9 @@ var player
 @export var wave_stages : Array[Array]
 var current_stage_index : int	# the index of the active stage of the wave in the array
 
+# Wave Counter
+@onready var wave_counter_ui = $WaveCounter
+
 # When creating a wave in the inspector: 
 # 1) create a new element in the array
 # 2) add 4 elements to the new array
@@ -45,10 +48,19 @@ const i_type : int = 1		# Index of the enemy TYPE
 const i_time : int = 2		# Index of the TIME before next enemies are spawned
 const i_grouped : int = 3	# Index of the bool that determines grouped vs random positioning
 
+# Entity Manager
 var entity_manager
 
+# Spawning Bounds
+@export var bounds_x : float = 1000.0
+@export var bounds_y : float = 1000.0
+var acceptable_spawn_dist : float = 600
+
+# Tracks if Random Waves are being generated
+var random : bool = false
+
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready():	
 	# Entity manager reference
 	if get_tree().get_first_node_in_group("EntityManager"):
 		entity_manager = get_tree().get_first_node_in_group("EntityManager")
@@ -64,18 +76,25 @@ func _ready():
 	
 	# If there is a custom wave run it
 	if wave_stages.size() > 0:
+		wave_counter_ui.update_wave_ui()
 		next_wave()
 	
 	# Otherwise run a random wave
 	else:
+		wave_counter_ui.update_wave_ui()
 		random_wave()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	# Go to the element combination scene after the wave is completed
 	if wave_over:
-		# REPLACE WITH SCENE TRANSITION
-		get_tree().quit() 
+		# If there is a custom wave run it
+		if !random:
+			next_wave()
+		# Otherwise run a random wave
+		else:
+			wave_counter_ui.update_wave_ui()
+			random_wave()
 	
 	# During a wave...
 	else:
@@ -102,6 +121,7 @@ func next_wave():
 # Creates a random wave if there is no wave built in the inspector
 func random_wave():
 	wave_over = false
+	random = true
 	current_stage_index = 0
 	
 	# Determine number of stages in the wave
@@ -178,16 +198,59 @@ func random_spawn_point():
 		8: # Bottom Right
 			current_spawn_point += Vector2(spawn_range_width, spawn_range_height) * distance_multiplier
 	
+	# Reposition if necessary
+	current_spawn_point = move_in_bounds(current_spawn_point)
+	current_spawn_point = away_from_player(current_spawn_point)
+	
 	# Return Vector2 position
 	return current_spawn_point
 
 # Adds variation to the spawn points of enemies
-# CURRENTLY CAN SPAWN ON TOP OF OTHER ENEMIES / OBJECTS
-func add_pos_variation(range_min: float = -100, range_max: float = 100):
+func add_pos_variation(range_min: float = -25, range_max: float = 25):
 	# Introduce variation
 	var x_pos_variation = rng.randf_range(range_min, range_max)
 	var y_pos_variation = rng.randf_range(range_min, range_max)
-	return Vector2(x_pos_variation, y_pos_variation)
+	
+	# Reposition if out of bounds
+	var spawn_vec : Vector2 = Vector2(x_pos_variation, y_pos_variation)
+	
+	# Return Vector2 position
+	return spawn_vec
+
+# Reposition a spawning vector if out of bounds
+func move_in_bounds(current_pos: Vector2):
+	if current_pos.x < -bounds_x: 
+		current_pos.x = -bounds_x
+	if current_pos.x > bounds_x:
+		current_pos.x = bounds_x
+	if current_pos.y < -bounds_y:
+		current_pos.y = -bounds_y
+	if current_pos.y > bounds_y:
+		current_pos.y = bounds_y
+	return current_pos
+
+func away_from_player(current_pos: Vector2):
+	# If the spawn point is too close to the player move it
+	if current_pos.distance_to(player.position) < acceptable_spawn_dist:
+		
+		var far_x : float = 0
+		var far_y : float = 0
+		
+		# Get X and Y coordinates far away from the player
+		if player.position.x > 0:
+			far_x = player.position.x - acceptable_spawn_dist
+		else:
+			far_x = player.position.x + acceptable_spawn_dist
+		if player.position.y > 0:
+			far_y = player.position.y - acceptable_spawn_dist
+		else:
+			far_y = player.position.y + acceptable_spawn_dist
+		
+		# Update spawn position vector
+		current_pos.x = far_x
+		current_pos.y = far_y
+	
+	return current_pos
 
 # Spawns a group of enemies in random positions
 func spawn_enemies(count: int, type: PackedScene):
@@ -212,7 +275,7 @@ func spawn(type: PackedScene):
 	enemy.physics_object.position = random_spawn_point() + add_pos_variation()
 
 # Spawns an enemy of a given type at a set position
-func spawn_at_pos(type: PackedScene, position: Vector2, has_variation: bool = false):
+func spawn_at_pos(type: PackedScene, position: Vector2, has_variation: bool = true):
 	# Creates an enemy in the scene
 	var enemy = type.instantiate()
 	add_child(enemy)

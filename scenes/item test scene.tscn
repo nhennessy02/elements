@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://c53dvgtfs8iqn" path="res://prefabs/player/player.tscn" id="1_pkeck"]
 [ext_resource type="PackedScene" uid="uid://rtck8bqo3jek" path="res://prefabs/base_item.tscn" id="2_52ngw"]
-[ext_resource type="PackedScene" uid="uid://bbfq4dms15rbu" path="res://prefabs/ui.tscn" id="3_a6bev"]
+[ext_resource type="PackedScene" uid="uid://bbfq4dms15rbu" path="res://prefabs/ui elements/ui.tscn" id="3_a6bev"]
 
 [node name="ItemTestScene" type="Node2D"]
 

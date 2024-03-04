@@ -11,6 +11,8 @@ var acceleration : Vector2 = Vector2.ZERO
 
 @export var mass : float = 1.0
 
+var colliding_with_terrain : bool = false
+
 func _ready():
 	position = owner.global_position
 
@@ -25,6 +27,16 @@ func _process(delta):
 	
 	# Update enemy position
 	owner.global_position = position
+	
+	# Keep enemies in bounds
+	if position.x >= owner.halfwidth_x:
+		position.x = owner.halfwidth_x
+	if position.x <= -owner.halfwidth_x:
+		position.x = -owner.halfwidth_x
+	if position.y >= owner.halfwidth_y:
+		position.y = owner.halfwidth_y
+	if position.y <= -owner.halfwidth_y:
+		position.y = -owner.halfwidth_y
 	
 	# Zero acceleration
 	acceleration = Vector2.ZERO

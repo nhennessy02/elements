@@ -13,6 +13,16 @@ var player:
 
 # Gives references to other entities
 var entity_manager
+var wave_manager : Node
+
+# Half of the width and height
+var halfwidth_x : float
+var halfwidth_y : float
+
+# Wandering Variables
+var wander_pos : Vector2
+var wander_angle : float
+var wander_radius : float
 
 # Used to calculate movement/forces
 var total_steering_force : Vector2 = Vector2.ZERO
@@ -20,6 +30,11 @@ var total_steering_force : Vector2 = Vector2.ZERO
 
 func _ready(): # LACKS DEFAULTS IN CASE OF MISSING PLAYER OR ENTITY MANAGER
 	entity_manager = get_tree().get_first_node_in_group("EntityManager")
+	
+	# Gets the bounds
+	wave_manager = get_parent()
+	halfwidth_x = wave_manager.bounds_x
+	halfwidth_y = wave_manager.bounds_y
 	
 	# Finds the player and gets a reference to it
 	player = entity_manager.player
@@ -76,6 +91,21 @@ func separate():
 	
 	# Return total separate force
 	return seperate_force;
+
+func wander(future_time: float = 0.5, wander_radius: float = 2.0):
+	wander_pos = calc_future_position(future_time)
+	
+	wander_pos.x += cos(wander_angle) * wander_radius
+	wander_pos.y += sin(wander_angle) * wander_radius
+	
+	return seek(wander_pos)
+
+func change_wander_angle(wander_radius: float = 2.0):
+	wander_angle = randf_range(0.0, 360.00)
+	wander_angle = deg_to_rad(wander_angle)
+
+func calc_future_position(time: float = 0.5):
+	return physics_object.position + physics_object.velocity * time
 
 func die():
 	entity_manager.remove_enemy(self)
