@@ -5,6 +5,9 @@ class_name Enemy extends CharacterBody2D
 @export var speed : float = 150.0
 @export var damage : int = 1
 
+# Pathfinding Variables
+@onready var nav_agent := $NavigationAgent2D as NavigationAgent2D
+
 # We assign this in _ready()
 var player:
 	get: return player
@@ -42,6 +45,11 @@ func _ready(): # LACKS DEFAULTS IN CASE OF MISSING PLAYER OR ENTITY MANAGER
 	
 	# Finds the player and gets a reference to it
 	player = entity_manager.player
+	
+	# Delay to prevent pathfinding errors
+	set_physics_process(false)
+	await get_tree().physics_frame
+	set_physics_process(true)
 
 func _physics_process(delta):
 	# Calc velocity each frame
@@ -52,7 +60,7 @@ func _physics_process(delta):
 	direction = velocity.normalized()
 	
 	# Zero acceleration
-	acceleration = Vector2.ZERO	
+	acceleration = Vector2.ZERO
 	
 	# Apply all steering forces to the enemy's movements
 	total_steering_force = Vector2.ZERO
@@ -72,6 +80,19 @@ func _on_hit_box_body_entered(body):
 	for child in body.get_children():
 		if child is DamageablePlayer:
 			child.hit(damage) # calls hit in damageable_player.gd
+
+# Find the fastest route to the player without collisions
+func pathfinding():
+	#var dir = to_local(nav_agent.get_next_path_position()).normalized()
+	#var pathfind_velocity = dir * speed
+	#return pathfind_velocity
+	return seek(nav_agent.get_next_path_position())
+
+# Get a path for pathfinding
+func make_path():
+	nav_agent.target_position = player.position
+func _make_new_path_on_timeout():
+	make_path()
 
 # Movement function: Enemies move towards player position
 func seek(seek_target_pos: Vector2):
