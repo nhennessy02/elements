@@ -18,7 +18,7 @@ func _ready():
 			#character speed += value
 			pass
 		Effect.BLEED:
-			get_node("./Damageable").hit()
+			procTimer.start(1)
 	pass # Replace with function body.
 
 
@@ -31,6 +31,7 @@ func _on_proc_timer_timeout():
 	match effect:
 		Effect.BLEED:
 			get_node("./Damageable").hit(1)
+			procTimer.start(1)
 	pass # Replace with function body.
 
 
