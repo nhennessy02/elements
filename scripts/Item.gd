@@ -2,7 +2,7 @@ extends Node
 
 class_name Item
 enum Element { PESTILENCE = 0, HEMOMANCY = 1, CONVALESCENCE = 2, BONECRAFT = 3, OCCULTISM = 4}
-var id;
+@export var id : int = -1
 
 @onready var sprite = $"../Sprite2D"
 #get some sprites only pestilence and hemomancy have temporary sprites
@@ -10,7 +10,8 @@ var spriteArray = [load("res://assets/sprites/elements/pestilence_bubble.png"),l
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	id = randi_range(Element.PESTILENCE, Element.OCCULTISM)
+	if id == -1:
+		id = randi_range(Element.PESTILENCE, Element.OCCULTISM)
 	#updateColor()
 	updateSprite()
 
