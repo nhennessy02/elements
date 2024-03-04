@@ -4,3 +4,9 @@
 
 [node name="Damageable" type="Node"]
 script = ExtResource("1_5yy5p")
+
+[node name="FlashTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[connection signal="timeout" from="FlashTimer" to="." method="_on_flash_timer_timeout"]
