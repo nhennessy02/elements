@@ -12,6 +12,9 @@ var enemy_projectiles : Array
 var player
 var player_projectiles : Array
 
+# Obstacles
+@export var obstacles_array : Array[Area2D]
+
 # Minimap
 @onready var minimap = $Minimap
 

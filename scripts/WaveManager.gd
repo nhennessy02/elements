@@ -178,7 +178,7 @@ func call_wave_element(index: int):
 # Returns a random position out of the player's view
 func random_spawn_point():
 	# General direction / location of spawn
-	var current_spawn_point = player.global_position
+	var current_spawn_point = player.position
 	var number = rng.randi_range(1, 8)
 	match number:
 		1: # Top Left
@@ -271,8 +271,7 @@ func spawn(type: PackedScene):
 	entity_manager.append_enemy(enemy)
 	
 	# Randomly determine enemy position
-	enemy.global_position = random_spawn_point() + add_pos_variation()
-	enemy.physics_object.position = random_spawn_point() + add_pos_variation()
+	enemy.position = random_spawn_point() + add_pos_variation()
 
 # Spawns an enemy of a given type at a set position
 func spawn_at_pos(type: PackedScene, position: Vector2, has_variation: bool = true):
@@ -282,13 +281,11 @@ func spawn_at_pos(type: PackedScene, position: Vector2, has_variation: bool = tr
 	
 	# Determine enemy position
 	entity_manager.append_enemy(enemy)
-	enemy.global_position = position
-	enemy.physics_object.position = position
+	enemy.position = position
 	
 	# Add random variation if needed
 	if has_variation:
-		enemy.global_position += add_pos_variation()
-		enemy.physics_object.position += add_pos_variation()
+		enemy.position += add_pos_variation()
 
 # Sets wave_over to true if there are no more enemies to spawn, and the rest are dead
 func check_if_wave_over():
