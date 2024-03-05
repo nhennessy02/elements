@@ -33,20 +33,18 @@ func _process(delta):
 	if fire_timer >= fire_rate:
 		can_fire = true
 		animPlayer.play("idle")
-		$CooldownSmoke.emitting = false
 	else:
 		can_fire = false
 	
 	# Input event
 	if Input.is_action_pressed("fire_wand") and can_fire: #left mouse click
 		fire()
-		$CooldownSmoke.emitting = false
 	if animPlayer.get_current_animation() != "fire":
 		if !can_fire:
 			animPlayer.play("cooldown")
 			$CooldownSmoke.emitting = true # cooldown particle effect
-		#else:
-			#animPlayer.play("idle")
+		else:
+			animPlayer.play("idle")
 			
 	
 
