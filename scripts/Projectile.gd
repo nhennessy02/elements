@@ -24,10 +24,10 @@ func _on_area_2d_body_entered(body):
 		if child is Damageable and active:
 		# Only deal damage if the thing is able to be damaged
 			child.hit(damage)
-			active = false
 			
 	# Make the projectile invisible
 	$Sprite2D.visible = false
+	active = false
 	
 # When the particles are finished emitting, delete the projectile object
 # Prevents the particles from being destroyed early
