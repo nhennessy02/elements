@@ -34,10 +34,11 @@ shape = SubResource("CircleShape2D_qdjwe")
 script = ExtResource("5_o0du0")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+max_speed = 150.0
 debug_enabled = true
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 0.01
+wait_time = 0.2
 autostart = true
 
 [connection signal="body_entered" from="HitBox" to="." method="_on_hit_box_body_entered"]
