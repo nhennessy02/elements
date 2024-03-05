@@ -33,6 +33,7 @@ func _process(delta):
 		active = true
 		lifetimer.start()
 		staticbody.set_collision_layer_value(1, true)
+		staticbody.set_collision_layer_value(5, true)
 		sprite.texture = wall
 
 

@@ -111,7 +111,7 @@ slot2={
 2d_navigation/layer_2="Flying"
 2d_physics/layer_3="Enemies"
 2d_physics/layer_4="PlayerBullets"
-2d_physics/layer_5="Fliers"
+2d_physics/layer_5="Pits"
 
 [rendering]
 
