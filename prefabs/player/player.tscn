@@ -199,7 +199,6 @@ debug_color = Color(0.988235, 0.0509804, 0.215686, 0.419608)
 script = ExtResource("3_1jh4r")
 
 [node name="Wand" parent="." instance=ExtResource("4_bkdhc")]
-fire_rate = 0.25
 defaultSpell = ExtResource("5_o482u")
 
 [node name="Inventory" type="Node" parent="."]

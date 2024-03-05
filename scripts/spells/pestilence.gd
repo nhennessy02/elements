@@ -2,8 +2,10 @@ extends Node2D
 
 var damagePerTick = 1
 var enemyList = []
+var wand
 
 func _ready():
+	wand = get_node("../Player/Wand")
 	self.rotation = 0
 	
 func _on_damage_rate_timeout():

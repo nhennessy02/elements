@@ -4,11 +4,11 @@ extends Node
 # Speed increases the character speed by 100
 # Bleed hurts for 1 damage a second for 10 seconds
 class_name Effect
-
-enum Effects {SPEED,BLEED,REGEN,SLOW,GHOSTING,INVULNERABILITY}
+#enum {SPEED,BLEED,REGEN,SLOW,GHOSTING,INVULNERABILITY}
 
 @onready var durationTimer = $DurationTimer
 @onready var procTimer = $ProcTimer
+var attachedNode;
 var duration;
 var effect;
 
@@ -20,6 +20,7 @@ func _ready():
 			#character speed += value
 			pass
 		Effects.BLEED:
+			get_parent().get_child(3).hit(1) #this has to be rewritten to work for anything and not just a damageable node in the 4th position of the node tree
 			procTimer.start(1)
 		Effects.REGEN:
 			pass
@@ -54,7 +55,7 @@ func _on_proc_timer_timeout():
 		Effects.SPEED:
 			pass
 		Effects.BLEED:
-			get_node("./Damageable").hit(1)
+			get_parent().get_child(3).hit(1) 
 			procTimer.start(1)
 			pass
 		Effects.REGEN:

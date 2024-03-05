@@ -8,8 +8,6 @@ size = Vector2(7, 12)
 
 [node name="LeechingShot" type="Node2D"]
 script = ExtResource("1_s4q73")
-speed = null
-damage = null
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_nj3fr")

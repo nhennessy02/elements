@@ -1,11 +1,9 @@
 extends Node
 
 var effectTemplate = preload("res://prefabs/effect.tscn")
-enum Effects {SPEED,BLEED,REGEN,SLOW,GHOSTING,INVULNERABILITY}
 # Called when the node enters the scene tree for the first time.
 
-func attach_effect(nodePath : NodePath, effect : Effect, duration : float):
-	var node = get_node(nodePath)
+func attach_effect(node, effect : int, duration : float):
 	#if node already has the effect, refresh the timer
 	for child in node.get_children():
 		if child is Effect:
@@ -16,5 +14,6 @@ func attach_effect(nodePath : NodePath, effect : Effect, duration : float):
 	var effectNode = effectTemplate.instantiate()
 	effectNode.duration = duration
 	effectNode.effect = effect
+	effectNode.attachedNode = node;
 	node.add_child(effectNode)
 	pass

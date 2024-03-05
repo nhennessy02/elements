@@ -26,9 +26,6 @@ func _process(delta):
 			mousePos = player.position + player.position.direction_to(mousePos) * min_range
 		staticbody.global_position = mousePos
 		staticbody.look_at(player.position)
-		pass
-		#staticbody.position = get_viewport().get_mouse_position()
-	#elif not active:
 	elif not active:
 		active = true
 		lifetimer.start()
