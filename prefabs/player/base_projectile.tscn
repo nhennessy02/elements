@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bv0585bqktpfy"]
+[gd_scene load_steps=10 format=3 uid="uid://bv0585bqktpfy"]
 
 [ext_resource type="Script" path="res://scripts/projectile.gd" id="1_k5emv"]
 [ext_resource type="Texture2D" uid="uid://d1yun7vb7gj1w" path="res://assets/sprites/projectile_basic-sheet.png" id="2_dg5gy"]
@@ -7,12 +7,11 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tw3tc"]
 size = Vector2(28.5, 28.5)
 
-[sub_resource type="Curve" id="Curve_o1xiu"]
-_data = [Vector2(0, 0.8), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_wwxqm"]
-curve = SubResource("Curve_o1xiu")
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_rm8iu"]
+particles_animation = true
+particles_anim_h_frames = 5
+particles_anim_v_frames = 1
+particles_anim_loop = false
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ttxkb"]
 particle_flag_disable_z = true
@@ -24,7 +23,49 @@ linear_accel_min = 50.0
 linear_accel_max = 50.0
 radial_accel_min = -75.0
 radial_accel_max = -75.0
-scale_curve = SubResource("CurveTexture_wwxqm")
+scale_min = 1.5
+scale_max = 1.5
+anim_speed_min = 1.25
+anim_speed_max = 1.5
+
+[sub_resource type="Animation" id="Animation_1raq6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_dg5gy")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [8]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
 
 [sub_resource type="Animation" id="Animation_qhv06"]
 resource_name = "basic"
@@ -67,45 +108,6 @@ tracks/2/keys = {
 "values": [0, 1, 2, 3, 4, 5, 6, 7]
 }
 
-[sub_resource type="Animation" id="Animation_1raq6"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("2_dg5gy")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:hframes")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [8]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_vikw5"]
 _data = {
 "RESET": SubResource("Animation_1raq6"),
@@ -135,6 +137,7 @@ debug_color = Color(0.996078, 0, 0.184314, 0.419608)
 [node name="HitParticles" type="GPUParticles2D" parent="."]
 z_index = 2
 texture_filter = 1
+material = SubResource("CanvasItemMaterial_rm8iu")
 emitting = false
 amount = 10
 process_material = SubResource("ParticleProcessMaterial_ttxkb")
