@@ -25,7 +25,7 @@ bounds_y = 1170.0
 position = Vector2(332, 142)
 
 [node name="BaseItem2" parent="." instance=ExtResource("5_6k6wa")]
-position = Vector2(-370, 201)
+position = Vector2(-714, 212)
 
 [node name="BaseItem3" parent="." instance=ExtResource("5_6k6wa")]
 position = Vector2(-211, -203)
@@ -37,4 +37,4 @@ position = Vector2(251, -287)
 position = Vector2(106, 369)
 
 [node name="Player" parent="." instance=ExtResource("2_u5jwy")]
-position = Vector2(435, -30)
+position = Vector2(40, 146)
