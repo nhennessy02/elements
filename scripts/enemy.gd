@@ -83,9 +83,6 @@ func _on_hit_box_body_entered(body):
 
 # Find the fastest route to the player without collisions
 func pathfinding():
-	#var dir = to_local(nav_agent.get_next_path_position()).normalized()
-	#var pathfind_velocity = dir * speed
-	#return pathfind_velocity
 	return seek(nav_agent.get_next_path_position())
 
 # Get a path for pathfinding
