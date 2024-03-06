@@ -3,7 +3,7 @@ extends Node
 # SPECIFICALLY FOR THE PLAYER
 
 class_name DamageablePlayer
-@export var health : int = 5;
+@export var health : int = 50;
 
 signal health_changed(value : int)
 

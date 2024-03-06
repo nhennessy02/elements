@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://c53dvgtfs8iqn"]
+[gd_scene load_steps=24 format=3 uid="uid://c53dvgtfs8iqn"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_l8vaj"]
 [ext_resource type="Texture2D" uid="uid://coo1w6yil0l76" path="res://assets/sprites/player_static.png" id="2_oxea1"]
@@ -8,7 +8,6 @@
 [ext_resource type="Script" path="res://scripts/Inventory.gd" id="5_5e60y"]
 [ext_resource type="PackedScene" uid="uid://bv0585bqktpfy" path="res://prefabs/player/base_projectile.tscn" id="5_o482u"]
 [ext_resource type="PackedScene" uid="uid://bbfq4dms15rbu" path="res://prefabs/ui elements/ui.tscn" id="7_hwjsq"]
-[ext_resource type="Texture2D" uid="uid://ojpjsipemkvk" path="res://assets/sprites/player_hurt.png" id="8_rlbso"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w8su0"]
 size = Vector2(92, 137)
@@ -136,51 +135,9 @@ tracks/2/keys = {
 "values": [0, 1]
 }
 
-[sub_resource type="Animation" id="Animation_ima03"]
-resource_name = "hurt"
-length = 0.4
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("8_rlbso")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:hframes")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [2]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [0, 1]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_cefwj"]
 _data = {
 "RESET": SubResource("Animation_hmyht"),
-"hurt": SubResource("Animation_ima03"),
 "idle": SubResource("Animation_gn72d"),
 "run": SubResource("Animation_ch70w")
 }
@@ -229,12 +186,14 @@ collision_layer = 2
 script = ExtResource("1_l8vaj")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 0.611765, 0.611765, 1)
 texture_filter = 1
 position = Vector2(189, -60)
 texture = ExtResource("2_oxea1")
 offset = Vector2(-189, 33)
 
 [node name="HitBox" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, -11.5)
 shape = SubResource("RectangleShape2D_w8su0")
 debug_color = Color(0.988235, 0.0509804, 0.215686, 0.419608)
@@ -253,6 +212,7 @@ script = ExtResource("5_5e60y")
 one_shot = true
 
 [node name="Area2D" type="Area2D" parent="."]
+visible = false
 collision_mask = 16
 monitorable = false
 
