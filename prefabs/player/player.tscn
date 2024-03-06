@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://c53dvgtfs8iqn"]
+[gd_scene load_steps=26 format=3 uid="uid://c53dvgtfs8iqn"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_l8vaj"]
 [ext_resource type="Texture2D" uid="uid://coo1w6yil0l76" path="res://assets/sprites/player_static.png" id="2_oxea1"]
@@ -8,16 +8,13 @@
 [ext_resource type="Script" path="res://scripts/Inventory.gd" id="5_5e60y"]
 [ext_resource type="PackedScene" uid="uid://bv0585bqktpfy" path="res://prefabs/player/base_projectile.tscn" id="5_o482u"]
 [ext_resource type="PackedScene" uid="uid://bbfq4dms15rbu" path="res://prefabs/ui elements/ui.tscn" id="7_hwjsq"]
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g1ww4"]
-radius = 46.0
-height = 146.0
+[ext_resource type="Texture2D" uid="uid://ojpjsipemkvk" path="res://assets/sprites/player_hurt.png" id="8_rlbso"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w8su0"]
-size = Vector2(92, 29)
+size = Vector2(92, 137)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wyean"]
-radius = 88.278
+radius = 120.067
 
 [sub_resource type="Animation" id="Animation_hmyht"]
 length = 0.001
@@ -139,12 +136,57 @@ tracks/2/keys = {
 "values": [0, 1]
 }
 
+[sub_resource type="Animation" id="Animation_ima03"]
+resource_name = "hurt"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("8_rlbso")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_cefwj"]
 _data = {
 "RESET": SubResource("Animation_hmyht"),
+"hurt": SubResource("Animation_ima03"),
 "idle": SubResource("Animation_gn72d"),
 "run": SubResource("Animation_ch70w")
 }
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_idlfq"]
+animation = &"hurt"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_c7fy5"]
 animation = &"idle"
@@ -163,12 +205,22 @@ advance_condition = &"running"
 advance_mode = 2
 advance_condition = &"idle"
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2vbg0"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hwlay"]
+advance_mode = 2
+advance_condition = &"running"
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_ppjxk"]
+states/hurt/node = SubResource("AnimationNodeAnimation_idlfq")
+states/hurt/position = Vector2(637, 106)
 states/idle/node = SubResource("AnimationNodeAnimation_c7fy5")
 states/idle/position = Vector2(529, 162)
 states/run/node = SubResource("AnimationNodeAnimation_n6o42")
 states/run/position = Vector2(529, 46)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_n8f3a"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_jrb4b"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_lxjdo")]
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_n8f3a"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_jrb4b"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_lxjdo"), "hurt", "idle", SubResource("AnimationNodeStateMachineTransition_2vbg0"), "hurt", "run", SubResource("AnimationNodeStateMachineTransition_hwlay")]
+graph_offset = Vector2(17, 6)
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 texture_filter = 1
@@ -182,25 +234,17 @@ position = Vector2(189, -60)
 texture = ExtResource("2_oxea1")
 offset = Vector2(-189, 33)
 
-[node name="DamageCollisionBox" type="StaticBody2D" parent="."]
-position = Vector2(1, -16)
-collision_layer = 2
-collision_mask = 4
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageCollisionBox"]
-shape = SubResource("CapsuleShape2D_g1ww4")
-
-[node name="WorldCollisionBox" type="CollisionShape2D" parent="."]
-position = Vector2(0, 42.5)
+[node name="HitBox" type="CollisionShape2D" parent="."]
+position = Vector2(0, -11.5)
 shape = SubResource("RectangleShape2D_w8su0")
 debug_color = Color(0.988235, 0.0509804, 0.215686, 0.419608)
-
-[node name="HealthTracker" type="Node" parent="."]
-script = ExtResource("3_1jh4r")
 
 [node name="Wand" parent="." instance=ExtResource("4_bkdhc")]
 fire_rate = 0.25
 defaultSpell = ExtResource("5_o482u")
+
+[node name="HealthTracker" type="Node" parent="."]
+script = ExtResource("3_1jh4r")
 
 [node name="Inventory" type="Node" parent="."]
 script = ExtResource("5_5e60y")
@@ -213,6 +257,7 @@ collision_mask = 16
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -11)
 shape = SubResource("CircleShape2D_wyean")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

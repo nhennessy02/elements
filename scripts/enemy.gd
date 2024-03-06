@@ -79,7 +79,7 @@ func apply_force(force: Vector2):
 func _on_hit_box_body_entered(body):
 	for child in body.get_children():
 		if child is DamageablePlayer:
-			child.hit(damage) # calls hit in damageable_player.gd
+			child.hit(damage, position) # calls hit in damageable_player.gd
 
 # Find the fastest route to the player without collisions
 func pathfinding():
