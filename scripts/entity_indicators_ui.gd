@@ -25,9 +25,9 @@ func _ready():
 	idtr_pos_y = screen_height/2 - 50
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	# Display these entities on the minimap relative to the player
-	move_indicators(delta)
+	move_indicators()
 	display_indicators()
 
 # Create an indicator of a specific type
@@ -49,7 +49,7 @@ func remove_indicator(enemy: Object):
 	indicator_array.remove_at(idtr_index) # removes the indicator
 
 # Moves the indicators on the minimap
-func move_indicators(delta):
+func move_indicators():
 	# MOVE ENEMY INDICATORS
 	for indicator in indicator_array:
 		# Get a normalized vector representing the indicator's position
