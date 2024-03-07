@@ -4,6 +4,5 @@
 [ext_resource type="Texture2D" uid="uid://2j7ed7jptklq" path="res://assets/ui elements/item_idtr.png" id="1_pwko4"]
 
 [node name="ItemIdtr" type="Sprite2D"]
-rotation = 1.5708
 texture = ExtResource("1_pwko4")
 script = ExtResource("1_4m5f7")

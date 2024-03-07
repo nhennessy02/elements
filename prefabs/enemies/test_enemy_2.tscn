@@ -1,0 +1,49 @@
+[gd_scene load_steps=7 format=3 uid="uid://bx3u8mnxg3xci"]
+
+[ext_resource type="PackedScene" uid="uid://tsnqt7x4rvnp" path="res://prefabs/entity elements/damageable.tscn" id="1_0axwg"]
+[ext_resource type="Texture2D" uid="uid://d1c56h8iqg4od" path="res://assets/sprites/enemy_ghost.png" id="1_4phfu"]
+[ext_resource type="Script" path="res://scripts/enemy.gd" id="1_52c41"]
+[ext_resource type="Script" path="res://scripts/enemy behavior/testenemy2_behavior.gd" id="3_65rph"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cnevg"]
+radius = 45.0444
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_752ce"]
+radius = 44.1022
+
+[node name="TestEnemy2" type="CharacterBody2D"]
+collision_layer = 4
+script = ExtResource("1_52c41")
+speed = 180.0
+max_force = Vector2(200, 200)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(0.0392157, 0.341176, 0.0352941, 1)
+texture = ExtResource("1_4phfu")
+
+[node name="HitBox" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+shape = SubResource("CircleShape2D_cnevg")
+
+[node name="HurtBox" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_752ce")
+
+[node name="Damageable" parent="." instance=ExtResource("1_0axwg")]
+health = 8
+
+[node name="Behavior" type="Node" parent="."]
+script = ExtResource("3_65rph")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.2
+autostart = true
+
+[connection signal="body_entered" from="HitBox" to="." method="_on_hit_box_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_make_new_path_on_timeout"]
