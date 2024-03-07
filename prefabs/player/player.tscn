@@ -186,7 +186,6 @@ collision_layer = 2
 script = ExtResource("1_l8vaj")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(1, 0.611765, 0.611765, 1)
 texture_filter = 1
 position = Vector2(189, -60)
 texture = ExtResource("2_oxea1")

@@ -84,7 +84,7 @@ func _physics_process(delta):
 		current_kb_speed = kb_speed
 	
 	if modulate_on:
-		sprite.modulate = "ff9c9c"
+		sprite.modulate = "bd002f"
 	else:
 		sprite.modulate = "ffffff"
 	
@@ -105,8 +105,6 @@ func _physics_process(delta):
 signal health_changed(value : int)
 func _on_health_tracker_health_changed(value):
 	health_changed.emit(value)
-	invulnerable = true
-	knockingback = true
 
 signal inventory_changed(value)
 func _on_inventory_inventory_changed(value):
