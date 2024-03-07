@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://cmtxokdcenu4h"]
 
 [ext_resource type="Script" path="res://scripts/minimap.gd" id="1_5ss5g"]
-[ext_resource type="Texture2D" uid="uid://ccl3qvmdlaq1k" path="res://assets/ui element sprites/minimap_base.png" id="2_o1pro"]
+[ext_resource type="Texture2D" uid="uid://ccl3qvmdlaq1k" path="res://assets/ui elements/minimap_base.png" id="2_o1pro"]
 [ext_resource type="PackedScene" uid="uid://di7gknw70p3rn" path="res://prefabs/ui elements/minimap/enemy_indicator.tscn" id="3_0koon"]
 [ext_resource type="PackedScene" uid="uid://bvl77p8kqd5lx" path="res://prefabs/ui elements/minimap/item_indicator.tscn" id="4_yoxw2"]
 [ext_resource type="PackedScene" uid="uid://bc082kcjphfg2" path="res://prefabs/ui elements/minimap/player_indicator.tscn" id="5_26g0s"]

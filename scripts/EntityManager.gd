@@ -8,24 +8,24 @@ var enemy_array : Array :
 	get: return enemy_array # Getter
 var enemy_projectiles : Array
 
+# Item References
+var item_array : Array: 
+	get: return item_array # Getter
+
 # Player Object References 
 var player
 var player_projectiles : Array
 
-# Obstacles
-@export var obstacles_array : Array[Area2D]
-
 # Minimap
-@onready var minimap = $Minimap
+@onready var entity_idtr = $EntityIndicatorsUI
 
 func _ready():
 	player = get_tree().get_nodes_in_group("Player")[0]
 
 # Functions to adjust the enemy array
 func append_enemy(enemy: Object):
-	minimap.create_indicator()
+	entity_idtr.create_indicator("enemy")
 	enemy_array.append(enemy)
 func remove_enemy(enemy: Object):
-	minimap.remove_indicator(enemy)
+	entity_idtr.remove_indicator(enemy)
 	enemy_array.erase(enemy)
-

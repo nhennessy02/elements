@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b1tgcwoe8tkn"
-path="res://.godot/imported/enemy_indicator.png-e77ee14b4ea6ad3e40cb2a214f4bbf4b.ctex"
+uid="uid://d0lcv5w3exhd2"
+path="res://.godot/imported/enemy_idtr.png-75374156ad038fd2592ac659f29f0526.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ui element sprites/enemy_indicator.png"
-dest_files=["res://.godot/imported/enemy_indicator.png-e77ee14b4ea6ad3e40cb2a214f4bbf4b.ctex"]
+source_file="res://assets/ui elements/enemy_idtr.png"
+dest_files=["res://.godot/imported/enemy_idtr.png-75374156ad038fd2592ac659f29f0526.ctex"]
 
 [params]
 

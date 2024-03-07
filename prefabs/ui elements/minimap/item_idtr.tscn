@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://iv8hu1chbkds"]
+
+[ext_resource type="Script" path="res://scripts/item_indicator.gd" id="1_4m5f7"]
+[ext_resource type="Texture2D" uid="uid://2j7ed7jptklq" path="res://assets/ui elements/item_idtr.png" id="1_pwko4"]
+
+[node name="ItemIdtr" type="Sprite2D"]
+rotation = 1.5708
+texture = ExtResource("1_pwko4")
+script = ExtResource("1_4m5f7")

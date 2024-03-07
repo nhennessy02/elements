@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://q8f65dxshadt"]
+
+[ext_resource type="Script" path="res://scripts/entity_indicators_ui.gd" id="1_4l224"]
+[ext_resource type="PackedScene" uid="uid://dcqihp201fvnk" path="res://prefabs/ui elements/minimap/enemy_idtr.tscn" id="2_tst2f"]
+[ext_resource type="PackedScene" uid="uid://iv8hu1chbkds" path="res://prefabs/ui elements/minimap/item_idtr.tscn" id="3_vlpd1"]
+
+[node name="EntityIndicatorsUI" type="CanvasLayer"]
+script = ExtResource("1_4l224")
+enemy_idtr = ExtResource("2_tst2f")
+item_idtr = ExtResource("3_vlpd1")
+
+[node name="Indicators" type="Node" parent="."]
+
+[node name="Center" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2

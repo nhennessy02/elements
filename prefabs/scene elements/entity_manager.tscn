@@ -1,9 +1,9 @@
 [gd_scene load_steps=3 format=3 uid="uid://c47i80j2hwowg"]
 
 [ext_resource type="Script" path="res://scripts/EntityManager.gd" id="1_2n1a4"]
-[ext_resource type="PackedScene" uid="uid://cmtxokdcenu4h" path="res://prefabs/ui elements/minimap/minimap.tscn" id="2_ixrol"]
+[ext_resource type="PackedScene" uid="uid://q8f65dxshadt" path="res://prefabs/ui elements/entity_indicators_ui.tscn" id="2_2k2d1"]
 
 [node name="EntityManager" type="Node" groups=["EntityManager"]]
 script = ExtResource("1_2n1a4")
 
-[node name="Minimap" parent="." instance=ExtResource("2_ixrol")]
+[node name="EntityIndicatorsUI" parent="." instance=ExtResource("2_2k2d1")]

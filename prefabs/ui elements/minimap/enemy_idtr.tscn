@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://dcqihp201fvnk"]
+
+[ext_resource type="Script" path="res://scripts/enemy_indicator.gd" id="1_8vbib"]
+[ext_resource type="Texture2D" uid="uid://d0lcv5w3exhd2" path="res://assets/ui elements/enemy_idtr.png" id="1_nve1t"]
+
+[node name="EnemyIdtr" type="Sprite2D"]
+texture = ExtResource("1_nve1t")
+script = ExtResource("1_8vbib")
