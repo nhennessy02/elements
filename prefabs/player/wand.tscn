@@ -264,6 +264,7 @@ libraries = {
 }
 
 [node name="CooldownSmoke" type="GPUParticles2D" parent="."]
+visible = false
 position = Vector2(154, 4)
 amount = 2
 process_material = SubResource("ParticleProcessMaterial_2vgd6")

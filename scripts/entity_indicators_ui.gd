@@ -2,7 +2,7 @@ extends CanvasLayer
 
 var player
 var entity_manager : Node
-@export var detect_range : float = 2000
+var detect_range : float
 var screen_width : float = DisplayServer.window_get_size().x
 var screen_height : float = DisplayServer.window_get_size().y
 var idtr_pos_x
@@ -23,6 +23,7 @@ func _ready():
 	player = get_tree().get_nodes_in_group("Player")[0]
 	idtr_pos_x = screen_width/2 - 50
 	idtr_pos_y = screen_height/2 - 50
+	detect_range = screen_height*2
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
