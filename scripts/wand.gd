@@ -66,7 +66,7 @@ func fire():
 
 func _on_inventory_combo_created(spellName, useRate, scene, wandColor):
 	currentSpell = scene
-	fire_rate = useRate
+	#fire_rate = useRate
 	sprite.material.set_shader_parameter("to",wandColor)
 	print(Vector4(wandColor.r,wandColor.b,wandColor.g,wandColor.a))
 
