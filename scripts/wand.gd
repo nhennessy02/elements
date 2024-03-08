@@ -64,11 +64,11 @@ func fire():
 	spell.global_rotation = self.global_rotation
 
 
-func _on_inventory_combo_created(_spellName, _useRate, scene, wandColor):
+func _on_inventory_combo_created(_spellName, _useRate, scene, newWandColor):
 	currentSpell = scene
 	#fire_rate = useRate
-	sprite.material.set_shader_parameter("to",wandColor)
-	print(Vector4(wandColor.r,wandColor.b,wandColor.g,wandColor.a))
+	sprite.material.set_shader_parameter("to",newWandColor)
+	print(Vector4(newWandColor.r,newWandColor.b,newWandColor.g,newWandColor.a))
 
 
 func startChargingAnimation():
