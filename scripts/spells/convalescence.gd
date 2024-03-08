@@ -20,7 +20,7 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	scaleFactor = (startTime - timer.time_left) / startTime
 	self.position = player.position
 	ring.scale.x = 2 * scaleFactor

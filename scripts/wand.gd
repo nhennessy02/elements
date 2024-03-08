@@ -19,7 +19,7 @@ func _ready():
 	currentSpell = defaultSpell
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	mousePos = get_global_mouse_position()
 	
 	#Flip to face the mouse
@@ -64,7 +64,7 @@ func fire():
 	spell.global_rotation = self.global_rotation
 
 
-func _on_inventory_combo_created(spellName, useRate, scene, wandColor):
+func _on_inventory_combo_created(_spellName, _useRate, scene, _wandColor):
 	currentSpell = scene
 	#fire_rate = useRate
 	sprite.material.set_shader_parameter("to",wandColor)
@@ -90,8 +90,8 @@ func startFireAnimation():
 	#animplayer.queue
 	
 # signal function should loop the cooldown animation when it starts
-func _on_animation_player_current_animation_changed(name):
-	if name == "cooldown":
+func _on_animation_player_current_animation_changed(anim_name):
+	if anim_name == "cooldown":
 		print("started cooldown animation")
 
 # signal function should change the wand state from cooldown to can fire and play and loop the idle animation

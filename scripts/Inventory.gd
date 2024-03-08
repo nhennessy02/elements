@@ -58,7 +58,7 @@ func _on_timer_timeout():
 	combo = []	
 
 func comboLookup(array):
-	array.sort_custom(func(a,b): a < b)
+	#array.sort_custom(func(a,b): a < b)
 	match array:
 		[]:
 			print("using Nothing")
