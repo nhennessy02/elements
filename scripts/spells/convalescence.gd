@@ -7,8 +7,12 @@ var healAmount = 5
 var startTime
 var scaleFactor
 
+@export var cooldown : float = 10
+var wand
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	wand = get_node("../Player/Wand")
 	player = get_node("../Player")
 	startTime = timer.time_left
 	self.global_rotation = 0;
@@ -27,6 +31,8 @@ func _process(delta):
 
 func fizzle():
 	timer.stop()
+	wand.startFireAnimation() #this should go straight to the cooldown animation
+	wand.startCooldown(cooldown)
 	queue_free()
 	pass
 	
@@ -36,5 +42,7 @@ func activate():
 
 func _on_activation_timer_timeout():
 	activate()
+	wand.startFireAnimation()
+	wand.startCooldown(cooldown)
 	queue_free()
 	pass # Replace with function body.

@@ -6,9 +6,14 @@ var active : bool = true
 @export var speed : float = 500
 @export var damage : int = 0
 
+@export var cooldown : float = 1
+var wand
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	wand = get_node("../Player/Wand")
+	wand.startFireAnimation()
+	wand.startCooldown(cooldown)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

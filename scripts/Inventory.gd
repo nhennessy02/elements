@@ -64,16 +64,16 @@ func comboLookup(array):
 			print("using Nothing")
 		[Element.PESTILENCE]:
 			print("using Pestilence")
-			combo_created.emit("Pestilence",3,load("res://prefabs/player/spells/pestilence.tscn"))
+			combo_created.emit("Pestilence",load("res://prefabs/player/spells/pestilence.tscn"))
 		[Element.HEMOMANCY]:
 			print("using Hemomancy")
 			#combo_created.emit("Hemomancy",0.25,load("res://prefabs/player/spells/hemomancy.tscn"))
 		[Element.CONVALESCENCE]:
 			print("using Convalescence")
-			combo_created.emit("Convalescence", 10, load("res://prefabs/player/spells/convalescence.tscn"))
+			combo_created.emit("Convalescence",load("res://prefabs/player/spells/convalescence.tscn"))
 		[Element.BONECRAFT]:
 			print("using Bonecraft")
-			combo_created.emit("Bonecraft",5,load("res://prefabs/player/spells/bonecraft.tscn"))
+			combo_created.emit("Bonecraft",load("res://prefabs/player/spells/bonecraft.tscn"))
 		[Element.OCCULTISM]:
 			print("using Occultism")
 		[Element.HEMOMANCY,Element.HEMOMANCY]:
@@ -81,7 +81,7 @@ func comboLookup(array):
 			combo_created.emit("Aorta",7,load("res://prefabs/player/spells/aorta.tscn"))
 		[Element.PESTILENCE,Element.HEMOMANCY]:
 			print("using Leeching Shot")
-			combo_created.emit("Leeching Shot",1,load("res://prefabs/player/spells/leeching_shot.tscn"))
+			combo_created.emit("Leeching Shot",load("res://prefabs/player/spells/leeching_shot.tscn"))
 		_:
 			print("couldn't decipher combo")
 

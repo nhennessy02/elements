@@ -5,14 +5,18 @@ extends Node2D
 @onready var lifetimer = $LifeTimer
 @export var indicator : Texture2D
 @export var wall : Texture2D
+@export var cooldown : float = 5
 var active = false
 var mousePos
 var max_range = 500
 var min_range = 100
 var player
+var wand
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	wand = get_node("../Player/Wand")
+	wand.startChargingAnimation()
 	player = get_node("../Player")
 	pass
 
@@ -28,6 +32,8 @@ func _process(delta):
 		staticbody.look_at(player.position)
 	elif not active:
 		active = true
+		wand.startFireAnimation()
+		wand.startCooldown(cooldown)
 		lifetimer.start()
 		staticbody.set_collision_layer_value(1, true)
 		sprite.texture = wall

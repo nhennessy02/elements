@@ -2,10 +2,14 @@ extends Node2D
 
 var damagePerTick = 1
 var enemyList = []
+
+@export var cooldown : float = 3
 var wand
 
 func _ready():
 	wand = get_node("../Player/Wand")
+	wand.startFireAnimation()
+	wand.startCooldown(cooldown)
 	self.rotation = 0
 	
 func _on_damage_rate_timeout():

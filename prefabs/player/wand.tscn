@@ -156,3 +156,9 @@ position = Vector2(157, -7)
 libraries = {
 "": SubResource("AnimationLibrary_36cj7")
 }
+
+[node name="CooldownTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="current_animation_changed" from="AnimationPlayer" to="." method="_on_animation_player_current_animation_changed"]
+[connection signal="timeout" from="CooldownTimer" to="." method="_on_cooldown_timer_timeout"]
