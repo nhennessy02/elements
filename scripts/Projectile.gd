@@ -5,7 +5,7 @@ var active : bool = true
 
 @export var speed : float = 500
 @export var damage : int = 4
-@export var cooldown : float = 0.4
+@export var cooldown : float = 0.2
 
 var wand
 

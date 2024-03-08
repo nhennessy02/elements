@@ -64,7 +64,7 @@ func fire():
 	spell.global_rotation = self.global_rotation
 
 
-func _on_inventory_combo_created(_spellName, _useRate, scene, _wandColor):
+func _on_inventory_combo_created(_spellName, _useRate, scene, wandColor):
 	currentSpell = scene
 	#fire_rate = useRate
 	sprite.material.set_shader_parameter("to",wandColor)
