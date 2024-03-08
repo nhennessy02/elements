@@ -198,7 +198,6 @@ shape = SubResource("RectangleShape2D_w8su0")
 debug_color = Color(0.988235, 0.0509804, 0.215686, 0.419608)
 
 [node name="Wand" parent="." instance=ExtResource("4_bkdhc")]
-fire_rate = 0.25
 defaultSpell = ExtResource("5_o482u")
 
 [node name="HealthTracker" type="Node" parent="."]

@@ -33,8 +33,14 @@ position = Vector2(-714, 212)
 [node name="BaseItem3" parent="." instance=ExtResource("5_6k6wa")]
 position = Vector2(-211, -203)
 
+[node name="Item" parent="BaseItem3" index="2"]
+id = 0
+
 [node name="BaseItem4" parent="." instance=ExtResource("5_6k6wa")]
 position = Vector2(251, -287)
+
+[node name="Item" parent="BaseItem4" index="2"]
+id = 1
 
 [node name="BaseItem5" parent="." instance=ExtResource("5_6k6wa")]
 position = Vector2(106, 369)

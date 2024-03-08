@@ -81,6 +81,7 @@ func comboLookup(array):
 			combo_created.emit("Aorta",7,load("res://prefabs/player/spells/aorta.tscn"),Color(0.45,0,0.05))
 		[Element.PESTILENCE,Element.HEMOMANCY]:
 			print("using Leeching Shot")
+			combo_created.emit("Leeching Shot",load("res://prefabs/player/spells/leeching_shot.tscn"))
 		_:
 			print("couldn't decipher combo")
 
