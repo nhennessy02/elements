@@ -25,5 +25,4 @@ func hit(damage : int, hit_pos : Vector2 = Vector2.ZERO):
 	
 	# Still alive...?
 	if health <= 0:
-		# Replace with more robust death / game over
-		get_tree().quit()
+		owner.gameover()

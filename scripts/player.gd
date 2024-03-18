@@ -101,6 +101,9 @@ func _physics_process(delta):
 	# Smoothes movement while colliding with walls, etc.
 	move_and_slide()
 
+func gameover():
+	get_tree().change_scene_to_file("res://scenes/mainmenu.tscn")
+
 #outgoing signals
 signal health_changed(value : int)
 func _on_health_tracker_health_changed(value):
