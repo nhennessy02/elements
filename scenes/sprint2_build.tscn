@@ -38,3 +38,10 @@ position = Vector2(106, 369)
 
 [node name="Player" parent="." instance=ExtResource("2_u5jwy")]
 position = Vector2(40, 146)
+
+[node name="background" type="Polygon2D" parent="."]
+z_index = -5
+position = Vector2(-2114, 1726)
+scale = Vector2(-73.5252, 52.6402)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-61, -64, 3, -64, 3, 0, -29.4267, 0, -61, 0)

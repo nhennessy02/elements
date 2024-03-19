@@ -40,12 +40,6 @@ func _process(_delta):
 	# Input event
 	if Input.is_action_pressed("fire_wand") and can_fire: #left mouse click
 		fire()
-	if animPlayer.get_current_animation() != "fire":
-		if !can_fire:
-			animPlayer.play("cooldown")
-			$CooldownSmoke.emitting = true # cooldown particle effect
-		else:
-			animPlayer.play("idle")
 			
 	
 
@@ -73,6 +67,7 @@ func _on_inventory_combo_created(_spellName, _useRate, scene, newWandColor):
 
 func startChargingAnimation():
 	print("started charging animation")
+	animPlayer.play("hold")
 	#loop animation
 	pass
 
@@ -81,6 +76,9 @@ func startChargingAnimation():
 func startCooldown(value): 
 	print("started cooldown")
 	cooldownTimer.start(value)
+	animPlayer.play("cooldown")
+	if value > 1:
+		$CooldownSmoke.emitting = true
 
 func startFireAnimation():
 	print("started firing animation")
@@ -99,4 +97,5 @@ func _on_cooldown_timer_timeout():
 	print("started idle animation")
 	can_fire = true
 	animPlayer.play("idle")
+	$CooldownSmoke.emitting = false;
 
