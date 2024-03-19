@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://bbfq4dms15rbu"]
+[gd_scene load_steps=7 format=3 uid="uid://bbfq4dms15rbu"]
 
 [ext_resource type="Script" path="res://scripts/ui.gd" id="1_nn1au"]
 [ext_resource type="Texture2D" uid="uid://bwqai3p07c6s5" path="res://assets/sprites/elements/pestilence_ui.png" id="2_ll2dd"]
+[ext_resource type="Texture2D" uid="uid://dmdfnyqvvu31r" path="res://assets/ui elements/itemselected.png" id="3_6740d"]
 [ext_resource type="Texture2D" uid="uid://m0vtx42h8ef" path="res://assets/sprites/elements/hemomancy_ui.png" id="3_yky1o"]
 [ext_resource type="Texture2D" uid="uid://c4vlfp2nrhl4f" path="res://assets/sprites/elements/occultism_ui.png" id="4_8x4td"]
 
@@ -66,6 +67,16 @@ custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 texture = ExtResource("2_ll2dd")
 
+[node name="Selected0" type="TextureRect" parent="Control/ElementTextureContainer/Slot0/Element0"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_6740d")
+
 [node name="Slot1" type="GridContainer" parent="Control/ElementTextureContainer"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
@@ -83,6 +94,16 @@ custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 texture = ExtResource("3_yky1o")
 
+[node name="Selected1" type="TextureRect" parent="Control/ElementTextureContainer/Slot1/Element1"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_6740d")
+
 [node name="Slot2" type="GridContainer" parent="Control/ElementTextureContainer"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
@@ -99,3 +120,13 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 texture = ExtResource("4_8x4td")
+
+[node name="Selected2" type="TextureRect" parent="Control/ElementTextureContainer/Slot2/Element2"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_6740d")

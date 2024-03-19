@@ -6,6 +6,9 @@ class_name UI
 @onready var element_0 = %Element0
 @onready var element_1 = %Element1
 @onready var element_2 = %Element2
+@onready var selected_0 = $Control/ElementTextureContainer/Slot0/Element0/Selected0
+@onready var selected_1 = $Control/ElementTextureContainer/Slot1/Element1/Selected1
+@onready var selected_2 = $Control/ElementTextureContainer/Slot2/Element2/Selected2
 
 var spriteArray = [load("res://assets/sprites/elements/pestilence_ui.png"),load("res://assets/sprites/elements/hemomancy_ui.png"),load("res://assets/sprites/elements/convalescence_ui.png"),load("res://assets/sprites/elements/bonecraft_ui.png"),load("res://assets/sprites/elements/occultism_ui.png")]
 
