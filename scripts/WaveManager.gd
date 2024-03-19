@@ -11,6 +11,7 @@ var rng = RandomNumberGenerator.new()
 var spawn_range_width : float 
 var spawn_range_height : float
 var distance_multiplier : float = 1.5
+@export var spawn_points : Array[Node2D]
 
 # Random Wave Generator
 @export var r_stages_min : int = 5
@@ -160,10 +161,14 @@ func call_wave_element(index: int):
 	# Set new time between stages
 	spawn_time = time_between_spawns
 	
+	# Spawn certain enemy types at one of a few spawn points
+	if enemy_type.resource_name == "": # LABEL FLIERS ELSE THEY USE SPAWN PTS
+		spawn_enemies_at_spawnpoint(enemy_count, enemy_type)
+	
 	# If the spawned enemies appear in a similar location
-	if spawns_grouped:
+	elif spawns_grouped:
 		spawn_enemies_at_pos(enemy_count, enemy_type)
-		
+	
 	# If the spawned enemies are spawned randomly
 	else:
 		spawn_enemies(enemy_count, enemy_type)
@@ -262,6 +267,23 @@ func spawn_enemies_at_pos(count: int, type: PackedScene, variation: bool = true)
 	var position = random_spawn_point()
 	for n in count:
 		spawn_at_pos(type, position, variation)
+
+# Spawns a group of enemies at the furthest spawnpoint in the array
+func spawn_enemies_at_spawnpoint(count: int, type: PackedScene, variation: bool = false):
+	var position = get_furthest_spawnpoint()
+	for n in count:
+		spawn_at_pos(type, position, variation)
+
+# Gets the spawnpoint furthest from the player
+func get_furthest_spawnpoint():
+	var position = Vector2.ZERO
+	var furthest = Vector2.ZERO
+	if spawn_points.size() > 0:
+		furthest = spawn_points[0].position
+		for pos in spawn_points:
+			if pos.position.distance_to(player.position) > furthest.distance_to(player.position):
+				furthest = pos.position
+	return furthest # return the furthest spawnpoint from the player
 
 # Spawns an enemy of a given type at a random position
 func spawn(type: PackedScene):
