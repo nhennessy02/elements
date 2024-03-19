@@ -14,6 +14,7 @@ func hit(damage : int, hit_pos : Vector2 = Vector2.ZERO):
 	if !owner.invulnerable:
 		health -= damage
 		health_changed.emit(health)
+		$"../AnimationPlayer".play("hurt")
 		
 		# Calc which direction to knock back player
 		var dir : Vector2 = (owner.position - hit_pos).normalized()

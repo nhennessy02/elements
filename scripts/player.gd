@@ -87,6 +87,7 @@ func _physics_process(delta):
 		sprite.modulate = "bd002f"
 	else:
 		sprite.modulate = "ffffff"
+		
 	
 	# Update velocity
 	velocity = new_velocity.clamp(-max_speed, max_speed)
