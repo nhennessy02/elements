@@ -1,8 +1,6 @@
 extends Node2D
 
 # Firing delay & hold to fire
-#@export var fire_rate : float = 0.4 
-#var fire_timer : float = 0
 var can_fire : bool = true
 var mousePos
 @export var defaultSpell : PackedScene
@@ -16,7 +14,7 @@ var currentSpell
 
 # Called when the node enters the scene tree for thes first time.
 func _ready():
-	currentSpell = defaultSpell
+	reset_wand()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -29,38 +27,26 @@ func _process(_delta):
 		sprite.flip_v = false
 	look_at(mousePos)
 	
-	# Firing Cooldown
-	# fire_timer += delta
-	#if fire_timer >= fire_rate:
-	#	can_fire = true
-	#	animPlayer.play("idle")
-	#else:
-	#	can_fire = false
-	
 	# Input event
 	if Input.is_action_pressed("fire_wand") and can_fire: #left mouse click
 		fire()
-			
+		
+	if Input.is_action_just_pressed("reset_wand") and (can_fire or not cooldownTimer.is_stopped()):
+		reset_wand()
 	
 
 func fire():
-	# reset timer
-	# fire_timer = 0
-	
-	# play animation
-	# animPlayer.play("fire")
-	print("fire")
-	print(can_fire)
 	can_fire = false
 	var spell = currentSpell.instantiate()
 	get_tree().current_scene.add_child(spell)
 	spell.global_position = spawnPoint.global_position #sets spawnpoint at the spawnpoint node
 	spell.global_rotation = self.global_rotation
 
+func reset_wand():
+	currentSpell = defaultSpell
 
 func _on_inventory_combo_created(_spellName, _useRate, scene, newWandColor):
 	currentSpell = scene
-	#fire_rate = useRate
 	sprite.material.set_shader_parameter("to",newWandColor)
 	print(Vector4(newWandColor.r,newWandColor.b,newWandColor.g,newWandColor.a))
 
