@@ -11,7 +11,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hr0cd"]
 shader = ExtResource("3_3lkc3")
 shader_parameter/from = Color(0.4, 0.215686, 0.741176, 1)
-shader_parameter/to = Color(0, 0.439216, 0.168627, 1)
+shader_parameter/to = Color(0.4, 0.215686, 0.741176, 1)
 shader_parameter/tolerance = 0.066
 
 [sub_resource type="Animation" id="Animation_kijlt"]
@@ -264,8 +264,8 @@ libraries = {
 }
 
 [node name="CooldownSmoke" type="GPUParticles2D" parent="."]
-visible = false
 position = Vector2(154, 4)
+emitting = false
 amount = 2
 process_material = SubResource("ParticleProcessMaterial_2vgd6")
 texture = ExtResource("7_f0u5e")

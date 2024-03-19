@@ -16,6 +16,7 @@ func _ready():
 	player = get_node("../Player")
 	startTime = timer.time_left
 	self.global_rotation = 0;
+	wand.startChargingAnimation()
 	pass # Replace with function body.
 
 

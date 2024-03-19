@@ -1,6 +1,6 @@
 extends Node2D
 
-var damagePerTick = 1
+var damagePerTick = 2
 var enemyList = []
 
 @export var cooldown : float = 3

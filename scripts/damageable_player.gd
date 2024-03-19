@@ -16,6 +16,7 @@ func hit(damage : int, hit_pos : Vector2 = Vector2.ZERO):
 		health -= damage
 		DamageNumbers.display_number(damage,damageNumberOrigin.global_position)
 		health_changed.emit(health)
+		$"../AnimationPlayer".play("hurt")
 		
 		# Calc which direction to knock back player
 		var dir : Vector2 = (owner.position - hit_pos).normalized()
@@ -27,5 +28,4 @@ func hit(damage : int, hit_pos : Vector2 = Vector2.ZERO):
 	
 	# Still alive...?
 	if health <= 0:
-		# Replace with more robust death / game over
-		get_tree().quit()
+		owner.gameover()

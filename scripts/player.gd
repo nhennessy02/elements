@@ -87,6 +87,7 @@ func _physics_process(delta):
 		sprite.modulate = "bd002f"
 	else:
 		sprite.modulate = "ffffff"
+		
 	
 	# Update velocity
 	velocity = new_velocity.clamp(-max_speed, max_speed)
@@ -100,6 +101,9 @@ func _physics_process(delta):
 	
 	# Smoothes movement while colliding with walls, etc.
 	move_and_slide()
+
+func gameover():
+	get_tree().change_scene_to_file.call_deferred("res://scenes/mainmenu.tscn")
 
 #outgoing signals
 signal health_changed(value : int)
