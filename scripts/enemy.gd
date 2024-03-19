@@ -46,6 +46,9 @@ func _ready(): # LACKS DEFAULTS IN CASE OF MISSING PLAYER OR ENTITY MANAGER
 	# Finds the player and gets a reference to it
 	player = entity_manager.player
 	
+	# plays its animation
+	$AnimationPlayer.play("base")
+	
 	# Delay to prevent pathfinding errors
 	set_physics_process(false)
 	await get_tree().physics_frame
