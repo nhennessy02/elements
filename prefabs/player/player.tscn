@@ -237,6 +237,9 @@ parameters/conditions/running = false
 [node name="Camera2D" type="Camera2D" parent="."]
 position_smoothing_enabled = true
 
+[node name="DamageNumberOrigin" type="Node2D" parent="."]
+position = Vector2(0, -110)
+
 [connection signal="health_changed" from="." to="UI" method="_on_player_health_changed"]
 [connection signal="inventory_changed" from="." to="UI" method="_on_player_inventory_changed"]
 [connection signal="health_changed" from="HealthTracker" to="." method="_on_health_tracker_health_changed"]

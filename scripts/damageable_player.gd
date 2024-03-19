@@ -4,6 +4,7 @@ extends Node
 
 class_name DamageablePlayer
 @export var health : int = 3;
+@onready var damageNumberOrigin = $"../DamageNumberOrigin"
 
 signal health_changed(value : int)
 
@@ -13,6 +14,7 @@ func hit(damage : int, hit_pos : Vector2 = Vector2.ZERO):
 	# Take Damage
 	if !owner.invulnerable:
 		health -= damage
+		DamageNumbers.display_number(damage,damageNumberOrigin.global_position)
 		health_changed.emit(health)
 		
 		# Calc which direction to knock back player

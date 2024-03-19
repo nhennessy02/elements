@@ -10,7 +10,14 @@ func display_number(value: int, position: Vector2):
 	number.z_index = 5 # should be above everything
 	number.label_settings = LabelSettings.new()
 	
-	number.label_settings.font_color = Color8(255,255,255)
+	var color = Color8(255,255,255)
+	
+	if value < 0:
+		color = Color8(50,255,50)
+	if value > 0:
+		color = Color8(255,50,50)
+	
+	number.label_settings.font_color = color
 	number.label_settings.font_size = 36
 	number.label_settings.outline_color = Color8(0,0,0)
 	number.label_settings.outline_size = 1
