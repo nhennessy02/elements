@@ -102,7 +102,7 @@ func _physics_process(delta):
 	move_and_slide()
 
 func gameover():
-	get_tree().change_scene_to_file("res://scenes/mainmenu.tscn")
+	get_tree().change_scene_to_file.call_deferred("res://scenes/mainmenu.tscn")
 
 #outgoing signals
 signal health_changed(value : int)
