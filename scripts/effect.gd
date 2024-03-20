@@ -11,9 +11,16 @@ class_name Effect
 var attachedNode;
 var duration;
 var effect;
-
+var effectIcons = [0,load("res://assets/sprites/effects/bleeding.png")]
+var iconContainer
+var icon
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	iconContainer = get_node("../EffectIconContainer")
+	icon = TextureRect.new()
+	icon.texture = effectIcons[1]
+	iconContainer.add_child(icon)
+	# applying effect to entity
 	durationTimer.start(duration)
 	match effect:
 		Effects.SPEED:
@@ -30,6 +37,8 @@ func _ready():
 			pass
 		Effects.INVULNERABILITY:
 			pass
+	#await durationTimer.timeout
+	
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -75,6 +84,7 @@ func _on_duration_timer_timeout():
 
 
 func end(): #undoes the effects and removes itself from the node it's attached to
+	icon.queue_free()
 	match effect:
 		Effects.SPEED:
 			#character speed -= value
