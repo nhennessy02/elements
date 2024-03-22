@@ -22,6 +22,8 @@ var pickedSlot2 : bool = false
 @onready var pickupZone = $"../Area2D"
 @onready var comboTimer = $Timer
 
+# References to the border UI for itemUI elements
+@onready var ui = $"../UI"
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -49,13 +51,23 @@ func _process(_delta):
 		comboTimer.stop()
 		comboLookup(combo)
 		combo = []
+	
+	if pickedSlot0:
+		ui.selected_0.visible = true
+	if pickedSlot1:
+		ui.selected_1.visible = true
+	if pickedSlot2:
+		ui.selected_2.visible = true
 
 func _on_timer_timeout():
 	comboLookup(combo)
 	pickedSlot0 = false
 	pickedSlot1 = false
 	pickedSlot2 = false
-	combo = []	
+	ui.selected_0.visible = false
+	ui.selected_1.visible = false
+	ui.selected_2.visible = false
+	combo = []
 
 func comboLookup(array):
 	#array.sort_custom(func(a,b): a < b)
