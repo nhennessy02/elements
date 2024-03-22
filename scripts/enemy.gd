@@ -47,7 +47,7 @@ func _ready(): # LACKS DEFAULTS IN CASE OF MISSING PLAYER OR ENTITY MANAGER
 	player = entity_manager.player
 	
 	# Play animation
-	$AnimationPlayer.play("base")
+	#$AnimationPlayer.play("base")
 	
 	# Delay to prevent pathfinding errors
 	set_physics_process(false)

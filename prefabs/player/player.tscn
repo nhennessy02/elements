@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://c53dvgtfs8iqn"]
+[gd_scene load_steps=27 format=3 uid="uid://c53dvgtfs8iqn"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_l8vaj"]
 [ext_resource type="Texture2D" uid="uid://coo1w6yil0l76" path="res://assets/sprites/player_static.png" id="2_oxea1"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bv0585bqktpfy" path="res://prefabs/player/base_projectile.tscn" id="5_o482u"]
 [ext_resource type="PackedScene" uid="uid://bbfq4dms15rbu" path="res://prefabs/ui elements/ui.tscn" id="7_hwjsq"]
 [ext_resource type="Texture2D" uid="uid://ojpjsipemkvk" path="res://assets/sprites/player_hurt.png" id="8_3vsmf"]
+[ext_resource type="Script" path="res://prefabs/player/CooldownBar.gd" id="10_4t0db"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w8su0"]
 size = Vector2(92, 137)
@@ -281,6 +282,15 @@ position_smoothing_enabled = true
 
 [node name="DamageNumberOrigin" type="Node2D" parent="."]
 position = Vector2(0, -110)
+
+[node name="CooldownBar" type="ProgressBar" parent="."]
+offset_left = -84.0
+offset_top = 68.0
+offset_right = 84.0
+offset_bottom = 95.0
+value = 100.0
+fill_mode = 1
+script = ExtResource("10_4t0db")
 
 [connection signal="health_changed" from="." to="UI" method="_on_player_health_changed"]
 [connection signal="inventory_changed" from="." to="UI" method="_on_player_inventory_changed"]
