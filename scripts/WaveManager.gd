@@ -270,20 +270,21 @@ func spawn_enemies_at_pos(count: int, type: PackedScene, variation: bool = true)
 
 # Spawns a group of enemies at the furthest spawnpoint in the array
 func spawn_enemies_at_spawnpoint(count: int, type: PackedScene, variation: bool = false):
-	var position = get_furthest_spawnpoint()
+	var position = get_valid_spawnpoint()
 	for n in count:
 		spawn_at_pos(type, position, variation)
 
-# Gets the spawnpoint furthest from the player
-func get_furthest_spawnpoint():
-	var position = Vector2.ZERO
-	var furthest = Vector2.ZERO
-	if spawn_points.size() > 0:
-		furthest = spawn_points[0].position
-		for pos in spawn_points:
-			if pos.position.distance_to(player.position) > furthest.distance_to(player.position):
-				furthest = pos.position
-	return furthest # return the furthest spawnpoint from the player
+# Gets a spawnpoint a certain minimum distance from the player
+func get_valid_spawnpoint():
+	var potential_pos : Array[Vector2]
+	const min_dist : float = 600.0
+	for point in spawn_points:
+		if point.position.distance_to(player.position) > min_dist:
+			potential_pos.push_back(point.position)
+	
+	# Choose a random spawnpoint from the acceptable spawns and return it
+	var rand_pos = potential_pos[randi_range(0, potential_pos.size() - 1)]
+	return rand_pos
 
 # Spawns an enemy of a given type at a random position
 func spawn(type: PackedScene):
