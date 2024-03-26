@@ -34,6 +34,11 @@ var acceleration : Vector2 = Vector2.ZERO
 var total_steering_force : Vector2 = Vector2.ZERO
 @export var max_force : Vector2 = Vector2(150.0, 150.0)
 @export var mass : float = 1.0
+@export var base_item : PackedScene
+
+# Item Drops
+@export var item_drop_chance : float = 5.0 # PERCENTAGE OUT OF 100
+@export var item_drop_indexes : Array[int] # PESTILENCE = 0, HEMOMANCY = 1, CONVALESCENCE = 2, BONECRAFT = 3, OCCULTISM = 4
 
 func _ready(): # LACKS DEFAULTS IN CASE OF MISSING PLAYER OR ENTITY MANAGER
 	entity_manager = get_tree().get_first_node_in_group("EntityManager")
@@ -180,7 +185,20 @@ func change_wander_angle():
 func calc_future_position(time: float = 0.1):
 	return position + velocity * time
 
+# Called when an enemy is killed
+# random chance to drop an item
+func drop_item(): 
+	if randi_range(0, 100) < item_drop_chance:
+		var item_drop = base_item.instantiate() # drop item
+		get_tree().root.add_child.call_deferred(item_drop)
+		item_drop.position = position # set item position to enemy position
+		
+		# Get a random item from the items that the enemy can potentially drop
+		var index = randi_range(0, item_drop_indexes.size() - 1)
+		item_drop.get_child(2).setId(item_drop_indexes[index])
+
 # NEEDS TO PLAY A DEATH ANIMATION FIRST
 func die():
+	drop_item()
 	entity_manager.remove_enemy(self)
 	queue_free()

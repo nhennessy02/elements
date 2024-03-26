@@ -38,7 +38,8 @@ func updateColor(): #this will need to be changed/updated for when we switch to 
 			
 
 func updateSprite():
-	sprite.texture = spriteArray[id]
-			
+	if sprite != null:
+		sprite.texture = spriteArray[id]
+
 func pickedUp():
 	get_parent().queue_free()
