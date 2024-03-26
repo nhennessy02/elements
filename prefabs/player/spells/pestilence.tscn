@@ -36,6 +36,7 @@ scale = Vector2(3, 3)
 shape = SubResource("CircleShape2D_kfx2d")
 
 [node name="DamageRate" type="Timer" parent="."]
+wait_time = 0.25
 autostart = true
 
 [node name="LifeTimer" type="Timer" parent="."]

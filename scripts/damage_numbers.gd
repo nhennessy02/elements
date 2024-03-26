@@ -6,7 +6,7 @@ func display_number(value: int, position: Vector2):
 	#creating the number
 	var number = Label.new()
 	number.global_position = position
-	number.text = str(value)
+	number.text = str(abs(value)) # shouldn't probably use abs
 	number.z_index = 5 # should be above everything
 	number.label_settings = LabelSettings.new()
 	

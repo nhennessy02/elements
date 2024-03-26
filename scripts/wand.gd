@@ -31,8 +31,8 @@ func _process(_delta):
 	if Input.is_action_pressed("fire_wand") and can_fire: #left mouse click
 		fire()
 		
-	if Input.is_action_just_pressed("reset_wand") and (can_fire or not cooldownTimer.is_stopped()):
-		reset_wand()
+	#if Input.is_action_just_pressed("reset_wand") and (can_fire or not cooldownTimer.is_stopped()):
+	#	reset_wand()
 	
 
 func fire():
@@ -45,7 +45,7 @@ func fire():
 func reset_wand():
 	currentSpell = defaultSpell
 
-func _on_inventory_combo_created(_spellName, _useRate, scene, newWandColor):
+func _on_inventory_combo_created(_spellName, scene, newWandColor):
 	currentSpell = scene
 	sprite.material.set_shader_parameter("to",newWandColor)
 	print(Vector4(newWandColor.r,newWandColor.b,newWandColor.g,newWandColor.a))

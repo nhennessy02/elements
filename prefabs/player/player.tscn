@@ -297,6 +297,20 @@ texture_over = ExtResource("11_gthth")
 texture_progress = ExtResource("12_bmrey")
 script = ExtResource("10_4t0db")
 
+[node name="EffectIconContainer" type="HBoxContainer" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -42.6667
+offset_top = -132.0
+offset_right = 44.3333
+offset_bottom = -108.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset = Vector2(42.6667, 10.6667)
+
 [connection signal="health_changed" from="." to="UI" method="_on_player_health_changed"]
 [connection signal="inventory_changed" from="." to="UI" method="_on_player_inventory_changed"]
 [connection signal="health_changed" from="HealthTracker" to="." method="_on_health_tracker_health_changed"]
