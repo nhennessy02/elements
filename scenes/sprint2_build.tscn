@@ -1,11 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://cp51bocqom0aj"]
+[gd_scene load_steps=5 format=3 uid="uid://cp51bocqom0aj"]
 
 [ext_resource type="PackedScene" uid="uid://cjm8hsedcxsca" path="res://prefabs/tilemaps/graveyard.tscn" id="1_bewk5"]
 [ext_resource type="PackedScene" uid="uid://c53dvgtfs8iqn" path="res://prefabs/player/player.tscn" id="2_u5jwy"]
 [ext_resource type="PackedScene" uid="uid://c47i80j2hwowg" path="res://prefabs/scene elements/entity_manager.tscn" id="3_7cmxo"]
 [ext_resource type="PackedScene" uid="uid://j27r6tyk1vro" path="res://prefabs/scene elements/wave_manager.tscn" id="4_xmt36"]
-[ext_resource type="PackedScene" uid="uid://rtck8bqo3jek" path="res://prefabs/base_item.tscn" id="5_6k6wa"]
-[ext_resource type="PackedScene" uid="uid://bx3u8mnxg3xci" path="res://prefabs/enemies/test_enemy_2.tscn" id="5_iic66"]
 
 [node name="Sprint2Build" type="Node2D"]
 
@@ -16,29 +14,8 @@ layer_0/tile_data = PackedInt32Array(-65536, 65536, 3, -65535, 0, 4, 1, 0, 1, 0,
 
 [node name="WaveManager" parent="." node_paths=PackedStringArray("spawn_points") instance=ExtResource("4_xmt36")]
 spawn_points = [NodePath("../SpawnPts/spawnpoint"), NodePath("../SpawnPts/spawnpoint2"), NodePath("../SpawnPts/spawnpoint3"), NodePath("../SpawnPts/spawnpoint4"), NodePath("../SpawnPts/spawnpoint5"), NodePath("../SpawnPts/spawnpoint6"), NodePath("../SpawnPts/spawnpoint7"), NodePath("../SpawnPts/spawnpoint8"), NodePath("../SpawnPts/spawnpoint9")]
-r_stages_min = 10
-r_count_min = 5
-r_count_max = 5
-r_time_min = 2.0
-r_time_max = 4.0
-random_enemy_array = Array[PackedScene]([ExtResource("5_iic66")])
 bounds_x = 1400.0
 bounds_y = 1170.0
-
-[node name="BaseItem" parent="." instance=ExtResource("5_6k6wa")]
-position = Vector2(332, 142)
-
-[node name="BaseItem2" parent="." instance=ExtResource("5_6k6wa")]
-position = Vector2(-714, 212)
-
-[node name="BaseItem3" parent="." instance=ExtResource("5_6k6wa")]
-position = Vector2(-211, -203)
-
-[node name="BaseItem4" parent="." instance=ExtResource("5_6k6wa")]
-position = Vector2(251, -287)
-
-[node name="BaseItem5" parent="." instance=ExtResource("5_6k6wa")]
-position = Vector2(106, 369)
 
 [node name="Player" parent="." instance=ExtResource("2_u5jwy")]
 position = Vector2(40, 146)

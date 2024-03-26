@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://b7lfpp4hqs48i"]
+[gd_scene load_steps=11 format=3 uid="uid://b7lfpp4hqs48i"]
 
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1_1ssfl"]
+[ext_resource type="PackedScene" uid="uid://rtck8bqo3jek" path="res://prefabs/base_item.tscn" id="2_3ta6i"]
 [ext_resource type="Texture2D" uid="uid://c16obwyr5hy2y" path="res://assets/sprites/enemy_ghost-Sheet.png" id="2_ghx6k"]
 [ext_resource type="PackedScene" uid="uid://tsnqt7x4rvnp" path="res://prefabs/entity elements/damageable.tscn" id="3_k7jt5"]
 [ext_resource type="Script" path="res://scripts/enemy behavior/TestEnemy.gd" id="4_msl7s"]
@@ -101,6 +102,9 @@ _data = {
 collision_layer = 4
 collision_mask = 16
 script = ExtResource("1_1ssfl")
+base_item = ExtResource("2_3ta6i")
+item_drop_chance = 50.0
+item_drop_indexes = Array[int]([0, 1, 2, 3, 4])
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_ghx6k")
