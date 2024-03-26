@@ -8,15 +8,16 @@ class_name Effect
 
 @onready var durationTimer = $DurationTimer
 @onready var procTimer = $ProcTimer
-var attachedNode;
-var duration;
-var effect;
+var attachedNode
+var duration
+var effect
 var effectIcons = [0,load("res://assets/sprites/effects/bleeding.png")]
 var iconContainer
 var icon
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	iconContainer = get_node("../EffectIconContainer")
+	print(iconContainer)
 	icon = TextureRect.new()
 	icon.texture = effectIcons[1]
 	iconContainer.add_child(icon)

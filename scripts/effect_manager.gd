@@ -5,6 +5,7 @@ var effectTemplate = preload("res://prefabs/effect.tscn")
 
 func attach_effect(node, effect : int, duration : float):
 	#if node already has the effect, refresh the timer
+	print(node)
 	for child in node.get_children():
 		if child is Effect:
 			if child.effect == effect:

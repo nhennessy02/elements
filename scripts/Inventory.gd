@@ -30,74 +30,75 @@ func _process(_delta):
 	#handles picking up objects from the ground
 	if Input.is_action_just_pressed("select"):
 		itemPickup()
-		#print("select has been pressed")
-	
 	#this second is about creating combinations 
 	#control either through press 1 2 and or 3 then send the combo after a timer - coded this way
 	#or hold a button, key or right click, press 1 2 and or 3 then release to send combo
 	if Input.is_action_just_pressed("slot0") and not pickedSlot0 and inventory.size() >= 1:
-		comboTimer.start()
-		combo.append(inventory[0])
 		pickedSlot0 = true
+	elif Input.is_action_just_pressed("slot0") and pickedSlot0 and inventory.size() >= 1:
+		pickedSlot0 = false
+		
 	if Input.is_action_just_pressed("slot1") and not pickedSlot1 and inventory.size() >= 2:
-		comboTimer.start()
-		combo.append(inventory[1])
 		pickedSlot1 = true
+	elif Input.is_action_just_pressed("slot1") and pickedSlot1 and inventory.size() >= 2:
+		pickedSlot1 = false
+		
 	if Input.is_action_just_pressed("slot2") and not pickedSlot2 and inventory.size() >= 3:
-		comboTimer.start()
-		combo.append(inventory[2])
 		pickedSlot2 = true
-	if pickedSlot0 and pickedSlot1 and pickedSlot2:
-		comboTimer.stop()
+	elif Input.is_action_just_pressed("slot2") and  pickedSlot2 and inventory.size() >= 3:
+		pickedSlot2 = false
+	
+	if Input.is_action_just_pressed("load_wand"):
+		if pickedSlot2:
+			combo.append(inventory[2])
+			inventory.remove_at(2)
+		if pickedSlot1:
+			combo.append(inventory[1])
+			inventory.remove_at(1)
+		if pickedSlot0:
+			combo.append(inventory[0])
+			inventory.remove_at(0)
+		pickedSlot0 = false
+		pickedSlot1 = false
+		pickedSlot2 = false
 		comboLookup(combo)
 		combo = []
-	
-	if pickedSlot0:
-		ui.selected_0.visible = true
-	if pickedSlot1:
-		ui.selected_1.visible = true
-	if pickedSlot2:
-		ui.selected_2.visible = true
+		inventory_changed.emit(inventory)
 
-func _on_timer_timeout():
-	comboLookup(combo)
-	pickedSlot0 = false
-	pickedSlot1 = false
-	pickedSlot2 = false
-	ui.selected_0.visible = false
-	ui.selected_1.visible = false
-	ui.selected_2.visible = false
-	combo = []
+	ui.selected_0.visible = pickedSlot0
+	ui.selected_1.visible = pickedSlot1
+	ui.selected_2.visible = pickedSlot2
 
 func comboLookup(array):
 	array.sort_custom(func(a,b): return a < b)
 	match array:
 		[]:
-			print("using Nothing")
+			print("using basic projectile")
+			combo_created.emit("Basic Projectile",load("res://prefabs/player/base_projectile.tscn"),Color(0.4,0.21,0.74))
 		[Element.PESTILENCE]:
 			print("using Pestilence")
-			combo_created.emit("Pestilence",3,load("res://prefabs/player/spells/pestilence.tscn"),Color(0,0.47,0.09))
+			combo_created.emit("Pestilence",load("res://prefabs/player/spells/pestilence.tscn"),Color(0,0.47,0.09))
 		[Element.HEMOMANCY]:
 			print("using Hemomancy")
 			#combo_created.emit("Hemomancy",0.25,load("res://prefabs/player/spells/hemomancy.tscn"),Color(0.58,0,0.11))
 		[Element.CONVALESCENCE]:
 			print("using Convalescence")
-			combo_created.emit("Convalescence", 10, load("res://prefabs/player/spells/convalescence.tscn"),Color(0.69,0.62,0.17))
+			combo_created.emit("Convalescence",load("res://prefabs/player/spells/convalescence.tscn"),Color(0.69,0.62,0.17))
 		[Element.BONECRAFT]:
 			print("using Bonecraft")
-			combo_created.emit("Bonecraft",5,load("res://prefabs/player/spells/bonecraft.tscn"),Color(0.58,0.56,0.50))
+			combo_created.emit("Bonecraft",load("res://prefabs/player/spells/bonecraft.tscn"),Color(0.58,0.56,0.50))
 		[Element.OCCULTISM]:
 			print("using Occultism")
 		[Element.HEMOMANCY,Element.HEMOMANCY]:
 			print("using Aorta")
-			combo_created.emit("Aorta",7,load("res://prefabs/player/spells/aorta.tscn"),Color(0.45,0,0.05))
+			combo_created.emit("Aorta",load("res://prefabs/player/spells/aorta.tscn"),Color(0.45,0,0.05))
 		[Element.PESTILENCE,Element.HEMOMANCY]:
 			print("using Leeching Shot")
-			combo_created.emit("Leeching Shot",1,load("res://prefabs/player/spells/leeching_shot.tscn"),Color(0.85,0.43,0.30))
+			combo_created.emit("Leeching Shot",load("res://prefabs/player/spells/leeching_shot.tscn"),Color(0.85,0.43,0.30))
 		_:
 			print("couldn't decipher combo")
 
-signal combo_created(spellName,useRate,scene,wandColor) #useRate is how often the spell is used in seconds
+signal combo_created(spellName,scene,wandColor) #useRate is how often the spell is used in seconds
 
 # this second is about picking up items
 func _on_area_2d_area_entered(area):

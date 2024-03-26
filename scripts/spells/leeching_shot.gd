@@ -26,6 +26,7 @@ func _on_area_2d_body_entered(body):
 	for child in body.get_children():
 		if child is Damageable and active:
 		# Only deal damage if the thing is able to be damaged
+			print(body)
 			EffectManager.attach_effect(body,Effects.BLEED,6)
 			active = false
 			queue_free()

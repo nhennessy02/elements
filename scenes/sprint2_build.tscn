@@ -65,12 +65,6 @@ scale = Vector2(-73.5252, 52.6402)
 color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(-61, -64, 3, -64, 3, 0, -29.4267, 0, -61, 0)
 
-[editable path="BaseItem"]
-[editable path="BaseItem2"]
-[editable path="BaseItem3"]
-[editable path="BaseItem4"]
-[editable path="BaseItem5"]
-
 [node name="SpawnPts" type="Node" parent="."]
 
 [node name="spawnpoint" type="Node2D" parent="SpawnPts"]
@@ -99,3 +93,9 @@ position = Vector2(1021, -907)
 
 [node name="spawnpoint9" type="Node2D" parent="SpawnPts"]
 position = Vector2(-1141, -923)
+
+[editable path="BaseItem"]
+[editable path="BaseItem2"]
+[editable path="BaseItem3"]
+[editable path="BaseItem4"]
+[editable path="BaseItem5"]

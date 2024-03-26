@@ -9,7 +9,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsedaw time since the previous frame.
 func _process(delta):
-	print(value)
+	#print(value)
 	value = timer.get_time_left()
 	pass
 	
