@@ -11,6 +11,7 @@ var rng = RandomNumberGenerator.new()
 var spawn_range_width : float 
 var spawn_range_height : float
 var distance_multiplier : float = 1.5
+@export var spawn_points : Array[Node2D]
 
 # Random Wave Generator
 @export var r_stages_min : int = 5
@@ -160,10 +161,14 @@ func call_wave_element(index: int):
 	# Set new time between stages
 	spawn_time = time_between_spawns
 	
+	# Spawn certain enemy types at one of a few spawn points
+	if enemy_type.resource_name == "": # LABEL FLIERS ELSE THEY USE SPAWN PTS
+		spawn_enemies_at_spawnpoint(enemy_count, enemy_type)
+	
 	# If the spawned enemies appear in a similar location
-	if spawns_grouped:
+	elif spawns_grouped:
 		spawn_enemies_at_pos(enemy_count, enemy_type)
-		
+	
 	# If the spawned enemies are spawned randomly
 	else:
 		spawn_enemies(enemy_count, enemy_type)
@@ -262,6 +267,24 @@ func spawn_enemies_at_pos(count: int, type: PackedScene, variation: bool = true)
 	var position = random_spawn_point()
 	for n in count:
 		spawn_at_pos(type, position, variation)
+
+# Spawns a group of enemies at the furthest spawnpoint in the array
+func spawn_enemies_at_spawnpoint(count: int, type: PackedScene, variation: bool = false):
+	var position = get_valid_spawnpoint()
+	for n in count:
+		spawn_at_pos(type, position, variation)
+
+# Gets a spawnpoint a certain minimum distance from the player
+func get_valid_spawnpoint():
+	var potential_pos : Array[Vector2]
+	const min_dist : float = 600.0
+	for point in spawn_points:
+		if point.position.distance_to(player.position) > min_dist:
+			potential_pos.push_back(point.position)
+	
+	# Choose a random spawnpoint from the acceptable spawns and return it
+	var rand_pos = potential_pos[randi_range(0, potential_pos.size() - 1)]
+	return rand_pos
 
 # Spawns an enemy of a given type at a random position
 func spawn(type: PackedScene):
