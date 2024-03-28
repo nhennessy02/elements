@@ -104,6 +104,7 @@ script = ExtResource("1_52c41")
 speed = 180.0
 max_force = Vector2(200, 200)
 base_item = ExtResource("2_kxfak")
+item_drop_chance = 10.0
 item_drop_indexes = Array[int]([0])
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
