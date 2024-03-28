@@ -118,6 +118,7 @@ slot2={
 2d_physics/layer_3="Enemies"
 2d_physics/layer_4="PlayerBullets"
 2d_physics/layer_5="Pits"
+2d_physics/layer_8="EnemyBullets"
 
 [rendering]
 

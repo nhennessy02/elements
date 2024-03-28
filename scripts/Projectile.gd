@@ -30,6 +30,7 @@ func _on_area_2d_body_entered(body):
 		if child is Damageable and active:
 		# Only deal damage if the thing is able to be damaged
 			child.hit(damage)
+			
 	# Make the projectile invisible
 	$Sprite2D.visible = false
 	active = false
