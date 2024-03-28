@@ -124,7 +124,7 @@ visible = false
 shape = SubResource("CircleShape2D_752ce")
 
 [node name="Damageable" parent="." instance=ExtResource("1_0axwg")]
-health = 8
+health = 6
 
 [node name="Behavior" type="Node" parent="."]
 script = ExtResource("3_65rph")

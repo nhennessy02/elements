@@ -53,5 +53,24 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 40
 text = "Quit"
 
+[node name="RichTextLabel" type="RichTextLabel" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 321.0
+offset_top = 581.0
+offset_right = -297.0
+offset_bottom = -71.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 50
+text = "WASD to Move
+Left  Click to FIRE
+SPACE to collect spell components
+Press 1, 2, or 3 to select spells
+Right Click to load selected spells into your wand or switch back to the main wand"
+scroll_active = false
+
 [connection signal="pressed" from="ColorRect/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="ColorRect/QuitButton" to="." method="_on_quit_button_pressed"]

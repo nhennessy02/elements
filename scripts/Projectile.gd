@@ -4,8 +4,8 @@ var direction
 var active : bool = true
 
 @export var speed : float = 500
-@export var damage : int = 4
-@export var cooldown : float = 0.2
+@export var damage : int = 3
+@export var cooldown : float = 0.3
 
 var wand
 
