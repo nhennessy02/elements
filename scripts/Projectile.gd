@@ -30,6 +30,7 @@ func _on_area_2d_body_entered(body):
 		if child is Damageable and active:
 		# Only deal damage if the thing is able to be damaged
 			child.hit(damage)
+			active = false
 			
 	# Make the projectile invisible
 	$Sprite2D.visible = false
@@ -40,5 +41,3 @@ func _on_area_2d_body_entered(body):
 # REPLACE WITH ENTITY POOLING
 func _on_hit_particles_finished():
 	queue_free()
-
-
