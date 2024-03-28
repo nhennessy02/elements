@@ -40,6 +40,9 @@ var total_steering_force : Vector2 = Vector2.ZERO
 @export var item_drop_chance : float = 5.0 # PERCENTAGE OUT OF 100
 @export var item_drop_indexes : Array[int] # PESTILENCE = 0, HEMOMANCY = 1, CONVALESCENCE = 2, BONECRAFT = 3, OCCULTISM = 4
 
+# Sprite
+@onready var sprite = $Sprite2D
+
 func _ready(): # LACKS DEFAULTS IN CASE OF MISSING PLAYER OR ENTITY MANAGER
 	entity_manager = get_tree().get_first_node_in_group("EntityManager")
 	
@@ -78,6 +81,12 @@ func _physics_process(delta):
 	
 	# Activate Collisions with Tilemap
 	move_and_slide()
+	
+	# Flip the enemy's sprite
+	if velocity.x > 0 and abs(velocity.x) > 2:
+		sprite.flip_h = true
+	elif velocity.x < 0 and abs(velocity.x) > 2:
+		sprite.flip_h = false
 
 # Applies movement to the enemy
 func apply_force(force: Vector2):
