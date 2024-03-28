@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://bvb2hip2civ7q"]
+
+[ext_resource type="Script" path="res://scripts/enemy behavior/enemy projectiles/blood_bullet.gd" id="1_6pu6j"]
+[ext_resource type="Texture2D" uid="uid://bkdp2gs7siomh" path="res://assets/sprites/enemy projectiles/enemy_blood_bullet.png" id="1_xf6bw"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qr82p"]
+radius = 32.0156
+
+[node name="BloodBullet" type="Node2D"]
+z_as_relative = false
+script = ExtResource("1_6pu6j")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_xf6bw")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 18
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+visible = false
+shape = SubResource("CircleShape2D_qr82p")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

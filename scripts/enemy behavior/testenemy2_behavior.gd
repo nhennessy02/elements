@@ -8,6 +8,6 @@ extends Node
 @export var avoid_weight : float = 5
 
 # Outline behaviors
-func calc_steering_forces():	
+func calc_steering_forces():
 	owner.total_steering_force += owner.pathfinding() * seek_weight
 	owner.total_steering_force += owner.separate() * separate_weight

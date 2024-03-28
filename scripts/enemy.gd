@@ -132,6 +132,13 @@ func flee(flee_target_pos: Vector2):
 	var flee_force : Vector2 = desired_velocity - velocity
 	return flee_force
 
+# Move away from a target's projected future position
+func evade(future_time: float = 1.0):
+	# Determind future position of player
+	var future_player_pos : Vector2 = player.position + player.velocity * future_time
+	# Flee the estimated future position
+	return flee(future_player_pos)
+
 # Movement function: Enemies separate from each other
 func separate():
 	var seperate_force : Vector2 = Vector2.ZERO
@@ -190,8 +197,8 @@ func change_wander_angle():
 	wander_angle = randf_range(0.0, 360.00)
 	wander_angle = deg_to_rad(wander_angle)
 
-# find where the agent will be after X time
-func calc_future_position(time: float = 0.1):
+# find where this agent will be after X time
+func calc_future_position(time: float = 1.0):
 	return position + velocity * time
 
 # Called when an enemy is killed
