@@ -32,7 +32,7 @@ func _process(delta):
 	# FIRING
 	# Fire projectiles while in EVADING or CIRCLING only
 	firing_timer += delta
-	if firing_timer > firing_time and current_state == State.tracking:
+	if firing_timer > firing_time:
 		fire()
 		firing_timer = 0
 
