@@ -4,10 +4,10 @@
 [ext_resource type="Texture2D" uid="uid://bkdp2gs7siomh" path="res://assets/sprites/enemy projectiles/enemy_blood_bullet.png" id="1_xf6bw"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qr82p"]
-radius = 26.0192
+radius = 28.0179
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_5hu2h"]
-radius = 26.0192
+[sub_resource type="CircleShape2D" id="CircleShape2D_6fsm7"]
+radius = 23.0
 
 [node name="BloodBullet" type="CharacterBody2D"]
 z_as_relative = false
@@ -25,8 +25,9 @@ collision_mask = 26
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_qr82p")
+debug_color = Color(0.937255, 0, 0.627451, 0.419608)
 
 [node name="Body" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_5hu2h")
+shape = SubResource("CircleShape2D_6fsm7")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

@@ -9,6 +9,9 @@ var active : bool = true
 
 var wand
 
+@onready var area = $Area2D
+@onready var body = $Body
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	wand = get_node("../Player/Wand")
@@ -18,8 +21,12 @@ func _ready():
 	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	position = position + Vector2.from_angle(global_rotation) * speed * delta; #Phillip - from_angle gives a unit vector in the direction from the angle given
+func _process(delta):	
+	if active:
+		position = position + Vector2.from_angle(global_rotation) * speed * delta; #Phillip - from_angle gives a unit vector in the direction from the angle given
+	else:
+		area.monitoring = false
+		body.disabled = true
 
 # Calls when the bullet collides with another object
 func _on_area_2d_body_entered(body):
@@ -31,11 +38,11 @@ func _on_area_2d_body_entered(body):
 		# Only deal damage if the thing is able to be damaged
 			child.hit(damage)
 			active = false
-			
+		
 	# Make the projectile invisible
 	$Sprite2D.visible = false
 	active = false
-	
+
 # When the particles are finished emitting, delete the projectile object
 # Prevents the particles from being destroyed early
 # REPLACE WITH ENTITY POOLING
