@@ -10,7 +10,7 @@ var active : bool = true
 var wand
 
 @onready var area = $Area2D
-@onready var body = $Body
+@onready var collision_body = $Body
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -26,7 +26,7 @@ func _process(delta):
 		position = position + Vector2.from_angle(global_rotation) * speed * delta; #Phillip - from_angle gives a unit vector in the direction from the angle given
 	else:
 		area.monitoring = false
-		body.disabled = true
+		collision_body.disabled = true
 
 # Calls when the bullet collides with another object
 func _on_area_2d_body_entered(body):
