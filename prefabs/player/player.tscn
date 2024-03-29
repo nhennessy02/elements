@@ -315,7 +315,6 @@ pivot_offset = Vector2(42.6667, 10.6667)
 [connection signal="inventory_changed" from="." to="UI" method="_on_player_inventory_changed"]
 [connection signal="health_changed" from="HealthTracker" to="." method="_on_health_tracker_health_changed"]
 [connection signal="combo_created" from="Inventory" to="Wand" method="_on_inventory_combo_created"]
-[connection signal="combo_created" from="Inventory" to="TextureProgressBar" method="_on_inventory_combo_created"]
 [connection signal="inventory_changed" from="Inventory" to="." method="_on_inventory_inventory_changed"]
 [connection signal="timeout" from="Inventory/Timer" to="Inventory" method="_on_timer_timeout"]
 [connection signal="area_entered" from="Area2D" to="Inventory" method="_on_area_2d_area_entered"]

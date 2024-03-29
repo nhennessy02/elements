@@ -63,6 +63,8 @@ func startCooldown(value):
 	print("started cooldown")
 	cooldownTimer.start(value)
 	animPlayer.play("cooldown")
+	$"../TextureProgressBar".max_value = value;
+	$"../TextureProgressBar".value = value;
 	if value > 1:
 		$CooldownSmoke.emitting = true
 

@@ -1,4 +1,5 @@
 extends TextureProgressBar
+@onready var wand = $"../Wand"
 @onready var timer = $"../Wand".cooldownTimer
 var cooldownValue
 # Called when the node enters the scene tree for the first time.
@@ -19,8 +20,3 @@ func _process(delta):
 	
 	if(value <= 0):
 		value = max_value
-	
-
-func _on_inventory_combo_created(spellName, useRate, scene, wandColor):
-	max_value = useRate;
-	value = useRate;
