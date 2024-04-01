@@ -3,8 +3,8 @@ extends CanvasLayer
 var player
 var entity_manager : Node
 var detect_range : float
-var screen_width : float = DisplayServer.window_get_size().x
-var screen_height : float = DisplayServer.window_get_size().y
+var screen_width : float
+var screen_height : float
 var idtr_pos_x
 var idtr_pos_y
 const max_scale : float = 4.0
@@ -19,6 +19,10 @@ var indicator_array : Array
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	# Screen Size Adjustments
+	screen_width = get_viewport().get_visible_rect().size.x
+	screen_height = get_viewport().get_visible_rect().size.y
+	
 	entity_manager = owner
 	player = get_tree().get_nodes_in_group("Player")[0]
 	idtr_pos_x = screen_width/2 - 50

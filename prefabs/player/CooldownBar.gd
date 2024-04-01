@@ -10,7 +10,7 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsedaw time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	value = timer.get_time_left()
 	
 	if (max_value < 0.5):
