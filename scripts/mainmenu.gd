@@ -1,6 +1,6 @@
 extends Control
 
-@export var level_name : String = "sprint2_build"
+@export var level_name : String = "game"
 
 # PLAY BUTTON
 func _on_play_button_pressed():
