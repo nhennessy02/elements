@@ -1,10 +1,12 @@
-[gd_scene load_steps=11 format=3 uid="uid://b7lfpp4hqs48i"]
+[gd_scene load_steps=15 format=3 uid="uid://b7lfpp4hqs48i"]
 
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1_1ssfl"]
 [ext_resource type="PackedScene" uid="uid://rtck8bqo3jek" path="res://prefabs/base_item.tscn" id="2_3ta6i"]
 [ext_resource type="Texture2D" uid="uid://c16obwyr5hy2y" path="res://assets/sprites/enemy_ghost-Sheet.png" id="2_ghx6k"]
 [ext_resource type="PackedScene" uid="uid://tsnqt7x4rvnp" path="res://prefabs/entity elements/damageable.tscn" id="3_k7jt5"]
 [ext_resource type="Script" path="res://scripts/enemy behavior/TestEnemy.gd" id="4_msl7s"]
+[ext_resource type="Texture2D" uid="uid://cv3hai1kn0egt" path="res://assets/sprites/enemy_ghost_death-Sheet.png" id="6_xicen"]
+[ext_resource type="Texture2D" uid="uid://cb2wik74hyql3" path="res://assets/sprites/enemy_ghost_spawn-Sheet.png" id="7_7ef2q"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_guw66"]
 radius = 48.2597
@@ -92,10 +94,90 @@ tracks/2/keys = {
 "values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11]
 }
 
+[sub_resource type="Animation" id="Animation_6eo28"]
+resource_name = "death"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("6_xicen")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [9]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+}
+
+[sub_resource type="Animation" id="Animation_oyp3d"]
+resource_name = "spawn"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("7_7ef2q")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [9]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5j6k0"]
 _data = {
 "RESET": SubResource("Animation_i741y"),
-"base": SubResource("Animation_f82gm")
+"base": SubResource("Animation_f82gm"),
+"death": SubResource("Animation_6eo28"),
+"spawn": SubResource("Animation_oyp3d")
 }
 
 [node name="Enemy" type="CharacterBody2D" groups=["Enemy"]]
