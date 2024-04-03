@@ -1,12 +1,36 @@
-[gd_scene load_steps=2 format=3 uid="uid://datrqknidjaa6"]
+[gd_scene load_steps=5 format=3 uid="uid://datrqknidjaa6"]
+
+[ext_resource type="Script" path="res://scripts/spells/occultism.gd" id="1_dboo3"]
+[ext_resource type="Texture2D" uid="uid://c6g0ofaqx8mq5" path="res://assets/sprites/projectile_placeholder.png" id="1_ui1e7"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8a6u5"]
+radius = 13.0384
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_aeoq2"]
+radius = 400.281
 
 [node name="Occultism" type="Node2D"]
+script = ExtResource("1_dboo3")
+speed = null
+damage = null
+cooldown = null
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.5708
+texture = ExtResource("1_ui1e7")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="HitBox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 148
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(10, 0)
 shape = SubResource("CircleShape2D_8a6u5")
+
+[node name="SearchArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SearchArea"]
+shape = SubResource("CircleShape2D_aeoq2")
+debug_color = Color(1, 1, 1, 0.109804)
+
+[connection signal="body_entered" from="HitBox" to="." method="_on_hit_box_body_entered"]

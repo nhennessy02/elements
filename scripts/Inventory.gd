@@ -25,6 +25,10 @@ var pickedSlot2 : bool = false
 # References to the border UI for itemUI elements
 @onready var ui = $"../UI"
 
+func _ready():
+	inventory = [Element.OCCULTISM]
+#	inventory_changed.emit(inventory)
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	#handles picking up objects from the ground
@@ -89,6 +93,7 @@ func comboLookup(array):
 			combo_created.emit("Bonecraft",load("res://prefabs/player/spells/bonecraft.tscn"),Color(0.58,0.56,0.50))
 		[Element.OCCULTISM]:
 			print("using Occultism")
+			combo_created.emit("Occultism",load("res://prefabs/player/spells/occultism.tscn"),Color(0.38,0.08,0.61))
 		[Element.HEMOMANCY,Element.HEMOMANCY]:
 			print("using Aorta")
 			combo_created.emit("Aorta",load("res://prefabs/player/spells/aorta.tscn"),Color(0.45,0,0.05))
