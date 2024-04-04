@@ -1,6 +1,7 @@
 extends Node2D
 
 @onready var SearchArea = $SearchArea
+@onready var CollisionShape = $SearchArea/CollisionShape2D
 
 @export var speed : float = 700
 @export var damage : int = 3
@@ -18,9 +19,11 @@ func _ready():
 func _process(delta):
 	#finding which enemy 
 	var nearestChild
-	var minDistPosition = Vector3(0,0,0)
+	var minDist = Constants.MAX_FLOAT
 	for child in SearchArea.get_overlapping_bodies():
-		if position.distance_to()
+		if position.distance_to(child) < minDist:
+			minDist = position.distance_to(child)
+			nearestChild = child
 	position = position + Vector2.from_angle(global_rotation) * speed * delta;
 	pass
 
