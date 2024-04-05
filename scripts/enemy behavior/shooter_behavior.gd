@@ -22,6 +22,8 @@ enum State {
 @export var max_firing_time : float = 5.0
 var firing_time
 var firing_timer : float = 0.0
+#every behavior needs this for animations to play properly!
+var alive = true;
 
 # Enemy starts in the TRACKING state
 func _ready():
@@ -59,10 +61,13 @@ func calc_steering_forces():
 
 # Fire a bullet
 func fire():
-	var new_bullet = bullet.instantiate()
-	new_bullet.position = owner.position
-	new_bullet.player_pos = owner.player.position
-	get_tree().root.add_child.call_deferred(new_bullet)
+	# will only fire if not spawning or dying
+	if (alive == true):
+		var new_bullet = bullet.instantiate()
+		new_bullet.position = owner.position
+		new_bullet.player_pos = owner.player.position
+		get_tree().root.add_child.call_deferred(new_bullet)
+	
 
 # Set a random firing time within a given range
 func set_firing_time():

@@ -1,11 +1,12 @@
-[gd_scene load_steps=12 format=3 uid="uid://d832j2alng2i"]
+[gd_scene load_steps=15 format=3 uid="uid://d832j2alng2i"]
 
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1_nkm16"]
 [ext_resource type="PackedScene" uid="uid://rtck8bqo3jek" path="res://prefabs/base_item.tscn" id="2_kx5wg"]
 [ext_resource type="Texture2D" uid="uid://c2t02xewexgqr" path="res://assets/sprites/enemy_skeleton.png" id="3_jybq4"]
 [ext_resource type="PackedScene" uid="uid://tsnqt7x4rvnp" path="res://prefabs/entity elements/damageable.tscn" id="4_lglkf"]
 [ext_resource type="Script" path="res://scripts/enemy behavior/shooter_behavior.gd" id="5_1crga"]
-[ext_resource type="PackedScene" uid="uid://bvb2hip2civ7q" path="res://prefabs/enemies/enemy projectiles/blood_bullet.tscn" id="6_xcx8n"]
+[ext_resource type="PackedScene" uid="uid://bvb2hip2civ7q" path="res://prefabs/enemies/enemy projectiles/bone_bullet.tscn" id="6_xcx8n"]
+[ext_resource type="Texture2D" uid="uid://bc8d2h07c6hxd" path="res://assets/sprites/enemy_skeleton_death_placeholder.png" id="7_yov1d"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_guw66"]
 radius = 48.2597
@@ -93,10 +94,91 @@ tracks/2/keys = {
 "values": [0]
 }
 
+[sub_resource type="Animation" id="Animation_epgfi"]
+resource_name = "death"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("7_yov1d")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_tn584"]
+resource_name = "spawn"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_jybq4")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5j6k0"]
 _data = {
 "RESET": SubResource("Animation_i741y"),
-"base": SubResource("Animation_f82gm")
+"base": SubResource("Animation_f82gm"),
+"death": SubResource("Animation_epgfi"),
+"spawn": SubResource("Animation_tn584")
 }
 
 [node name="Enemy" type="CharacterBody2D" groups=["Enemy"]]
