@@ -24,6 +24,19 @@ func _process(delta):
 		if position.distance_to(child) < minDist:
 			minDist = position.distance_to(child)
 			nearestChild = child
+	
+	#finding out if enemy is to the left or right of the trajectory
+	if(nearestChild):
+		var headingVector = Vector2.from_angle(global_rotation)
+		var vectorToEnemy = position - nearestChild.global_position
+		var perpVectorToEnemy = Vector2(-vectorToEnemy.y,vectorToEnemy.x)
+	
+		print(perpVectorToEnemy.dot(headingVector))
+	#turn left
+	#if(perpVectorToEnemy.dot(headingVector)>0):
+		
+	#else(perpVectorToEnemy.dot(headingVector)<0):
+	#updating position 
 	position = position + Vector2.from_angle(global_rotation) * speed * delta;
 	pass
 
