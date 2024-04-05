@@ -7,6 +7,7 @@
 [node name="Subarea" type="Node2D"]
 
 [node name="Pillars" type="Node2D" parent="."]
+position = Vector2(0, -200)
 script = ExtResource("1_j8jkf")
 pillar_scene = ExtResource("2_ablxd")
 pillar_pos_array = Array[Vector2]([Vector2(300, 0), Vector2(-300, 0), Vector2(0, -200)])
