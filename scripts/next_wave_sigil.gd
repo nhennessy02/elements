@@ -14,6 +14,14 @@ func _process(_delta):
 		anim_player.play("deactivated")
 		particles.emitting = false
 	
+	# Update particles while on sigil
+	if can_teleport:
+		particles.orbit_velocity_min = -0.5
+		particles.orbit_velocity_max = 0.5
+	else:
+		particles.orbit_velocity_min = -0.1
+		particles.orbit_velocity_max = 0.1
+	
 	# Send player to next wave
 	if can_teleport and activated and Input.is_action_just_pressed("select"):
 		get_tree().quit()
