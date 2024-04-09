@@ -25,6 +25,7 @@ position = Vector2(10, 0)
 shape = SubResource("CircleShape2D_8a6u5")
 
 [node name="SearchArea" type="Area2D" parent="."]
+collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SearchArea"]
 shape = SubResource("CircleShape2D_aeoq2")

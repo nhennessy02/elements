@@ -3,10 +3,14 @@ extends Node2D
 @onready var SearchArea = $SearchArea
 @onready var CollisionShape = $SearchArea/CollisionShape2D
 
-@export var speed : float = 700
+@export var speed : float = 300
+var maxSpeed : float = 700
+var ratio : float = 0.2
 @export var damage : int = 3
 @export var cooldown : float = 1
 var wand
+var nearestChild
+var angleUpdateCounter = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -18,20 +22,25 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	#finding which enemy 
-	var nearestChild
-	var minDist = Constants.MAX_FLOAT
-	for child in SearchArea.get_overlapping_bodies():
-		if position.distance_to(child) < minDist:
-			minDist = position.distance_to(child)
-			nearestChild = child
+	if(not nearestChild):
+		var minDist = Constants.MAX_FLOAT
+		for child in SearchArea.get_overlapping_bodies():
+			if position.distance_to(child.global_position) < minDist:
+				minDist = position.distance_to(child.global_position)
+				nearestChild = child
 	
 	#finding out if enemy is to the left or right of the trajectory
-	if(nearestChild):
-		var headingVector = Vector2.from_angle(global_rotation)
-		var vectorToEnemy = position - nearestChild.global_position
-		var perpVectorToEnemy = Vector2(-vectorToEnemy.y,vectorToEnemy.x)
+	if(not is_instance_valid(nearestChild)):
+		nearestChild = null
 	
-		print(perpVectorToEnemy.dot(headingVector))
+	if(nearestChild):
+		if(angleUpdateCounter >= 2): #every 2 frames update the angle and the speed of the projectile
+			var angleBetween = Vector2.from_angle(global_rotation).angle_to(nearestChild.global_position - global_position)
+			global_rotation = global_rotation + angleBetween * ratio
+			speed = speed + (maxSpeed - speed) * ratio
+			angleUpdateCounter = 0
+		angleUpdateCounter += 1
+	
 	#turn left
 	#if(perpVectorToEnemy.dot(headingVector)>0):
 		
