@@ -9,6 +9,8 @@ var pillar_indexes : Array[int]
 @export var pillar_scene : PackedScene
 @export var pillar_pos_array : Array[Vector2]
 
+@onready var teleporter = $"../NextWaveSigil"
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	# Get player reference
@@ -28,7 +30,7 @@ func _ready():
 		pillars[i].position = pillar_pos_array[i]
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	# Delete other items when one is picked up
 	var current_inventory_size = items.inventory.size()
 	if current_inventory_size != prev_inventory_size:
@@ -57,5 +59,12 @@ func get_pillar_index(min_index: int = 0, max_index: int = 4):
 	else:
 		return index
 
+# Clears spell items when the player picks up one
 func delete_all_items():
-	pass
+	for pillar in pillars:
+		pillar.get_child(1).queue_free()
+	activate_teleporter()
+
+# Allows the player to leave the subarea
+func activate_teleporter():
+	teleporter.activated = true
