@@ -1,5 +1,6 @@
 extends Sprite2D
 
+@onready var particles = $Particles
 @onready var anim_player = $AnimationPlayer
 var activated: bool = false
 var can_teleport: bool = false
@@ -8,8 +9,10 @@ var can_teleport: bool = false
 func _process(_delta):
 	if activated:
 		anim_player.play("activated")
+		particles.emitting = true
 	else:
 		anim_player.play("deactivated")
+		particles.emitting = false
 	
 	# Send player to next wave
 	if can_teleport and activated and Input.is_action_just_pressed("select"):

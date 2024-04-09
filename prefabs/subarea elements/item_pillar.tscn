@@ -65,6 +65,7 @@ position = Vector2(0, -11.333)
 texture = ExtResource("1_6js4v")
 
 [node name="BaseItem" parent="." instance=ExtResource("2_retf5")]
+visible = false
 z_as_relative = true
 position = Vector2(0, -75.3333)
 scale = Vector2(0.8, 0.8)
