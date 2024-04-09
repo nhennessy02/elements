@@ -1,51 +1,30 @@
-[gd_scene load_steps=8 format=3 uid="uid://dne6s4xkt5uxt"]
+[gd_scene load_steps=4 format=3 uid="uid://dne6s4xkt5uxt"]
 
-[ext_resource type="Texture2D" uid="uid://b5yglciyxuypw" path="res://assets/sprites/spells/aorta/aorta_head.png" id="1_3rc76"]
-[ext_resource type="Script" path="res://scripts/projectile.gd" id="1_f6etd"]
-[ext_resource type="Texture2D" uid="uid://cspjnpjsx1gqp" path="res://assets/sprites/spells/aorta/aorta_trail.png" id="2_x7bje"]
-[ext_resource type="Texture2D" uid="uid://dmjitkurhaqrp" path="res://assets/sprites/spells/aorta/aorta_particle.png" id="3_koiiv"]
+[ext_resource type="Script" path="res://scripts/spells/aorta.gd" id="1_f6ldd"]
+[ext_resource type="Texture2D" uid="uid://vuym5pytm1l0" path="res://assets/sprites/spells/hemomancy/hemomancy.png" id="2_rp1j4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ue058"]
-size = Vector2(18, 36)
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dbm71"]
-particle_flag_disable_z = true
-direction = Vector3(-20, 0, 0)
-spread = 0.0
-initial_velocity_min = 117.65
-initial_velocity_max = 117.65
-gravity = Vector3(0, 0, 0)
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_s2yt7"]
-particle_flag_disable_z = true
-direction = Vector3(0, 1, 0)
-spread = 0.0
-initial_velocity_min = -10.0
-initial_velocity_max = 10.0
-gravity = Vector3(0, 0, 0)
+size = Vector2(18, 128)
 
 [node name="Aorta" type="Node2D"]
-script = ExtResource("1_f6etd")
-speed = 1000.0
-damage = 8
+script = ExtResource("1_f6ldd")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(3, 3)
-texture = ExtResource("1_3rc76")
+rotation = 1.5708
+texture = ExtResource("2_rp1j4")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 8
 collision_mask = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(-15, 0)
+position = Vector2(8, 0)
 shape = SubResource("RectangleShape2D_ue058")
 debug_color = Color(0, 0.6, 0.701961, 0.419608)
 
-[node name="Trail" type="GPUParticles2D" parent="."]
-process_material = SubResource("ParticleProcessMaterial_dbm71")
-texture = ExtResource("2_x7bje")
+[node name="Lifetime" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+autostart = true
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
-process_material = SubResource("ParticleProcessMaterial_s2yt7")
-texture = ExtResource("3_koiiv")
+[connection signal="timeout" from="Lifetime" to="." method="_on_lifetime_timeout"]
