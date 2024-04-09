@@ -10,7 +10,7 @@ var player_pos : Vector2 = Vector2.ZERO
 
 func _ready():
 	direction = (player_pos - position).normalized() # direction is set to the normalized vector towards the player
-
+	$AnimationPlayer.play("base")
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):	
 	if active:

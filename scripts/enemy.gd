@@ -8,6 +8,9 @@ class_name Enemy extends CharacterBody2D
 # Pathfinding Variables
 @onready var nav_agent := $NavigationAgent2D as NavigationAgent2D
 
+#Animation player
+@onready var animPlayer = $AnimationPlayer as AnimationPlayer
+
 # We assign this in _ready()
 var player:
 	get: return player
@@ -54,8 +57,11 @@ func _ready(): # LACKS DEFAULTS IN CASE OF MISSING PLAYER OR ENTITY MANAGER
 	# Finds the player and gets a reference to it
 	player = entity_manager.player
 	
-	# Play animation
-	$AnimationPlayer.play("base")
+	# Play spawning animation
+	animPlayer.play("spawn")
+	
+	#Plays idle animation when the spawn animation finishes
+	animPlayer.queue("base")
 	
 	# Delay to prevent pathfinding errors
 	set_physics_process(false)
@@ -87,6 +93,7 @@ func _physics_process(delta):
 		sprite.flip_h = true
 	elif velocity.x < 0 and abs(velocity.x) > 2:
 		sprite.flip_h = false
+		
 
 # Applies movement to the enemy
 func apply_force(force: Vector2):
@@ -215,6 +222,18 @@ func drop_item():
 
 # NEEDS TO PLAY A DEATH ANIMATION FIRST
 func die():
+	animPlayer.play("death")
+	
+	#Stops the enemy and makes hit/hurtboxes inactive
+	set_physics_process(false)
+	$HurtBox.set_deferred("disabled",true)
+	$HitBox.set_deferred("monitoring",false)
+	$Behavior.alive = false
+	
+	# wait until the animation finishes, then die for realsies
+	await animPlayer.animation_finished
+	
 	drop_item()
 	entity_manager.remove_enemy(self)
 	queue_free()
+	
