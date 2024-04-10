@@ -1,0 +1,211 @@
+[gd_scene load_steps=21 format=3 uid="uid://cvj5kc7s1pc2o"]
+
+[ext_resource type="Texture2D" uid="uid://clts8s67dq618" path="res://assets/subarea room/spellicons/spellsloticon.png" id="1_yxksh"]
+[ext_resource type="Texture2D" uid="uid://ckvhut8t0l1ck" path="res://assets/subarea room/spellicons/spellicon_bonecraft.png" id="2_ios5i"]
+[ext_resource type="Script" path="res://scripts/spellicon.gd" id="2_vbfvw"]
+[ext_resource type="Texture2D" uid="uid://iie6luyuy8vl" path="res://assets/subarea room/spellicons/spellicon_hemomancy.png" id="3_ieyfh"]
+[ext_resource type="Texture2D" uid="uid://bi0w43800kgih" path="res://assets/subarea room/spellicons/spellicon_occultism.png" id="4_t6vui"]
+[ext_resource type="Texture2D" uid="uid://cxkk1q6bitr0v" path="res://assets/subarea room/spellicons/spellicon_pestilence.png" id="5_gvq68"]
+[ext_resource type="Texture2D" uid="uid://7ov2e57cr4oh" path="res://assets/subarea room/spellicons/spellicon_divine.png" id="6_di5os"]
+
+[sub_resource type="Animation" id="Animation_n2lw1"]
+resource_name = "empty"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_yxksh")]
+}
+
+[sub_resource type="Animation" id="Animation_1k4b5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_yxksh")]
+}
+
+[sub_resource type="Animation" id="Animation_ekuhc"]
+resource_name = "bonecraft"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_ios5i")]
+}
+
+[sub_resource type="Animation" id="Animation_bklim"]
+resource_name = "hemomancy"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_ieyfh")]
+}
+
+[sub_resource type="Animation" id="Animation_sxwt1"]
+resource_name = "occultism"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_t6vui")]
+}
+
+[sub_resource type="Animation" id="Animation_n6ofa"]
+resource_name = "pestilence"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("5_gvq68")]
+}
+
+[sub_resource type="Animation" id="Animation_qhnr8"]
+resource_name = "divine"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("6_di5os")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fv26c"]
+_data = {
+"RESET": SubResource("Animation_1k4b5"),
+"bonecraft": SubResource("Animation_ekuhc"),
+"divine": SubResource("Animation_qhnr8"),
+"empty": SubResource("Animation_n2lw1"),
+"hemomancy": SubResource("Animation_bklim"),
+"occultism": SubResource("Animation_sxwt1"),
+"pestilence": SubResource("Animation_n6ofa")
+}
+
+[sub_resource type="Animation" id="Animation_6hyq6"]
+resource_name = "scaling"
+length = 0.05
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(2, 2), Vector2(3, 3)]
+}
+
+[sub_resource type="Animation" id="Animation_afbs6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(2, 2)]
+}
+
+[sub_resource type="Animation" id="Animation_n6p53"]
+resource_name = "scaledown"
+length = 0.05
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(3, 3), Vector2(2, 2)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8rlbm"]
+_data = {
+"RESET": SubResource("Animation_afbs6"),
+"scaledown": SubResource("Animation_n6p53"),
+"scaling": SubResource("Animation_6hyq6")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kmqqw"]
+size = Vector2(116, 115)
+
+[node name="SpellIcon" type="Sprite2D"]
+scale = Vector2(2, 2)
+texture = ExtResource("1_yxksh")
+script = ExtResource("2_vbfvw")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_fv26c")
+}
+
+[node name="ScaleAnimator" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_8rlbm")
+}
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_kmqqw")

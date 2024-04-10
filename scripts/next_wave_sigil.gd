@@ -16,8 +16,8 @@ func _process(_delta):
 	
 	# Update particles while on sigil
 	if can_teleport:
-		particles.orbit_velocity_min = -0.5
-		particles.orbit_velocity_max = 0.5
+		particles.orbit_velocity_min = -0.2
+		particles.orbit_velocity_max = 0.2
 	else:
 		particles.orbit_velocity_min = -0.1
 		particles.orbit_velocity_max = 0.1

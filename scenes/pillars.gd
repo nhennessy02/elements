@@ -3,6 +3,7 @@ extends Node2D
 var player
 var items
 var prev_inventory_size: int
+var item_collected: bool = false
 
 var pillars : Array[CharacterBody2D]
 var pillar_indexes : Array[int]
@@ -33,7 +34,7 @@ func _ready():
 func _process(_delta):
 	# Delete other items when one is picked up
 	var current_inventory_size = items.inventory.size()
-	if current_inventory_size != prev_inventory_size:
+	if current_inventory_size != prev_inventory_size and !item_collected:
 		delete_all_items()
 	prev_inventory_size = current_inventory_size
 	
@@ -63,6 +64,11 @@ func get_pillar_index(min_index: int = 0, max_index: int = 4):
 func delete_all_items():
 	for pillar in pillars:
 		pillar.get_child(1).queue_free()
+	
+	# Stop from calling again
+	item_collected = true
+	
+	# Player can now leave to next wave
 	activate_teleporter()
 
 # Allows the player to leave the subarea
