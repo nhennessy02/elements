@@ -62,11 +62,11 @@ func get_pillar_index(min_index: int = 0, max_index: int = 4):
 
 # Clears spell items when the player picks up one
 func delete_all_items():
-	for pillar in pillars:
-		pillar.get_child(1).queue_free()
+	#for pillar in pillars:w
+		#pillar.get_child(1).queue_free()
 	
 	# Stop from calling again
-	item_collected = true
+	#item_collected = true #TESTING
 	
 	# Player can now leave to next wave
 	activate_teleporter()
