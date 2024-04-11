@@ -16,62 +16,74 @@ enum Element { PESTILENCE = 0, HEMOMANCY = 1, CONVALESCENCE = 2, BONECRAFT = 3, 
 var inventory = []
 var combo = []
 var groundItems = []
-var pickedSlot0 : bool = false
-var pickedSlot1 : bool = false
-var pickedSlot2 : bool = false
+var slots: Array[bool] = [false, false, false]
+
 @onready var pickupZone = $"../Area2D"
 @onready var comboTimer = $Timer
 
 # References to the border UI for itemUI elements
 @onready var ui = $"../UI"
 
-func _ready():
-	inventory = [Element.OCCULTISM]
-#	inventory_changed.emit(inventory)
-	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	#handles picking up objects from the ground
 	if Input.is_action_just_pressed("select"):
 		itemPickup()
-	#this second is about creating combinations 
-	#control either through press 1 2 and or 3 then send the combo after a timer - coded this way
-	#or hold a button, key or right click, press 1 2 and or 3 then release to send combo
-	if Input.is_action_just_pressed("slot0") and not pickedSlot0 and inventory.size() >= 1:
-		pickedSlot0 = true
-	elif Input.is_action_just_pressed("slot0") and pickedSlot0 and inventory.size() >= 1:
-		pickedSlot0 = false
-		
-	if Input.is_action_just_pressed("slot1") and not pickedSlot1 and inventory.size() >= 2:
-		pickedSlot1 = true
-	elif Input.is_action_just_pressed("slot1") and pickedSlot1 and inventory.size() >= 2:
-		pickedSlot1 = false
-		
-	if Input.is_action_just_pressed("slot2") and not pickedSlot2 and inventory.size() >= 3:
-		pickedSlot2 = true
-	elif Input.is_action_just_pressed("slot2") and  pickedSlot2 and inventory.size() >= 3:
-		pickedSlot2 = false
+	
+	# Have only 1 spell selected at a time
+	if Input.is_action_just_pressed("slot0") and inventory.size() >= 1:
+		set_active_spell(0)
+	elif Input.is_action_just_pressed("slot1") and inventory.size() >= 2:
+		set_active_spell(1)
+	elif Input.is_action_just_pressed("slot2")and inventory.size() >= 3:
+		set_active_spell(2)
+	
+	# Toggle between spells by pressing SHIFT or TAB
+	if (Input.is_action_just_pressed("toggle_spell") or Input.is_action_just_pressed("mouse_wheel_down")) and inventory.size() > 0:
+		var active_spell_index: int
+		for i in inventory.size():
+			if slots[i] == true:
+				active_spell_index = i
+				break
+		set_active_spell((active_spell_index + 1) % inventory.size())
+	
+	# Selecting Spells with Mousewheel
+	if Input.is_action_just_pressed("mouse_wheel_up") and inventory.size() > 0:
+		var active_spell_index: int
+		for i in inventory.size():
+			if slots[i] == true:
+				active_spell_index = i
+				break
+		active_spell_index -= 1
+		if active_spell_index < 0:
+			active_spell_index = inventory.size() - 1
+		set_active_spell(active_spell_index)
 	
 	if Input.is_action_just_pressed("load_wand"):
-		if pickedSlot2:
+		if slots[2]:
 			combo.append(inventory[2])
 			inventory.remove_at(2)
-		if pickedSlot1:
+		if slots[1]:
 			combo.append(inventory[1])
 			inventory.remove_at(1)
-		if pickedSlot0:
+		if slots[0]:
 			combo.append(inventory[0])
 			inventory.remove_at(0)
-		pickedSlot0 = false
-		pickedSlot1 = false
-		pickedSlot2 = false
 		comboLookup(combo)
 		combo = []
 		inventory_changed.emit(inventory)
 
-	ui.selected_0.visible = pickedSlot0
-	ui.selected_1.visible = pickedSlot1
-	ui.selected_2.visible = pickedSlot2
+	ui.selected_0.visible = slots[0]
+	ui.selected_1.visible = slots[1]
+	ui.selected_2.visible = slots[2]
+
+# Sets the chosen slot to active and all other to not be
+func set_active_spell(index: int):
+	for i in slots.size():
+		if i == index:
+			slots[i] = true
+		else:
+			slots[i] = false
 
 func comboLookup(array):
 	array.sort_custom(func(a,b): return a < b)

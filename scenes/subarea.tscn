@@ -22,7 +22,6 @@ pillar_pos_array = Array[Vector2]([Vector2(300, -275), Vector2(-300, -275), Vect
 
 [node name="Player" parent="." instance=ExtResource("1_2mryg")]
 position = Vector2(0, -10)
-scale = Vector2(0.75, 0.75)
 
 [node name="CombinerUI" parent="." instance=ExtResource("5_pe58s")]
 visible = false
