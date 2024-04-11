@@ -1,0 +1,86 @@
+[gd_scene load_steps=10 format=3 uid="uid://eip6jv8ww40u"]
+
+[ext_resource type="Texture2D" uid="uid://jmlvyyxkt03o" path="res://assets/subarea room/pillar.png" id="1_6js4v"]
+[ext_resource type="PackedScene" uid="uid://rtck8bqo3jek" path="res://prefabs/base_item.tscn" id="2_retf5"]
+
+[sub_resource type="Animation" id="Animation_bgapk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -75.3333)]
+}
+
+[sub_resource type="Animation" id="Animation_lxrgn"]
+resource_name = "item_bob"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, -75.3333), Vector2(0, -66.333), Vector2(0, -75.333)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_h5t3y"]
+_data = {
+"RESET": SubResource("Animation_bgapk"),
+"item_bob": SubResource("Animation_lxrgn")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hgjae"]
+animation = &"item_bob"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_bh6dk"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_742y0"]
+states/item_bob/node = SubResource("AnimationNodeAnimation_hgjae")
+states/item_bob/position = Vector2(419, 94)
+transitions = ["Start", "item_bob", SubResource("AnimationNodeStateMachineTransition_bh6dk")]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_h72sh"]
+radius = 14.6667
+height = 36.0
+
+[node name="ItemPillar" type="CharacterBody2D"]
+scale = Vector2(1.5, 1.5)
+collision_mask = 0
+
+[node name="Pillar" type="Sprite2D" parent="."]
+position = Vector2(0, -11.333)
+texture = ExtResource("1_6js4v")
+
+[node name="BaseItem" parent="." instance=ExtResource("2_retf5")]
+z_as_relative = true
+position = Vector2(0, -75.3333)
+scale = Vector2(0.8, 0.8)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="BaseItem"]
+libraries = {
+"": SubResource("AnimationLibrary_h5t3y")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="BaseItem"]
+libraries = {
+"": SubResource("AnimationLibrary_h5t3y")
+}
+tree_root = SubResource("AnimationNodeStateMachine_742y0")
+anim_player = NodePath("../AnimationPlayer")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -23.3333)
+shape = SubResource("CapsuleShape2D_h72sh")

@@ -1,0 +1,28 @@
+[gd_scene load_steps=7 format=3 uid="uid://y16urejntjqv"]
+
+[ext_resource type="PackedScene" uid="uid://c53dvgtfs8iqn" path="res://prefabs/player/player.tscn" id="1_2mryg"]
+[ext_resource type="Script" path="res://scenes/pillars.gd" id="1_j8jkf"]
+[ext_resource type="PackedScene" uid="uid://dve5kuoqdo8bg" path="res://prefabs/subarea elements/next_wave_sigil.tscn" id="1_qtbjo"]
+[ext_resource type="PackedScene" uid="uid://eip6jv8ww40u" path="res://prefabs/subarea elements/item_pillar.tscn" id="2_ablxd"]
+[ext_resource type="PackedScene" uid="uid://bf5e83173gyu" path="res://prefabs/subarea elements/combiner_ui.tscn" id="5_pe58s"]
+[ext_resource type="PackedScene" uid="uid://drlkmigl88gcq" path="res://prefabs/subarea elements/comboaltar.tscn" id="6_mfew8"]
+
+[node name="Subarea" type="Node2D"]
+
+[node name="Comboaltar" parent="." instance=ExtResource("6_mfew8")]
+position = Vector2(458, 187)
+
+[node name="NextWaveSigil" parent="." instance=ExtResource("1_qtbjo")]
+position = Vector2(0, 100)
+
+[node name="Pillars" type="Node2D" parent="."]
+script = ExtResource("1_j8jkf")
+pillar_scene = ExtResource("2_ablxd")
+pillar_pos_array = Array[Vector2]([Vector2(300, -275), Vector2(-300, -275), Vector2(0, -325)])
+
+[node name="Player" parent="." instance=ExtResource("1_2mryg")]
+position = Vector2(0, -10)
+scale = Vector2(0.75, 0.75)
+
+[node name="CombinerUI" parent="." instance=ExtResource("5_pe58s")]
+visible = false

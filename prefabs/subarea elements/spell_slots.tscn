@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://c2x2wxf3t3sx8"]
+
+[ext_resource type="PackedScene" uid="uid://cvj5kc7s1pc2o" path="res://prefabs/subarea elements/spellsloticon.tscn" id="1_f541g"]
+[ext_resource type="Script" path="res://scripts/spell_slots.gd" id="1_x53tf"]
+
+[node name="SpellSlots" type="Node2D" node_paths=PackedStringArray("slots", "combo_slots")]
+script = ExtResource("1_x53tf")
+slots = [NodePath("Slot1"), NodePath("Slot2"), NodePath("Slot3")]
+combo_slots = [NodePath("ComboIcon1"), NodePath("ComboIcon2")]
+
+[node name="Slot1" parent="." instance=ExtResource("1_f541g")]
+
+[node name="Slot2" parent="." instance=ExtResource("1_f541g")]
+position = Vector2(350, 0)
+inventory_slot_index = 1
+
+[node name="Slot3" parent="." instance=ExtResource("1_f541g")]
+position = Vector2(700, 0)
+inventory_slot_index = 2
+
+[node name="ComboIcon1" parent="." instance=ExtResource("1_f541g")]
+position = Vector2(-130, -600)
+
+[node name="ComboIcon2" parent="." instance=ExtResource("1_f541g")]
+position = Vector2(830, -600)

@@ -1,0 +1,73 @@
+[gd_scene load_steps=7 format=3 uid="uid://bf5e83173gyu"]
+
+[ext_resource type="Texture2D" uid="uid://c8gdyqxhrckfp" path="res://assets/subarea room/combosigil.png" id="2_elroy"]
+[ext_resource type="Texture2D" uid="uid://wcldlmrxwr5k" path="res://assets/subarea room/buttons/combo_button_on.png" id="3_4wwlt"]
+[ext_resource type="Texture2D" uid="uid://5xhbdbxhng0q" path="res://assets/subarea room/buttons/combo_button_pressed.png" id="4_rocl8"]
+[ext_resource type="Texture2D" uid="uid://dbsn1esg8nrqs" path="res://assets/subarea room/buttons/combo_button_hover.png" id="5_2ddlo"]
+[ext_resource type="Texture2D" uid="uid://dsvmgsieqvja6" path="res://assets/subarea room/buttons/combo_button_disabled.png" id="6_unq3h"]
+[ext_resource type="PackedScene" uid="uid://c2x2wxf3t3sx8" path="res://prefabs/subarea elements/spell_slots.tscn" id="8_pphi3"]
+
+[node name="CombinerUI" type="CanvasLayer"]
+
+[node name="Background" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.368627, 0.368627, 0.368627, 0.768627)
+
+[node name="CombineUI" type="ColorRect" parent="Background"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.140063
+anchor_right = 0.860125
+anchor_bottom = 1.0
+offset_left = 0.0799561
+offset_top = -0.279999
+offset_right = -0.440063
+offset_bottom = 0.359985
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Combosigil" type="Sprite2D" parent="Background/CombineUI"]
+modulate = Color(0.458824, 0.458824, 0.458824, 1)
+position = Vector2(700, 285)
+scale = Vector2(3, 3)
+texture = ExtResource("2_elroy")
+
+[node name="TextureButton" type="TextureButton" parent="Background/CombineUI"]
+layout_mode = 0
+offset_left = 507.0
+offset_top = 500.0
+offset_right = 891.0
+offset_bottom = 692.0
+disabled = true
+texture_normal = ExtResource("3_4wwlt")
+texture_pressed = ExtResource("4_rocl8")
+texture_hover = ExtResource("5_2ddlo")
+texture_disabled = ExtResource("6_unq3h")
+
+[node name="InventoryUI" type="ColorRect" parent="Background"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.2
+anchor_top = 0.675444
+anchor_right = 0.8
+anchor_bottom = 0.975444
+offset_left = -0.720032
+offset_top = -0.47998
+offset_right = 0.23999
+offset_bottom = 0.52002
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.180392, 0.180392, 0.180392, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="SpellSlots" parent="Background/InventoryUI" instance=ExtResource("8_pphi3")]
+position = Vector2(235, 160)
+
+[connection signal="pressed" from="Background/CombineUI/TextureButton" to="Background/InventoryUI/SpellSlots" method="_on_texture_button_pressed"]
