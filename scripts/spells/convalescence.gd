@@ -3,7 +3,7 @@ extends Node
 @onready var timer = $ActivationTimer
 @onready var ring = $InnerRing
 var player
-var healAmount = 5
+var shieldAmount = 5
 var startTime
 var scaleFactor
 
@@ -38,7 +38,7 @@ func fizzle():
 	pass
 	
 func activate():
-	player.get_child(3).hit(-healAmount) #child 3 is the health tracker of the player, hitting for negative heals
+	player.get_child(3).addToShield(shieldAmount)
 	pass
 
 func _on_activation_timer_timeout():

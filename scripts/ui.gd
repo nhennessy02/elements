@@ -3,6 +3,7 @@ class_name UI
 
 #ui properties
 @onready var health_label = %HealthLabel
+@onready var shield_label = %ShieldLabel
 @onready var element_0 = %Element0
 @onready var element_1 = %Element1
 @onready var element_2 = %Element2
@@ -14,9 +15,16 @@ var spriteArray = [load("res://assets/sprites/elements/pestilence_ui.png"),load(
 
 func update_health_label(value):
 	health_label.text = "Health: " + str(value)
+	
+func update_shield_label(value):
+	shield_label.text = "Sheild: " + str(value)
 
 func _on_player_health_changed(value):
 	update_health_label(value)
+	
+func _on_player_shield_changed(value):
+	update_shield_label(value)
+	
 
 func update_inventory_textures(value):
 	match value.size():
@@ -40,3 +48,5 @@ func update_inventory_textures(value):
 
 func _on_player_inventory_changed(value):
 	update_inventory_textures(value)
+
+

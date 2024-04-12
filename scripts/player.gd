@@ -109,7 +109,15 @@ func gameover():
 signal health_changed(value : int)
 func _on_health_tracker_health_changed(value):
 	health_changed.emit(value)
+	
+signal shield_changed(value : int)
+func _on_health_tracker_shield_changed(value):
+	shield_changed.emit(value)
+	pass # Replace with function body.
+
 
 signal inventory_changed(value)
 func _on_inventory_inventory_changed(value):
 	inventory_changed.emit(value)
+
+

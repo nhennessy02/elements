@@ -7,7 +7,7 @@ extends Node2D
 var maxSpeed : float = 700
 var ratio : float = 0.2
 @export var damage : int = 3
-@export var cooldown : float = 1
+@export var cooldown : float = 0.5
 var wand
 var nearestChild
 var angleUpdateCounter = 0

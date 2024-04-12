@@ -26,8 +26,9 @@ var pickedSlot2 : bool = false
 @onready var ui = $"../UI"
 
 func _ready():
-	inventory = [Element.OCCULTISM]
+	inventory = [Element.CONVALESCENCE]
 #	inventory_changed.emit(inventory)
+	pass
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -94,12 +95,15 @@ func comboLookup(array):
 		[Element.OCCULTISM]:
 			print("using Occultism")
 			combo_created.emit("Occultism",load("res://prefabs/player/spells/occultism.tscn"),Color(0.38,0.08,0.61))
+		#[Element.PESTILENCE,Element.PESTILENCE]:
+		#	print("using")
 		[Element.HEMOMANCY,Element.HEMOMANCY]:
 			print("using Aorta")
 			combo_created.emit("Aorta",load("res://prefabs/player/spells/aorta.tscn"),Color(0.45,0,0.05))
 		[Element.PESTILENCE,Element.HEMOMANCY]:
 			print("using Leeching Shot")
 			combo_created.emit("Leeching Shot",load("res://prefabs/player/spells/leeching_shot.tscn"),Color(0.85,0.43,0.30))
+			
 		_:
 			print("couldn't decipher combo")
 

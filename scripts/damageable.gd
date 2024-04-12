@@ -14,7 +14,7 @@ func hit(damage : int):
 	health -= damage
 	
 	#display how much damage taken
-	DamageNumbers.display_number(damage, damageNumberOrigin.global_position)
+	DamageNumbers.display_number(damage, damageNumberOrigin.global_position, Color8(255,50,50))
 	
 	#flash red on hit
 	flashTimer.start()

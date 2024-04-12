@@ -2,21 +2,14 @@ extends Node
 #follows this video by DashNothing "Damage Numbers in Godot 4 | Let's Godot" 
 #link https://www.youtube.com/watch?v=F0DQLSiLkjg
 
-func display_number(value: int, position: Vector2):
+func display_number(value: int, position: Vector2, color = Color8(255,255,255)):
 	#creating the number
 	var number = Label.new()
 	number.global_position = position
 	number.text = str(abs(value)) # shouldn't probably use abs
 	number.z_index = 5 # should be above everything
 	number.label_settings = LabelSettings.new()
-	
-	var color = Color8(255,255,255)
-	
-	if value < 0:
-		color = Color8(50,255,50)
-	if value > 0:
-		color = Color8(255,50,50)
-	
+
 	number.label_settings.font_color = color
 	number.label_settings.font_size = 36
 	number.label_settings.outline_color = Color8(0,0,0)

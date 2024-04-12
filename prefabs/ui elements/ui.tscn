@@ -28,10 +28,19 @@ theme_override_constants/margin_top = 32
 theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 32
 
-[node name="HealthLabel" type="Label" parent="Control/MarginContainer"]
+[node name="GridContainer" type="GridContainer" parent="Control/MarginContainer"]
+layout_mode = 2
+
+[node name="HealthLabel" type="Label" parent="Control/MarginContainer/GridContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Health: 3"
+text = "Health: 5"
+label_settings = SubResource("LabelSettings_ha46s")
+
+[node name="ShieldLabel" type="Label" parent="Control/MarginContainer/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Shield: 0"
 label_settings = SubResource("LabelSettings_ha46s")
 
 [node name="ElementTextureContainer" type="HBoxContainer" parent="Control"]

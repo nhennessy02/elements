@@ -1,7 +1,6 @@
 extends Node2D
 
-@export var speed : float = 700
-@export var damage : int = 3
+@export var projectilePrefab : PackedScene
 @export var cooldown : float = 1
 var wand
 
@@ -10,16 +9,16 @@ func _ready():
 	wand = get_node("../Player/Wand")
 	wand.startFireAnimation()
 	wand.startCooldown(cooldown)
+	for i in range(-1,2):
+		var projectile = projectilePrefab.instantiate()
+		add_child(projectile)
+		projectile.global_position = position
+		projectile.global_rotation = rotation + (i * deg_to_rad(30))
+		
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	position = position + Vector2.from_angle(global_rotation) * speed * delta;
-
-func _on_area_2d_body_entered(body):
-	for child in body.get_children():
-		if child is Damageable:
-			child.hit(damage);
-			EffectManager.attach_effect(body,Effects.BLEED,3)
+	pass
 
 func _on_lifetime_timeout():
 	queue_free()
