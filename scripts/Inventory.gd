@@ -149,7 +149,7 @@ func itemPickup():
 				item = node
 				if inventory.size() == 3:
 					var temp = item.getId()
-					item.setId(inventory[0].pop_front())
+					item.setId(get_combo_index(inventory.pop_front()))
 					inventory.push_back([temp])
 					inventory_changed.emit(inventory)
 					#swap items

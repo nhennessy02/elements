@@ -38,7 +38,7 @@ func updateColor(): #this will need to be changed/updated for when we switch to 
 		_: # default case
 			sprite.modulate = Color8(255, 255, 255)
 
-func updateSprite():
+func updateSprite(): # ADD ABILITY TO DROP COMBOS
 	if sprite != null:
 		sprite.texture = spriteArray[id]
 
