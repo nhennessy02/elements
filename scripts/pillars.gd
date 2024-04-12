@@ -18,17 +18,10 @@ func _ready():
 	if get_tree().get_nodes_in_group("Player")[0] != null:
 		player = get_tree().get_nodes_in_group("Player")[0]
 		items = player.get_node("Inventory")
-	
 	setup_pillars()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	# Delete other items when one is picked up
-	var current_inventory_size = items.inventory.size()
-	if current_inventory_size != prev_inventory_size and !item_collected:
-		delete_all_items()
-	prev_inventory_size = current_inventory_size
-	
 	# Change Z-index depending on player pos to look nicer
 	if player != null:
 		for pillar in pillars:
@@ -39,7 +32,6 @@ func _process(_delta):
 
 func setup_pillars():
 	var pillar_count = randi_range(2,3)
-	
 	# Spawn Pillars with Items
 	for i in pillar_count:
 		var new_pillar = pillar_scene.instantiate()
@@ -66,7 +58,8 @@ func get_pillar_index(min_index: int = 0, max_index: int = 4):
 # Clears spell items when the player picks up one
 func delete_all_items():
 	for pillar in pillars:
-		pillar.get_child(1).queue_free()
+		for child in pillar.get_children():
+			child.queue_free()
 	
 	# Stop from calling again
 	item_collected = true

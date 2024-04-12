@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://sajeqdcg2gb6"]
+
+[ext_resource type="Script" path="res://scripts/pillars.gd" id="1_foq6a"]
+[ext_resource type="PackedScene" uid="uid://eip6jv8ww40u" path="res://prefabs/subarea elements/item_pillar.tscn" id="2_51k6h"]
+
+[node name="Pillars" type="Node2D"]
+script = ExtResource("1_foq6a")
+pillar_scene = ExtResource("2_51k6h")
+pillar_pos_array = Array[Vector2]([Vector2(300, -275), Vector2(-300, -275), Vector2(0, -325)])

@@ -43,4 +43,5 @@ func updateSprite():
 		sprite.texture = spriteArray[id]
 
 func pickedUp():
+	get_parent().get_parent().consumed = true
 	get_parent().queue_free()
