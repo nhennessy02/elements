@@ -1,11 +1,14 @@
-[gd_scene load_steps=7 format=3 uid="uid://bf5e83173gyu"]
+[gd_scene load_steps=10 format=3 uid="uid://bf5e83173gyu"]
 
 [ext_resource type="Texture2D" uid="uid://c8gdyqxhrckfp" path="res://assets/subarea room/combosigil.png" id="2_elroy"]
 [ext_resource type="Texture2D" uid="uid://wcldlmrxwr5k" path="res://assets/subarea room/buttons/combo_button_on.png" id="3_4wwlt"]
 [ext_resource type="Texture2D" uid="uid://5xhbdbxhng0q" path="res://assets/subarea room/buttons/combo_button_pressed.png" id="4_rocl8"]
 [ext_resource type="Texture2D" uid="uid://dbsn1esg8nrqs" path="res://assets/subarea room/buttons/combo_button_hover.png" id="5_2ddlo"]
 [ext_resource type="Texture2D" uid="uid://dsvmgsieqvja6" path="res://assets/subarea room/buttons/combo_button_disabled.png" id="6_unq3h"]
+[ext_resource type="Texture2D" uid="uid://dkluh3ikpib21" path="res://assets/subarea room/buttons/exit.png" id="7_oenxo"]
 [ext_resource type="PackedScene" uid="uid://c2x2wxf3t3sx8" path="res://prefabs/subarea elements/spell_slots.tscn" id="8_pphi3"]
+[ext_resource type="Texture2D" uid="uid://bvt7kdl6jqsw5" path="res://assets/subarea room/buttons/exit_pressed.png" id="8_tdojv"]
+[ext_resource type="Texture2D" uid="uid://vfr24j7yymxx" path="res://assets/subarea room/buttons/exit_hover.png" id="9_glig1"]
 
 [node name="CombinerUI" type="CanvasLayer"]
 
@@ -70,4 +73,15 @@ metadata/_edit_use_anchors_ = true
 [node name="SpellSlots" parent="Background/InventoryUI" instance=ExtResource("8_pphi3")]
 position = Vector2(235, 160)
 
+[node name="ExitButton" type="TextureButton" parent="Background"]
+layout_mode = 0
+offset_left = 1719.0
+offset_top = 55.0
+offset_right = 1847.0
+offset_bottom = 183.0
+texture_normal = ExtResource("7_oenxo")
+texture_pressed = ExtResource("8_tdojv")
+texture_hover = ExtResource("9_glig1")
+
 [connection signal="pressed" from="Background/CombineUI/TextureButton" to="Background/InventoryUI/SpellSlots" method="_on_texture_button_pressed"]
+[connection signal="pressed" from="Background/ExitButton" to="Background/InventoryUI/SpellSlots" method="_on_exit_button_pressed"]

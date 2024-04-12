@@ -256,6 +256,7 @@ script = ExtResource("5_5e60y")
 one_shot = true
 
 [node name="Area2D" type="Area2D" parent="."]
+visible = false
 collision_mask = 16
 monitorable = false
 

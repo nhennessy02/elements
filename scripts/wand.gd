@@ -50,7 +50,6 @@ func _on_inventory_combo_created(_spellName, scene, newWandColor):
 	sprite.material.set_shader_parameter("to",newWandColor)
 	print(Vector4(newWandColor.r,newWandColor.b,newWandColor.g,newWandColor.a))
 
-
 func startChargingAnimation():
 	print("started charging animation")
 	animPlayer.play("hold")
@@ -86,4 +85,3 @@ func _on_cooldown_timer_timeout():
 	can_fire = true
 	animPlayer.play("idle")
 	$CooldownSmoke.emitting = false;
-

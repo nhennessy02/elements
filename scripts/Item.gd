@@ -35,7 +35,8 @@ func updateColor(): #this will need to be changed/updated for when we switch to 
 			sprite.modulate = Color8(219, 213, 180)
 		Element.OCCULTISM:
 			sprite.modulate = Color8(126, 60, 207)
-			
+		_: # default case
+			sprite.modulate = Color8(255, 255, 255)
 
 func updateSprite():
 	if sprite != null:

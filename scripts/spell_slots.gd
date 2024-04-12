@@ -1,17 +1,22 @@
 extends Node2D
 
 var inventory
+var inv_funcs
 @export var slots: Array[Sprite2D]
 @export var combo_slots: Array[Sprite2D]
 
+@onready var ui = $"../../.."
+
 # Buttons
 @onready var button = $"../../CombineUI/TextureButton"
+@onready var exit_btn = $"../../ExitButton"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	# Get a reference to the player's inventory
 	if get_tree().get_nodes_in_group("Player")[0]:
 		var player = get_tree().get_nodes_in_group("Player")[0]
+		inv_funcs = player.get_node("Inventory")
 		inventory = player.get_node("Inventory").inventory
 
 func _process(_delta):
@@ -37,7 +42,7 @@ func _process(_delta):
 func update_ui():
 	# Assign starting spell for each slot based on inventory
 	for i in inventory.size():
-		slots[i].spell_index = inventory[i]
+		slots[i].spell_index = inv_funcs.get_combo_index(inventory[i])
 		slots[i].display_current_spell()
 
 # Inputs a spell into one of the 2 combo slots
@@ -72,22 +77,47 @@ func return_to_empty_slot(index: int = -1):
 func _on_texture_button_pressed():
 	var spell_i1: int = -1
 	var spell_i2: int = -1
+	var save_index = null
 	
 	# Save data
 	spell_i1 = combo_slots[0].spell_index
 	spell_i2 = combo_slots[1].spell_index
 	
+	for slot in slots:
+		if !slot.empty_display:
+			save_index = slot.spell_index
+			break
+	
 	# Clear data
 	for slot in combo_slots:
 		# Clear old spell data from inventory
 		slots[slot.inventory_slot_index].inventory_slot_index = -1
+		slots[slot.inventory_slot_index].empty()
 		# Clear data from combo slots
 		slot.inventory_slot_index = -1
 		# Empty combo display
 		slot.empty()
 	
-	# Add new spell to inventory
+	# REMOVES USED ITEMS FROM PLAYER INVENTORY
+	inventory.clear()
+	if save_index != null:
+		inv_funcs.add_item(inv_funcs.get_combo_from_index(save_index))
 	
+	# Add new spell to inventory
+	inv_funcs.add_item([spell_i1, spell_i2])
 	
 	# Display new spell in UI
-	
+	var count = 0
+	for slot in slots:
+		if slot.empty_display and slot.inventory_slot_index == -1:
+			slot.spell_index = inv_funcs.get_combo_index([spell_i1, spell_i2])
+			slot.display_current_spell()
+			slot.inventory_slot_index = count
+			break
+		count += 1
+
+# Exit the Combination Altar UI
+func _on_exit_button_pressed():
+	ui.visible = false
+	var player = get_tree().get_nodes_in_group("Player")[0]
+	player.get_node("UI").visible = true

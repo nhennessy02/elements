@@ -12,9 +12,9 @@ extends Node
 #3c. give the object/scene to the wand to use - works alright
 #3d. remove the elements used from your inventory
 
-enum Element { PESTILENCE = 0, HEMOMANCY = 1, CONVALESCENCE = 2, BONECRAFT = 3, OCCULTISM = 4}
-var inventory = []
-var combo = []
+enum Element { PESTILENCE = 0, HEMOMANCY = 1, DIVINE = 2, BONECRAFT = 3, OCCULTISM = 4}
+var inventory: Array[Array]
+var combo: Array
 var groundItems = []
 var slots: Array[bool] = [false, false, false]
 
@@ -59,19 +59,20 @@ func _process(_delta):
 			active_spell_index = inventory.size() - 1
 		set_active_spell(active_spell_index)
 	
+	# Loads active spell into wand
 	if Input.is_action_just_pressed("load_wand"):
 		if slots[2]:
-			combo.append(inventory[2])
-			inventory.remove_at(2)
+			combo = inventory[2]
+			#inventory.remove_at(2)
 		if slots[1]:
-			combo.append(inventory[1])
-			inventory.remove_at(1)
+			combo = inventory[1]
+			#inventory.remove_at(1)
 		if slots[0]:
-			combo.append(inventory[0])
-			inventory.remove_at(0)
+			combo = inventory[0]
+			#inventory.remove_at(0)
 		comboLookup(combo)
 		combo = []
-		inventory_changed.emit(inventory)
+		#inventory_changed.emit(inventory)
 
 	ui.selected_0.visible = slots[0]
 	ui.selected_1.visible = slots[1]
@@ -97,7 +98,7 @@ func comboLookup(array):
 		[Element.HEMOMANCY]:
 			print("using Hemomancy")
 			combo_created.emit("Hemomancy",load("res://prefabs/player/spells/hemomancy.tscn"),Color(0.58,0,0.11))
-		[Element.CONVALESCENCE]:
+		[Element.DIVINE]:
 			print("using Convalescence")
 			combo_created.emit("Convalescence",load("res://prefabs/player/spells/convalescence.tscn"),Color(0.69,0.62,0.17))
 		[Element.BONECRAFT]:
@@ -106,12 +107,12 @@ func comboLookup(array):
 		[Element.OCCULTISM]:
 			print("using Occultism")
 			combo_created.emit("Occultism",load("res://prefabs/player/spells/occultism.tscn"),Color(0.38,0.08,0.61))
-		[Element.HEMOMANCY,Element.HEMOMANCY]:
-			print("using Aorta")
-			combo_created.emit("Aorta",load("res://prefabs/player/spells/aorta.tscn"),Color(0.45,0,0.05))
 		[Element.PESTILENCE,Element.HEMOMANCY]:
 			print("using Leeching Shot")
 			combo_created.emit("Leeching Shot",load("res://prefabs/player/spells/leeching_shot.tscn"),Color(0.85,0.43,0.30))
+		[Element.HEMOMANCY,Element.HEMOMANCY]:
+			print("using Aorta")
+			combo_created.emit("Aorta",load("res://prefabs/player/spells/aorta.tscn"),Color(0.45,0,0.05))
 		_:
 			print("couldn't decipher combo")
 
@@ -132,6 +133,7 @@ func _on_area_2d_area_exited(area):
 		#print(area.get_node("Item").getId())
 		#print(area)
 
+# Pick up an item from the environment
 func itemPickup():
 	var item
 	for element in groundItems:
@@ -140,13 +142,13 @@ func itemPickup():
 				item = node
 				if inventory.size() == 3:
 					var temp = item.getId()
-					item.setId(inventory.pop_front())
-					inventory.push_back(temp) 					
+					item.setId(inventory[0].pop_front())
+					inventory.push_back([temp])
 					inventory_changed.emit(inventory)
 					#swap items
 					# save information about the item in the inventory array
 				else:
-					inventory.append(item.id)
+					inventory.append([item.id])
 					item.pickedUp()
 					inventory_changed.emit(inventory)
 				break
@@ -156,9 +158,106 @@ func itemPickup():
 		return
 	#print(inventory)
 
+# Adds a spell to the inventory
+func add_item(spell: Array):
+	if inventory.size() < 3:
+		spell.sort_custom(func(a,b): return a < b)
+		inventory.append(spell)
+		inventory_changed.emit(inventory)
+
 signal inventory_changed(value)
 
+# There is an index which corresponds to each item combination
+func get_combo_index(item_array: Array):
+	item_array.sort_custom(func(a,b): return a < b)
+	match item_array:
+		[]: # empty case
+			return -1
+		[Element.PESTILENCE]:
+			return 0
+		[Element.HEMOMANCY]:
+			return 1
+		[Element.DIVINE]:
+			return 2
+		[Element.BONECRAFT]:
+			return 3
+		[Element.OCCULTISM]:
+			return 4
+		[Element.PESTILENCE, Element.PESTILENCE]:
+			return 5
+		[Element.PESTILENCE,Element.HEMOMANCY]:
+			return 6
+		[Element.PESTILENCE, Element.DIVINE]:
+			return 7
+		[Element.PESTILENCE, Element.BONECRAFT]:
+			return 8
+		[Element.PESTILENCE, Element.OCCULTISM]:
+			return 9
+		[Element.HEMOMANCY,Element.HEMOMANCY]:
+			return 10
+		[Element.HEMOMANCY, Element.DIVINE]:
+			return 11
+		[Element.HEMOMANCY, Element.BONECRAFT]:
+			return 12
+		[Element.HEMOMANCY, Element.OCCULTISM]:
+			return 13
+		[Element.DIVINE, Element.DIVINE]:
+			return 14
+		[Element.DIVINE, Element.BONECRAFT]:
+			return 15
+		[Element.DIVINE, Element.OCCULTISM]:
+			return 16
+		[Element.BONECRAFT, Element.BONECRAFT]:
+			return 17
+		[Element.BONECRAFT, Element.OCCULTISM]:
+			return 18
+		[Element.OCCULTISM, Element.OCCULTISM]:
+			return 19
+		_: # default case
+			return -1
 
-
-
-
+# returns an array based on the index given
+func get_combo_from_index(index: int):
+	match index:
+		0:
+			return [Element.PESTILENCE]
+		1:
+			return [Element.HEMOMANCY]
+		2:
+			return [Element.DIVINE]
+		3:
+			return [Element.BONECRAFT]
+		4:
+			return [Element.OCCULTISM]
+		5:
+			return [Element.PESTILENCE, Element.PESTILENCE]
+		6:
+			return [Element.PESTILENCE, Element.HEMOMANCY]
+		7:
+			return [Element.PESTILENCE, Element.DIVINE]
+		8:
+			return [Element.PESTILENCE, Element.BONECRAFT]
+		9:
+			return [Element.PESTILENCE, Element.OCCULTISM]
+		10:
+			return [Element.HEMOMANCY, Element.HEMOMANCY]
+		11:
+			return [Element.HEMOMANCY, Element.DIVINE]
+		12:
+			return [Element.HEMOMANCY, Element.BONECRAFT]
+		13:
+			return [Element.HEMOMANCY, Element.OCCULTISM]
+		14:
+			return [Element.DIVINE, Element.DIVINE]
+		15:
+			return [Element.DIVINE, Element.BONECRAFT]
+		16:
+			return [Element.DIVINE, Element.OCCULTISM]
+		17:
+			return [Element.BONECRAFT, Element.BONECRAFT]
+		18:
+			return [Element.BONECRAFT, Element.OCCULTISM]
+		19:
+			return [Element.OCCULTISM, Element.OCCULTISM]
+		_: # default case
+			return []

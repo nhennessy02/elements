@@ -233,7 +233,7 @@ func die():
 	# wait until the animation finishes, then die for realsies
 	await animPlayer.animation_finished
 	
-	drop_item()
+	#drop_item()
 	entity_manager.remove_enemy(self)
 	queue_free()
 	
