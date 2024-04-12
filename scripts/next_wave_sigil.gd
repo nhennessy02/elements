@@ -2,6 +2,7 @@ extends Sprite2D
 
 @onready var particles = $Particles
 @onready var anim_player = $AnimationPlayer
+@onready var pillars = $"../Pillars"
 var activated: bool = false
 var can_teleport: bool = false
 
@@ -24,7 +25,7 @@ func _process(_delta):
 	
 	# Send player to next wave
 	if can_teleport and activated and Input.is_action_just_pressed("select"):
-		get_tree().quit()
+		get_tree().change_scene_to_file.call_deferred("res://scenes/game.tscn")
 
 # When the player enters the sigil it turns on a bool
 # While this bool is true the player can use an input to progress to the next wave

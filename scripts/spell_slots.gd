@@ -11,15 +11,17 @@ var inv_funcs
 @onready var button = $"../../CombineUI/TextureButton"
 @onready var exit_btn = $"../../ExitButton"
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	# Get a reference to the player's inventory
-	if get_tree().get_nodes_in_group("Player")[0]:
-		var player = get_tree().get_nodes_in_group("Player")[0]
-		inv_funcs = player.get_node("Inventory")
-		inventory = player.get_node("Inventory").inventory
+var loaded: bool = false
 
 func _process(_delta):
+	# Get a reference to the player's inventory
+	if !loaded:
+		if get_tree().get_nodes_in_group("Player")[0]:
+			var player = get_tree().get_nodes_in_group("Player")[0]
+			inv_funcs = player.get_node("Inventory")
+			inventory = player.get_node("Inventory").inventory
+		loaded = true
+	
 	# Click on a spell to place it in an empty slot of the combiner
 	for slot in slots:
 		if slot.mouse_over and !slot.empty_display and Input.is_action_just_pressed("grab_spell"):

@@ -22,6 +22,7 @@ PauseMenu="*res://prefabs/pause_menu.tscn"
 EffectManager="*res://scripts/effect_manager.gd"
 DamageNumbers="*res://scripts/damage_numbers.gd"
 Constants="*res://scripts/constants.gd"
+PlayerInventory="*res://player_inventory.gd"
 
 [display]
 

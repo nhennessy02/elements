@@ -23,9 +23,15 @@ var slots: Array[bool] = [false, false, false]
 
 # References to the border UI for itemUI elements
 @onready var ui = $"../UI"
+var inventory_loaded: bool = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
+	# LOADS INVENTORY FROM PREVIOUS SCENES
+	if !inventory_loaded:
+		get_inventory()
+		inventory_loaded = true
+	
 	#handles picking up objects from the ground
 	if Input.is_action_just_pressed("select"):
 		itemPickup()
@@ -77,6 +83,7 @@ func _process(_delta):
 	ui.selected_0.visible = slots[0]
 	ui.selected_1.visible = slots[1]
 	ui.selected_2.visible = slots[2]
+	save_inventory()
 
 # Sets the chosen slot to active and all other to not be
 func set_active_spell(index: int):
@@ -261,3 +268,10 @@ func get_combo_from_index(index: int):
 			return [Element.OCCULTISM, Element.OCCULTISM]
 		_: # default case
 			return []
+
+# saves and retrieves the inventory to an autoload
+func save_inventory():
+	PlayerInventory.inventory = inventory
+func get_inventory():
+	inventory = PlayerInventory.inventory
+	inventory_changed.emit(inventory)
