@@ -89,13 +89,14 @@ func _ready():
 func _process(delta):
 	# Go to the element combination scene after the wave is completed
 	if wave_over:
-		# If there is a custom wave run it
-		if !random:
-			next_wave()
-		# Otherwise run a random wave
-		else:
-			wave_counter_ui.update_wave_ui()
-			random_wave()
+		get_tree().change_scene_to_file.call_deferred("res://scenes/subarea.tscn")
+		## If there is a custom wave run it
+		#if !random:
+			#next_wave()
+		## Otherwise run a random wave
+		#else:
+			#wave_counter_ui.update_wave_ui()
+			#random_wave()
 	
 	# During a wave...
 	else:
@@ -276,7 +277,7 @@ func spawn_enemies_at_spawnpoint(count: int, type: PackedScene, variation: bool 
 
 # Gets a spawnpoint a certain minimum distance from the player
 func get_valid_spawnpoint():
-	var potential_pos : Array[Vector2]
+	var potential_pos : Array[Vector2] = []
 	const min_dist : float = 600.0
 	for point in spawn_points:
 		if point.position.distance_to(player.position) > min_dist:

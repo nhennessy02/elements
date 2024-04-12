@@ -35,11 +35,13 @@ func updateColor(): #this will need to be changed/updated for when we switch to 
 			sprite.modulate = Color8(219, 213, 180)
 		Element.OCCULTISM:
 			sprite.modulate = Color8(126, 60, 207)
-			
+		_: # default case
+			sprite.modulate = Color8(255, 255, 255)
 
-func updateSprite():
+func updateSprite(): # ADD ABILITY TO DROP COMBOS
 	if sprite != null:
 		sprite.texture = spriteArray[id]
 
 func pickedUp():
+	get_parent().get_parent().consumed = true
 	get_parent().queue_free()

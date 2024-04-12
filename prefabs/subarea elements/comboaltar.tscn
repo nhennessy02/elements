@@ -1,0 +1,50 @@
+[gd_scene load_steps=5 format=3 uid="uid://drlkmigl88gcq"]
+
+[ext_resource type="Texture2D" uid="uid://08ysnovu2kcd" path="res://assets/subarea room/comboaltar.png" id="1_7dj2q"]
+[ext_resource type="Script" path="res://scripts/comboaltar.gd" id="2_apvxk"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3vw30"]
+radius = 74.6734
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q2vuw"]
+radius = 12.7273
+height = 65.645
+
+[node name="Comboaltar" type="CharacterBody2D"]
+scale = Vector2(2.19362, 2.2)
+script = ExtResource("2_apvxk")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_3vw30")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -37.2727)
+texture = ExtResource("1_7dj2q")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -30)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_q2vuw")
+debug_color = Color(0.752941, 0.396078, 0.607843, 0.419608)
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(0, -50)
+emitting = false
+amount = 20
+emission_shape = 1
+emission_sphere_radius = 23.37
+direction = Vector2(0, -1)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 10.0
+scale_amount_min = 5.0
+scale_amount_max = 5.0
+color = Color(0.372549, 0, 0.141176, 1)
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

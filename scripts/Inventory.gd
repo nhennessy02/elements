@@ -12,67 +12,91 @@ extends Node
 #3c. give the object/scene to the wand to use - works alright
 #3d. remove the elements used from your inventory
 
-enum Element { PESTILENCE = 0, HEMOMANCY = 1, CONVALESCENCE = 2, BONECRAFT = 3, OCCULTISM = 4}
-var inventory = []
-var combo = []
+enum Element { PESTILENCE = 0, HEMOMANCY = 1, DIVINE = 2, BONECRAFT = 3, OCCULTISM = 4}
+var inventory: Array[Array]
+var combo: Array
 var groundItems = []
-var pickedSlot0 : bool = false
-var pickedSlot1 : bool = false
-var pickedSlot2 : bool = false
+var slots: Array[bool] = [false, false, false]
+
 @onready var pickupZone = $"../Area2D"
 @onready var comboTimer = $Timer
 
 # References to the border UI for itemUI elements
 @onready var ui = $"../UI"
+var inventory_loaded: bool = false
 
 func _ready():
-	inventory = [Element.CONVALESCENCE]
+#	inventory = [Element.CONVALESCENCE]
 #	inventory_changed.emit(inventory)
 	pass
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
+	# LOADS INVENTORY FROM PREVIOUS SCENES
+	if !inventory_loaded:
+		get_inventory()
+		inventory_loaded = true
+	
 	#handles picking up objects from the ground
 	if Input.is_action_just_pressed("select"):
 		itemPickup()
-	#this second is about creating combinations 
-	#control either through press 1 2 and or 3 then send the combo after a timer - coded this way
-	#or hold a button, key or right click, press 1 2 and or 3 then release to send combo
-	if Input.is_action_just_pressed("slot0") and not pickedSlot0 and inventory.size() >= 1:
-		pickedSlot0 = true
-	elif Input.is_action_just_pressed("slot0") and pickedSlot0 and inventory.size() >= 1:
-		pickedSlot0 = false
-		
-	if Input.is_action_just_pressed("slot1") and not pickedSlot1 and inventory.size() >= 2:
-		pickedSlot1 = true
-	elif Input.is_action_just_pressed("slot1") and pickedSlot1 and inventory.size() >= 2:
-		pickedSlot1 = false
-		
-	if Input.is_action_just_pressed("slot2") and not pickedSlot2 and inventory.size() >= 3:
-		pickedSlot2 = true
-	elif Input.is_action_just_pressed("slot2") and  pickedSlot2 and inventory.size() >= 3:
-		pickedSlot2 = false
 	
+	# Have only 1 spell selected at a time
+	if Input.is_action_just_pressed("slot0") and inventory.size() >= 1:
+		set_active_spell(0)
+	elif Input.is_action_just_pressed("slot1") and inventory.size() >= 2:
+		set_active_spell(1)
+	elif Input.is_action_just_pressed("slot2")and inventory.size() >= 3:
+		set_active_spell(2)
+	
+	# Toggle between spells by pressing SHIFT or TAB
+	if (Input.is_action_just_pressed("toggle_spell") or Input.is_action_just_pressed("mouse_wheel_down")) and inventory.size() > 0:
+		var active_spell_index: int
+		for i in inventory.size():
+			if slots[i] == true:
+				active_spell_index = i
+				break
+		set_active_spell((active_spell_index + 1) % inventory.size())
+	
+	# Selecting Spells with Mousewheel
+	if Input.is_action_just_pressed("mouse_wheel_up") and inventory.size() > 0:
+		var active_spell_index: int
+		for i in inventory.size():
+			if slots[i] == true:
+				active_spell_index = i
+				break
+		active_spell_index -= 1
+		if active_spell_index < 0:
+			active_spell_index = inventory.size() - 1
+		set_active_spell(active_spell_index)
+	
+	# Loads active spell into wand
 	if Input.is_action_just_pressed("load_wand"):
-		if pickedSlot2:
-			combo.append(inventory[2])
-			inventory.remove_at(2)
-		if pickedSlot1:
-			combo.append(inventory[1])
-			inventory.remove_at(1)
-		if pickedSlot0:
-			combo.append(inventory[0])
-			inventory.remove_at(0)
-		pickedSlot0 = false
-		pickedSlot1 = false
-		pickedSlot2 = false
+		if slots[2]:
+			combo = inventory[2]
+			#inventory.remove_at(2)
+		if slots[1]:
+			combo = inventory[1]
+			#inventory.remove_at(1)
+		if slots[0]:
+			combo = inventory[0]
+			#inventory.remove_at(0)
 		comboLookup(combo)
 		combo = []
-		inventory_changed.emit(inventory)
+		#inventory_changed.emit(inventory)
 
-	ui.selected_0.visible = pickedSlot0
-	ui.selected_1.visible = pickedSlot1
-	ui.selected_2.visible = pickedSlot2
+	ui.selected_0.visible = slots[0]
+	ui.selected_1.visible = slots[1]
+	ui.selected_2.visible = slots[2]
+	save_inventory()
+
+# Sets the chosen slot to active and all other to not be
+func set_active_spell(index: int):
+	for i in slots.size():
+		if i == index:
+			slots[i] = true
+		else:
+			slots[i] = false
 
 func comboLookup(array):
 	array.sort_custom(func(a,b): return a < b)
@@ -86,7 +110,7 @@ func comboLookup(array):
 		[Element.HEMOMANCY]:
 			print("using Hemomancy")
 			combo_created.emit("Hemomancy",load("res://prefabs/player/spells/hemomancy.tscn"),Color(0.58,0,0.11))
-		[Element.CONVALESCENCE]:
+		[Element.DIVINE]:
 			print("using Convalescence")
 			combo_created.emit("Convalescence",load("res://prefabs/player/spells/convalescence.tscn"),Color(0.69,0.62,0.17))
 		[Element.BONECRAFT]:
@@ -124,6 +148,7 @@ func _on_area_2d_area_exited(area):
 		#print(area.get_node("Item").getId())
 		#print(area)
 
+# Pick up an item from the environment
 func itemPickup():
 	var item
 	for element in groundItems:
@@ -132,13 +157,13 @@ func itemPickup():
 				item = node
 				if inventory.size() == 3:
 					var temp = item.getId()
-					item.setId(inventory.pop_front())
-					inventory.push_back(temp) 					
+					item.setId(get_combo_index(inventory.pop_front()))
+					inventory.push_back([temp])
 					inventory_changed.emit(inventory)
 					#swap items
 					# save information about the item in the inventory array
 				else:
-					inventory.append(item.id)
+					inventory.append([item.id])
 					item.pickedUp()
 					inventory_changed.emit(inventory)
 				break
@@ -148,9 +173,113 @@ func itemPickup():
 		return
 	#print(inventory)
 
+# Adds a spell to the inventory
+func add_item(spell: Array):
+	if inventory.size() < 3:
+		spell.sort_custom(func(a,b): return a < b)
+		inventory.append(spell)
+		inventory_changed.emit(inventory)
+
 signal inventory_changed(value)
 
+# There is an index which corresponds to each item combination
+func get_combo_index(item_array: Array):
+	item_array.sort_custom(func(a,b): return a < b)
+	match item_array:
+		[]: # empty case
+			return -1
+		[Element.PESTILENCE]:
+			return 0
+		[Element.HEMOMANCY]:
+			return 1
+		[Element.DIVINE]:
+			return 2
+		[Element.BONECRAFT]:
+			return 3
+		[Element.OCCULTISM]:
+			return 4
+		[Element.PESTILENCE, Element.PESTILENCE]:
+			return 5
+		[Element.PESTILENCE,Element.HEMOMANCY]:
+			return 6
+		[Element.PESTILENCE, Element.DIVINE]:
+			return 7
+		[Element.PESTILENCE, Element.BONECRAFT]:
+			return 8
+		[Element.PESTILENCE, Element.OCCULTISM]:
+			return 9
+		[Element.HEMOMANCY,Element.HEMOMANCY]:
+			return 10
+		[Element.HEMOMANCY, Element.DIVINE]:
+			return 11
+		[Element.HEMOMANCY, Element.BONECRAFT]:
+			return 12
+		[Element.HEMOMANCY, Element.OCCULTISM]:
+			return 13
+		[Element.DIVINE, Element.DIVINE]:
+			return 14
+		[Element.DIVINE, Element.BONECRAFT]:
+			return 15
+		[Element.DIVINE, Element.OCCULTISM]:
+			return 16
+		[Element.BONECRAFT, Element.BONECRAFT]:
+			return 17
+		[Element.BONECRAFT, Element.OCCULTISM]:
+			return 18
+		[Element.OCCULTISM, Element.OCCULTISM]:
+			return 19
+		_: # default case
+			return -1
 
+# returns an array based on the index given
+func get_combo_from_index(index: int):
+	match index:
+		0:
+			return [Element.PESTILENCE]
+		1:
+			return [Element.HEMOMANCY]
+		2:
+			return [Element.DIVINE]
+		3:
+			return [Element.BONECRAFT]
+		4:
+			return [Element.OCCULTISM]
+		5:
+			return [Element.PESTILENCE, Element.PESTILENCE]
+		6:
+			return [Element.PESTILENCE, Element.HEMOMANCY]
+		7:
+			return [Element.PESTILENCE, Element.DIVINE]
+		8:
+			return [Element.PESTILENCE, Element.BONECRAFT]
+		9:
+			return [Element.PESTILENCE, Element.OCCULTISM]
+		10:
+			return [Element.HEMOMANCY, Element.HEMOMANCY]
+		11:
+			return [Element.HEMOMANCY, Element.DIVINE]
+		12:
+			return [Element.HEMOMANCY, Element.BONECRAFT]
+		13:
+			return [Element.HEMOMANCY, Element.OCCULTISM]
+		14:
+			return [Element.DIVINE, Element.DIVINE]
+		15:
+			return [Element.DIVINE, Element.BONECRAFT]
+		16:
+			return [Element.DIVINE, Element.OCCULTISM]
+		17:
+			return [Element.BONECRAFT, Element.BONECRAFT]
+		18:
+			return [Element.BONECRAFT, Element.OCCULTISM]
+		19:
+			return [Element.OCCULTISM, Element.OCCULTISM]
+		_: # default case
+			return []
 
-
-
+# saves and retrieves the inventory to an autoload
+func save_inventory():
+	PlayerInventory.inventory = inventory
+func get_inventory():
+	inventory = PlayerInventory.inventory
+	inventory_changed.emit(inventory)
