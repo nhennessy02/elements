@@ -1,11 +1,13 @@
-[gd_scene load_steps=14 format=3 uid="uid://bx3u8mnxg3xci"]
+[gd_scene load_steps=16 format=3 uid="uid://bx3u8mnxg3xci"]
 
 [ext_resource type="PackedScene" uid="uid://tsnqt7x4rvnp" path="res://prefabs/entity elements/damageable.tscn" id="1_0axwg"]
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1_52c41"]
 [ext_resource type="PackedScene" uid="uid://rtck8bqo3jek" path="res://prefabs/base_item.tscn" id="2_kxfak"]
 [ext_resource type="Script" path="res://scripts/enemy behavior/testenemy2_behavior.gd" id="3_65rph"]
 [ext_resource type="Texture2D" uid="uid://d1ss3md3ic8bp" path="res://assets/sprites/enemy_zombie.png" id="3_arjqc"]
-[ext_resource type="Texture2D" uid="uid://bt2dnmrn0aai3" path="res://assets/sprites/enemy_zombie-death-placeholder.png" id="6_fthnl"]
+[ext_resource type="Texture2D" uid="uid://brhkjclufc480" path="res://assets/sprites/enemy_zombie_walk-Sheet.png" id="6_7qwko"]
+[ext_resource type="Texture2D" uid="uid://cn2xoh6byhll2" path="res://assets/sprites/enemy_zombie_death-Sheet.png" id="7_yvesm"]
+[ext_resource type="Texture2D" uid="uid://dg3lgc3khuube" path="res://assets/sprites/enemy_zombie_spawn-Sheet.png" id="8_uelis"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cnevg"]
 radius = 45.0444
@@ -54,7 +56,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_f82gm"]
 resource_name = "base"
-length = 1.05
+length = 0.7
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -66,7 +68,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("3_arjqc")]
+"values": [ExtResource("6_7qwko")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -78,7 +80,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [1]
+"values": [10]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -87,10 +89,50 @@ tracks/2/path = NodePath("Sprite2D:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.075, 0.15, 0.225, 0.3, 0.375, 0.45, 0.525, 0.6, 0.675),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+}
+
+[sub_resource type="Animation" id="Animation_6mkbt"]
+resource_name = "death"
+length = 1.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [0]
+"values": [ExtResource("7_yvesm")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [14]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13]
 }
 
 [sub_resource type="Animation" id="Animation_nkln5"]
@@ -102,50 +144,10 @@ tracks/0/path = NodePath("Sprite2D:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.1),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("3_arjqc")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:hframes")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.1),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [1]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0.1),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-
-[sub_resource type="Animation" id="Animation_6mkbt"]
-resource_name = "death"
-length = 0.8
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("6_fthnl")]
+"values": [ExtResource("8_uelis")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -157,7 +159,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [1]
+"values": [12]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -166,10 +168,10 @@ tracks/2/path = NodePath("Sprite2D:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0]
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5j6k0"]
