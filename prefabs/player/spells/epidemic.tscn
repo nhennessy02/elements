@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://cvx0n3w606yvm"]
+
+[ext_resource type="Script" path="res://scripts/spells/epidemic.gd" id="1_2jmor"]
+[ext_resource type="Texture2D" uid="uid://c6g0ofaqx8mq5" path="res://assets/sprites/projectile_placeholder.png" id="1_7twqc"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_prsjr"]
+radius = 13.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0jght"]
+
+[node name="Epidemic" type="Node2D"]
+script = ExtResource("1_2jmor")
+
+[node name="Projectile" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Projectile"]
+modulate = Color(0.235294, 1, 0, 1)
+position = Vector2(-11, 0)
+rotation = 1.5708
+texture = ExtResource("1_7twqc")
+
+[node name="ProjectileArea2D" type="Area2D" parent="Projectile"]
+collision_layer = 8
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Projectile/ProjectileArea2D"]
+shape = SubResource("CircleShape2D_prsjr")
+
+[node name="Bubble" type="Node2D" parent="."]
+process_mode = 4
+visible = false
+
+[node name="Sprite2D" type="Sprite2D" parent="Bubble"]
+
+[node name="BubbleArea2D" type="Area2D" parent="Bubble"]
+collision_layer = 8
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bubble/BubbleArea2D"]
+shape = SubResource("CircleShape2D_0jght")
