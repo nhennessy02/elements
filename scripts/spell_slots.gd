@@ -35,7 +35,8 @@ func _process(_delta):
 			slot.inventory_slot_index = -1
 	
 	# Turn on Combine button if both slots full
-	if !combo_slots[0].empty_display and !combo_slots[1].empty_display:
+	if !combo_slots[0].empty_display and !combo_slots[1].empty_display \
+	and inv_funcs.get_combo_index([combo_slots[0].spell_index, combo_slots[1].spell_index]) >= 0:
 		button.disabled = false
 	else:
 		button.disabled = true
