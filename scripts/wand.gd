@@ -29,18 +29,18 @@ func _process(_delta):
 	
 	# Input event
 	if Input.is_action_pressed("fire_wand") and can_fire: #left mouse click
-		fire()
-		
+		fire(defaultSpell)
+	if Input.is_action_pressed("fire_spell") and can_fire: #left mouse click
+		fire(currentSpell)
 	#if Input.is_action_just_pressed("reset_wand") and (can_fire or not cooldownTimer.is_stopped()):
 	#	reset_wand()
-	
 
-func fire():
+func fire(spell: PackedScene = defaultSpell):
 	can_fire = false
-	var spell = currentSpell.instantiate()
-	get_tree().current_scene.add_child(spell)
-	spell.global_position = spawnPoint.global_position #sets spawnpoint at the spawnpoint node
-	spell.global_rotation = self.global_rotation
+	var bullet = spell.instantiate()
+	get_tree().current_scene.add_child(bullet)
+	bullet.global_position = spawnPoint.global_position #sets spawnpoint at the spawnpoint node
+	bullet.global_rotation = self.global_rotation
 
 func reset_wand():
 	currentSpell = defaultSpell

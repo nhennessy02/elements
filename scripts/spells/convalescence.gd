@@ -26,7 +26,7 @@ func _process(_delta):
 	self.position = player.position
 	ring.scale.x = 2 * scaleFactor
 	ring.scale.y = 2 * scaleFactor
-	if timer.time_left > 0 and Input.is_action_just_released("fire_wand"):
+	if timer.time_left > 0 and Input.is_action_just_released("fire_spell"):
 		fizzle()
 		pass
 
