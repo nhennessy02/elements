@@ -26,7 +26,7 @@ var slots: Array[bool] = [false, false, false]
 var inventory_loaded: bool = false
 
 func _ready():
-#	inventory = [Element.CONVALESCENCE]
+#	inventory = [Element.DIVINE]
 #	inventory_changed.emit(inventory)
 	pass
 	
@@ -119,8 +119,9 @@ func comboLookup(array):
 		[Element.OCCULTISM]:
 			print("using Occultism")
 			combo_created.emit("Occultism",load("res://prefabs/player/spells/occultism.tscn"),Color(0.38,0.08,0.61))
-		#[Element.PESTILENCE,Element.PESTILENCE]:
-		#	print("using")
+		[Element.PESTILENCE,Element.PESTILENCE]:
+			print("using Epidemic")
+			combo_created.emit("Epidemic",load("res://prefabs/player/spells/epidemic.tscn"),Color(0.02,0.77,0.12))
 		[Element.HEMOMANCY,Element.HEMOMANCY]:
 			print("using Aorta")
 			combo_created.emit("Aorta",load("res://prefabs/player/spells/aorta.tscn"),Color(0.45,0,0.05))
