@@ -28,6 +28,7 @@ var inventory_loaded: bool = false
 func _ready():
 #	inventory = [Element.DIVINE]
 #	inventory_changed.emit(inventory)
+	combo_created.emit("Epidemic",load("res://prefabs/player/spells/epidemic.tscn"),Color(0.02,0.77,0.12))
 	pass
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -132,7 +133,7 @@ func comboLookup(array):
 		_:
 			print("couldn't decipher combo")
 
-signal combo_created(spellName,scene,wandColor) #useRate is how often the spell is used in seconds
+signal combo_created(spellName,scene,wandColor)
 
 # this second is about picking up items
 func _on_area_2d_area_entered(area):

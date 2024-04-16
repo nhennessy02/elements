@@ -50,6 +50,8 @@ func create_indicator(idtr_type : String):
 # Delete the indicator when the enemy dies or is removed
 func remove_indicator(enemy: Object):
 	var idtr_index = entity_manager.enemy_array.find(enemy) # get the deleted enemy's index
+	if idtr_index < 0:
+		return
 	indicator_array[idtr_index].visible = false
 	indicator_array.remove_at(idtr_index) # removes the indicator
 
