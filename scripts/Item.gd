@@ -6,7 +6,8 @@ enum Element { PESTILENCE = 0, HEMOMANCY = 1, CONVALESCENCE = 2, BONECRAFT = 3, 
 
 @onready var sprite = $"../Sprite2D"
 #get some sprites only pestilence and hemomancy have temporary sprites
-var spriteArray = [load("res://assets/sprites/elements/pestilence_bubble.png"),load("res://assets/sprites/elements/hemomancy_bubble.png"),load("res://assets/sprites/elements/convalescence_bubble.png"),load("res://assets/sprites/elements/bonecraft_bubble.png"),load("res://assets/sprites/elements/occultism_bubble.png")]
+@export var spriteArray: Array[Texture2D]
+@export var default_item_sprite: Texture2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -39,8 +40,10 @@ func updateColor(): #this will need to be changed/updated for when we switch to 
 			sprite.modulate = Color8(255, 255, 255)
 
 func updateSprite(): # ADD ABILITY TO DROP COMBOS
-	if sprite != null:
+	if sprite != null and id < spriteArray.size():
 		sprite.texture = spriteArray[id]
+	elif sprite != null:
+		sprite.texture = default_item_sprite
 
 func pickedUp():
 	get_parent().get_parent().consumed = true
