@@ -22,7 +22,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	if Input.is_action_pressed("fire_wand") and not active:
+	if Input.is_action_pressed("fire_spell") and not active:
 		mousePos = get_global_mouse_position()
 		if(player.position.distance_to(mousePos)>max_range):
 			mousePos = player.position + player.position.direction_to(mousePos) * max_range
