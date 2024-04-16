@@ -11,6 +11,7 @@ var currentSpell
 @onready var animPlayer = $AnimationPlayer
 @onready var wandColor = Color(102,55,189)
 @onready var cooldownTimer = $CooldownTimer
+@onready var basic_attack_timer = $BasicProjectileTimer
 
 # Called when the node enters the scene tree for thes first time.
 func _ready():
@@ -29,23 +30,25 @@ func _process(_delta):
 	
 	# Input event
 	if Input.is_action_pressed("fire_wand") and can_fire: #left mouse click
-		fire(defaultSpell)
-	if Input.is_action_pressed("fire_spell") and can_fire: #left mouse click
+		fire(defaultSpell, true)
+	elif Input.is_action_pressed("fire_spell") and can_fire: #left mouse click
 		fire(currentSpell)
 	#if Input.is_action_just_pressed("reset_wand") and (can_fire or not cooldownTimer.is_stopped()):
 	#	reset_wand()
 
-func fire(spell: PackedScene = defaultSpell):
-	can_fire = false
-	var bullet = spell.instantiate()
-	get_tree().current_scene.add_child(bullet)
-	bullet.global_position = spawnPoint.global_position #sets spawnpoint at the spawnpoint node
-	bullet.global_rotation = self.global_rotation
+func fire(spell: PackedScene = defaultSpell, base_fire: bool = false):
+	if currentSpell != defaultSpell or base_fire:
+		can_fire = false
+		var bullet = spell.instantiate()
+		get_tree().current_scene.add_child(bullet)
+		bullet.global_position = spawnPoint.global_position #sets spawnpoint at the spawnpoint node
+		bullet.global_rotation = self.global_rotation
 
 func reset_wand():
 	currentSpell = defaultSpell
 
 func _on_inventory_combo_created(_spellName, scene, newWandColor):
+	fire(currentSpell)
 	currentSpell = scene
 	sprite.material.set_shader_parameter("to",newWandColor)
 	print(Vector4(newWandColor.r,newWandColor.b,newWandColor.g,newWandColor.a))

@@ -275,5 +275,10 @@ texture = ExtResource("7_f0u5e")
 [node name="CooldownTimer" type="Timer" parent="."]
 one_shot = true
 
+[node name="BasicProjectileTimer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+
 [connection signal="current_animation_changed" from="AnimationPlayer" to="." method="_on_animation_player_current_animation_changed"]
 [connection signal="timeout" from="CooldownTimer" to="." method="_on_cooldown_timer_timeout"]
+[connection signal="timeout" from="BasicProjectileTimer" to="." method="_on_basic_projectile_timer_timeout"]

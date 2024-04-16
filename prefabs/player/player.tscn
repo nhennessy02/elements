@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://c53dvgtfs8iqn"]
+[gd_scene load_steps=29 format=3 uid="uid://c53dvgtfs8iqn"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_l8vaj"]
 [ext_resource type="Texture2D" uid="uid://coo1w6yil0l76" path="res://assets/sprites/player_static.png" id="2_oxea1"]
@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://ccv77gx8m4wua" path="res://prefabs/player/wand.tscn" id="4_bkdhc"]
 [ext_resource type="Texture2D" uid="uid://db2msbgy42dkt" path="res://assets/sprites/player_walk.png" id="4_jxc0e"]
 [ext_resource type="Script" path="res://scripts/Inventory.gd" id="5_5e60y"]
-[ext_resource type="PackedScene" uid="uid://bv0585bqktpfy" path="res://prefabs/player/base_projectile.tscn" id="5_o482u"]
 [ext_resource type="PackedScene" uid="uid://bbfq4dms15rbu" path="res://prefabs/ui elements/ui.tscn" id="7_hwjsq"]
 [ext_resource type="Texture2D" uid="uid://ojpjsipemkvk" path="res://assets/sprites/player_hurt.png" id="8_3vsmf"]
 [ext_resource type="Script" path="res://prefabs/player/CooldownBar.gd" id="10_4t0db"]
@@ -244,7 +243,6 @@ shape = SubResource("RectangleShape2D_w8su0")
 debug_color = Color(0.988235, 0.0509804, 0.215686, 0.419608)
 
 [node name="Wand" parent="." instance=ExtResource("4_bkdhc")]
-defaultSpell = ExtResource("5_o482u")
 
 [node name="HealthTracker" type="Node" parent="."]
 script = ExtResource("3_1jh4r")
