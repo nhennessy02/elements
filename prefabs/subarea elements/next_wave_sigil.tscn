@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dve5kuoqdo8bg"]
+[gd_scene load_steps=11 format=3 uid="uid://dve5kuoqdo8bg"]
 
 [ext_resource type="Texture2D" uid="uid://bvam0fxhydvbt" path="res://assets/subarea room/nextwavesigil.png" id="1_d3n8y"]
 [ext_resource type="Script" path="res://scripts/next_wave_sigil.gd" id="2_ihcd2"]
@@ -18,6 +18,18 @@ tracks/0/keys = {
 "update": 1,
 "values": [ExtResource("1_d3n8y")]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_5xqxw"]
 resource_name = "activated"
@@ -33,6 +45,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [ExtResource("1_d3n8y")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_1je8a"]
@@ -50,12 +74,83 @@ tracks/0/keys = {
 "update": 1,
 "values": [ExtResource("2_r2fnj")]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_q8s48"]
+resource_name = "glowing"
+length = 0.6
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_d3n8y")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.572549, 0.572549, 0.572549, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_6w8hl"]
+resource_name = "charging"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_d3n8y")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1.804, 2, 2, 1)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_vfa0o"]
 _data = {
 "RESET": SubResource("Animation_5qbsm"),
 "activated": SubResource("Animation_5xqxw"),
-"deactivated": SubResource("Animation_1je8a")
+"charging": SubResource("Animation_6w8hl"),
+"deactivated": SubResource("Animation_1je8a"),
+"glowing": SubResource("Animation_q8s48")
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ahsxc"]
