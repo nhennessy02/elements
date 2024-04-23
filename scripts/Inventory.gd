@@ -158,7 +158,7 @@ func itemPickup():
 				if inventory.size() == 3:
 					var temp = item.getId()
 					item.setId(get_combo_index(inventory.pop_front()))
-					inventory.push_back([temp])
+					inventory.push_back(get_combo_from_index(temp))
 					inventory_changed.emit(inventory)
 					#swap items
 					# save information about the item in the inventory array
