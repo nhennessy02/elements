@@ -121,6 +121,15 @@ func _on_texture_button_pressed():
 
 # Exit the Combination Altar UI
 func _on_exit_button_pressed():
+	# Clear combo table
+	for slot in slots:
+		slot.empty();
+		slot.spell_index = -1;
+	for slot in combo_slots:
+		slot.empty();
+		slot.spell_index = -1;
+	
+	# UI visibility 
 	ui.visible = false
 	var player = get_tree().get_nodes_in_group("Player")[0]
 	player.get_node("UI").visible = true
