@@ -1,12 +1,41 @@
-[gd_scene load_steps=2 format=3 uid="uid://c7bpniu5otbo5"]
+[gd_scene load_steps=6 format=3 uid="uid://c7bpniu5otbo5"]
 
 [ext_resource type="Script" path="res://scripts/mainmenu.gd" id="1_vjevy"]
+[ext_resource type="Texture2D" uid="uid://b600xhdc8bn6" path="res://assets/sprites/UI/title.png" id="2_vhu7r"]
+[ext_resource type="Texture2D" uid="uid://ea50lw4ye7rp" path="res://assets/sprites/UI/cloud.png" id="3_k51ca"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ta8cs"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 55.0
+angle_max = 360.0
+spread = 0.0
+initial_velocity_min = -100.0
+initial_velocity_max = -100.0
+gravity = Vector3(0, 0, 0)
+scale_max = 1.5
+color = Color(0.87451, 0.835294, 0.878431, 0.560784)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_oxtkw"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 55.0
+angle_max = 360.0
+direction = Vector3(-1, 0, 0)
+spread = 0.0
+initial_velocity_min = -100.0
+initial_velocity_max = -100.0
+gravity = Vector3(0, 0, 0)
+scale_max = 1.5
+color = Color(0.960784, 0.909804, 1, 0.266667)
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = -3.0
+offset_bottom = -3.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_vjevy")
@@ -18,9 +47,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.447059, 0.447059, 0.447059, 1)
+color = Color(0.207843, 0.156863, 0.239216, 1)
 
 [node name="PlayButton" type="Button" parent="ColorRect"]
+z_index = 1
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.38125
@@ -28,9 +58,9 @@ anchor_top = 0.411111
 anchor_right = 0.597917
 anchor_bottom = 0.5
 offset_left = -4.0
-offset_top = -160.0
+offset_top = 174.0
 offset_right = 4.0
-offset_bottom = -152.0
+offset_bottom = 182.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 40
@@ -38,6 +68,7 @@ text = "Play
 "
 
 [node name="QuitButton" type="Button" parent="ColorRect"]
+z_index = 1
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.38125
@@ -45,15 +76,16 @@ anchor_top = 0.411111
 anchor_right = 0.597917
 anchor_bottom = 0.5
 offset_left = -4.0
-offset_top = -4.0
+offset_top = 320.0
 offset_right = 4.0
-offset_bottom = 4.0
+offset_bottom = 328.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 40
 text = "Quit"
 
 [node name="RichTextLabel" type="RichTextLabel" parent="ColorRect"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -71,6 +103,30 @@ SPACE to collect spell components
 Press 1, 2, or 3 to select spells
 Right Click to load selected spells into your wand or switch back to the main wand"
 scroll_active = false
+
+[node name="Sprite2D" type="Sprite2D" parent="ColorRect"]
+texture_filter = 1
+position = Vector2(942, 284)
+scale = Vector2(3, 3)
+texture = ExtResource("2_vhu7r")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(2153, 922)
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_ta8cs")
+texture = ExtResource("3_k51ca")
+lifetime = 25.0
+visibility_rect = Rect2(-500, -500, 500, 500)
+draw_order = 0
+
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="."]
+position = Vector2(-183, 1095)
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_oxtkw")
+texture = ExtResource("3_k51ca")
+lifetime = 25.0
+visibility_rect = Rect2(0, -500, 500, 500)
+draw_order = 0
 
 [connection signal="pressed" from="ColorRect/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="ColorRect/QuitButton" to="." method="_on_quit_button_pressed"]
