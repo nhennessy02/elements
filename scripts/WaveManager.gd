@@ -30,7 +30,7 @@ var player
 var current_stage_index : int	# the index of the active stage of the wave in the array
 
 # Wave Counter
-@onready var wave_counter_ui = $WaveCounter
+#@onready var wave_counter_ui = $WaveCounter
 
 # When creating a wave in the inspector: 
 # 1) create a new element in the array
@@ -77,12 +77,12 @@ func _ready():
 	
 	# If there is a custom wave run it
 	if wave_stages.size() > 0:
-		wave_counter_ui.update_wave_ui()
+		#wave_counter_ui.update_wave_ui()
 		next_wave()
 	
 	# Otherwise run a random wave
 	else:
-		wave_counter_ui.update_wave_ui()
+		#wave_counter_ui.update_wave_ui()
 		random_wave()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

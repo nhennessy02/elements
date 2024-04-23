@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://drlkmigl88gcq"]
+[gd_scene load_steps=9 format=3 uid="uid://drlkmigl88gcq"]
 
 [ext_resource type="Texture2D" uid="uid://08ysnovu2kcd" path="res://assets/subarea room/comboaltar.png" id="1_7dj2q"]
 [ext_resource type="Script" path="res://scripts/comboaltar.gd" id="2_apvxk"]
@@ -9,6 +9,97 @@ radius = 74.6734
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q2vuw"]
 radius = 12.7273
 height = 65.645
+
+[sub_resource type="Animation" id="Animation_oxm0h"]
+resource_name = "static"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_7dj2q")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_a5s1p"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_7dj2q")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_lgceo"]
+resource_name = "glowing"
+length = 0.6
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.682353, 0.682353, 0.682353, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_7dj2q")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2rywo"]
+_data = {
+"RESET": SubResource("Animation_a5s1p"),
+"glowing": SubResource("Animation_lgceo"),
+"static": SubResource("Animation_oxm0h")
+}
 
 [node name="Comboaltar" type="CharacterBody2D"]
 scale = Vector2(2.19362, 2.2)
@@ -45,6 +136,11 @@ initial_velocity_max = 10.0
 scale_amount_min = 5.0
 scale_amount_max = 5.0
 color = Color(0.372549, 0, 0.141176, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_2rywo")
+}
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

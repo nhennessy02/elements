@@ -3,6 +3,7 @@ extends CharacterBody2D
 @onready var sprite = $Sprite2D
 @onready var particles = $CPUParticles2D
 @onready var ui = $"../CombinerUI"
+@onready var anim_player = $AnimationPlayer
 var ui_script: Node2D
 
 var player
@@ -40,12 +41,14 @@ func _process(_delta):
 
 # Check for when the player enters the altar's range
 func _on_area_2d_body_entered(body):
+	anim_player.play("glowing")
 	for child in body.get_children():
 		if child is DamageablePlayer:
 			interactable = true
 
 # Check for when the player leaves the altar's range
 func _on_area_2d_body_exited(body):
+	anim_player.play("static")
 	for child in body.get_children():
 		if child is DamageablePlayer:
 			interactable = false

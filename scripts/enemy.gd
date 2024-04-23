@@ -46,6 +46,9 @@ var total_steering_force : Vector2 = Vector2.ZERO
 # Sprite
 @onready var sprite = $Sprite2D
 
+# Training Dummy?
+@export var static_enemy: bool = false
+
 func _ready(): # LACKS DEFAULTS IN CASE OF MISSING PLAYER OR ENTITY MANAGER
 	entity_manager = get_tree().get_first_node_in_group("EntityManager")
 	
@@ -57,9 +60,10 @@ func _ready(): # LACKS DEFAULTS IN CASE OF MISSING PLAYER OR ENTITY MANAGER
 	# Finds the player and gets a reference to it
 	player = entity_manager.player
 	
-	# Play spawning animation
-	animPlayer.play("spawn")
-	
+	if !static_enemy:
+		# Play spawning animation
+		animPlayer.play("spawn")
+		
 	#Plays idle animation when the spawn animation finishes
 	animPlayer.queue("base")
 	
@@ -69,31 +73,33 @@ func _ready(): # LACKS DEFAULTS IN CASE OF MISSING PLAYER OR ENTITY MANAGER
 	set_physics_process(true)
 
 func _physics_process(delta):
-	# Calc velocity each frame
-	velocity += acceleration * delta
-	position += velocity * delta
-	
-	# Get direction based on velocity
-	direction = velocity.normalized()
-	
-	# Zero acceleration
-	acceleration = Vector2.ZERO
-	
-	# Apply all steering forces to the enemy's movements
-	total_steering_force = Vector2.ZERO
-	get_node("Behavior").calc_steering_forces()
-	total_steering_force = total_steering_force.clamp(-max_force, max_force)
-	apply_force(total_steering_force)
-	
-	# Activate Collisions with Tilemap
-	move_and_slide()
-	
-	# Flip the enemy's sprite
-	if velocity.x > 0 and abs(velocity.x) > 2:
-		sprite.flip_h = true
-	elif velocity.x < 0 and abs(velocity.x) > 2:
-		sprite.flip_h = false
+	if !static_enemy:
+		# Calc velocity each frame
+		velocity += acceleration * delta
+		position += velocity * delta
 		
+		# Get direction based on velocity
+		direction = velocity.normalized()
+		
+		# Zero acceleration
+		acceleration = Vector2.ZERO
+		
+		# Apply all steering forces to the enemy's movements
+		total_steering_force = Vector2.ZERO
+		if !static_enemy:
+			get_node("Behavior").calc_steering_forces()
+		total_steering_force = total_steering_force.clamp(-max_force, max_force)
+		apply_force(total_steering_force)
+		
+		# Activate Collisions with Tilemap
+		move_and_slide()
+		
+		# Flip the enemy's sprite
+		if velocity.x > 0 and abs(velocity.x) > 2:
+			sprite.flip_h = true
+		elif velocity.x < 0 and abs(velocity.x) > 2:
+			sprite.flip_h = false
+			
 
 # Applies movement to the enemy
 func apply_force(force: Vector2):
