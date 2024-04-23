@@ -117,6 +117,10 @@ func _make_new_path_on_timeout():
 
 # Movement function: Enemies move towards player position
 func seek(seek_target_pos: Vector2):
+	# play the running animation if the flee animation was already going
+	if(animPlayer.get_current_animation() == "flee"):
+		animPlayer.play("base")
+	
 	# Get desired velocity
 	var desired_velocity : Vector2 = seek_target_pos - position
 	
@@ -129,6 +133,10 @@ func seek(seek_target_pos: Vector2):
 
 # Move away from a target
 func flee(flee_target_pos: Vector2):
+	# play the fleeing animation if the seek animation was already going
+	if(animPlayer.get_current_animation() == "base"):
+		animPlayer.play("flee")
+	
 	# Determind desired flee velocity
 	var desired_velocity : Vector2 = position - flee_target_pos
 	
@@ -141,6 +149,10 @@ func flee(flee_target_pos: Vector2):
 
 # Move away from a target's projected future position
 func evade(future_time: float = 1.0):
+	# play the fleeing animation if the seek animation was already going
+	if(animPlayer.get_current_animation() == "base"):
+		animPlayer.play("flee")
+		
 	# Determind future position of player
 	var future_player_pos : Vector2 = player.position + player.velocity * future_time
 	# Flee the estimated future position
