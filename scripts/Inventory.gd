@@ -28,7 +28,7 @@ var inventory_loaded: bool = false
 func _ready():
 #	inventory = [Element.DIVINE]
 #	inventory_changed.emit(inventory)
-	combo_created.emit("Epidemic",load("res://prefabs/player/spells/epidemic.tscn"),Color(0.02,0.77,0.12))
+	combo_created.emit("Rot",load("res://prefabs/player/spells/rot.tscn"),Color(0.012, 0.169, 0))
 	pass
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -102,9 +102,6 @@ func set_active_spell(index: int):
 func comboLookup(array):
 	array.sort_custom(func(a,b): return a < b)
 	match array:
-		[]:
-			print("using basic projectile")
-			combo_created.emit("Basic Projectile",load("res://prefabs/player/base_projectile.tscn"),Color(0.4,0.21,0.74))
 		[Element.PESTILENCE]:
 			print("using Pestilence")
 			combo_created.emit("Pestilence",load("res://prefabs/player/spells/pestilence.tscn"),Color(0,0.47,0.09))
@@ -129,7 +126,9 @@ func comboLookup(array):
 		[Element.PESTILENCE,Element.HEMOMANCY]:
 			print("using Leeching Shot")
 			combo_created.emit("Leeching Shot",load("res://prefabs/player/spells/leeching_shot.tscn"),Color(0.85,0.43,0.30))
-			
+		[Element.PESTILENCE,Element.BONECRAFT]:
+			print("using Rot")
+			combo_created.emit("Rot",load("res://prefabs/player/spells/rot.tscn"),Color(0.012, 0.169, 0))
 		_:
 			print("couldn't decipher combo")
 
