@@ -11,7 +11,7 @@ class_name Effect
 var attachedNode
 var duration
 var effect
-var effectIcons = [0,load("res://assets/sprites/effects/bleeding.png")]
+var effectIcons = [0,load("res://assets/sprites/effects/bleeding.png"),0,load("res://assets/sprites/effects/slowed.png"),0,0]
 var iconContainer
 var icon
 # Called when the node enters the scene tree for the first time.
