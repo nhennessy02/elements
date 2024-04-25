@@ -46,8 +46,9 @@ var total_steering_force : Vector2 = Vector2.ZERO
 # Sprite
 @onready var sprite = $Sprite2D
 
-# Training Dummy?
+# Hotfix for animations
 @export var static_enemy: bool = false
+@export var is_skeleton: bool = false
 
 func _ready(): # LACKS DEFAULTS IN CASE OF MISSING PLAYER OR ENTITY MANAGER
 	entity_manager = get_tree().get_first_node_in_group("EntityManager")
@@ -140,7 +141,7 @@ func seek(seek_target_pos: Vector2):
 # Move away from a target
 func flee(flee_target_pos: Vector2):
 	# play the fleeing animation if the seek animation was already going
-	if(animPlayer.get_current_animation() == "base"):
+	if(animPlayer.get_current_animation() == "base") and is_skeleton:
 		animPlayer.play("flee")
 	
 	# Determind desired flee velocity
@@ -156,7 +157,7 @@ func flee(flee_target_pos: Vector2):
 # Move away from a target's projected future position
 func evade(future_time: float = 1.0):
 	# play the fleeing animation if the seek animation was already going
-	if(animPlayer.get_current_animation() == "base"):
+	if(animPlayer.get_current_animation() == "base") and is_skeleton:
 		animPlayer.play("flee")
 		
 	# Determind future position of player
