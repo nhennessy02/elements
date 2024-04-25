@@ -1,8 +1,95 @@
-[gd_scene load_steps=11 format=3 uid="uid://eip6jv8ww40u"]
+[gd_scene load_steps=16 format=3 uid="uid://eip6jv8ww40u"]
 
 [ext_resource type="Texture2D" uid="uid://jmlvyyxkt03o" path="res://assets/subarea room/pillar.png" id="1_6js4v"]
 [ext_resource type="Script" path="res://scripts/item_pillar.gd" id="1_uit35"]
+[ext_resource type="Texture2D" uid="uid://cufns8y0finnt" path="res://assets/sprites/UI/pillarinteract_spritesheet.png" id="2_d28if"]
 [ext_resource type="PackedScene" uid="uid://rtck8bqo3jek" path="res://prefabs/base_item.tscn" id="2_retf5"]
+
+[sub_resource type="Animation" id="Animation_rpays"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_d28if")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_lquvc"]
+resource_name = "active"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_d28if")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_73g6r"]
+_data = {
+"RESET": SubResource("Animation_rpays"),
+"active": SubResource("Animation_lquvc")
+}
 
 [sub_resource type="Animation" id="Animation_bgapk"]
 length = 0.001
@@ -57,10 +144,25 @@ transitions = ["Start", "item_bob", SubResource("AnimationNodeStateMachineTransi
 radius = 14.6667
 height = 36.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_0s3nr"]
+radius = 51.3377
+
 [node name="ItemPillar" type="CharacterBody2D"]
 scale = Vector2(1.5, 1.5)
 collision_mask = 0
 script = ExtResource("1_uit35")
+
+[node name="Interact" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, 10)
+scale = Vector2(2, 2)
+texture = ExtResource("2_d28if")
+hframes = 5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Interact"]
+libraries = {
+"": SubResource("AnimationLibrary_73g6r")
+}
 
 [node name="Pillar" type="Sprite2D" parent="."]
 position = Vector2(0, -11.333)
@@ -86,3 +188,13 @@ anim_player = NodePath("../AnimationPlayer")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -23.3333)
 shape = SubResource("CapsuleShape2D_h72sh")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_0s3nr")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

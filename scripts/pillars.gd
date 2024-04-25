@@ -59,14 +59,15 @@ func get_pillar_index(min_index: int = 0, max_index: int = 4):
 func delete_all_items():
 	for pillar in pillars:
 		for child in pillar.get_children():
-			child.queue_free()
+			for item in child.get_children():
+				item.queue_free()
 	
 	# Stop from calling again
 	item_collected = true
 	
 	# Player can now leave to next wave
-	activate_teleporter()
+	#activate_teleporter()
 
-# Allows the player to leave the subarea
-func activate_teleporter():
-	teleporter.activated = true
+## Allows the player to leave the subarea
+#func activate_teleporter():
+	#teleporter.activated = trues

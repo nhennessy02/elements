@@ -1,7 +1,12 @@
-[gd_scene load_steps=4 format=3 uid="uid://rtck8bqo3jek"]
+[gd_scene load_steps=9 format=3 uid="uid://rtck8bqo3jek"]
 
 [ext_resource type="Texture2D" uid="uid://bveb47lhblcqp" path="res://assets/sprites/elements/pestilence_bubble.png" id="1_sxtuc"]
 [ext_resource type="Script" path="res://scripts/Item.gd" id="2_41ebv"]
+[ext_resource type="Texture2D" uid="uid://byl23y0mknk7n" path="res://assets/sprites/elements/hemomancy_bubble.png" id="3_bmka2"]
+[ext_resource type="Texture2D" uid="uid://bq1agdwp1dsdm" path="res://assets/sprites/elements/convalescence_bubble.png" id="4_1ehwj"]
+[ext_resource type="Texture2D" uid="uid://crdqf51ckt345" path="res://assets/sprites/elements/bonecraft_bubble.png" id="5_yn06n"]
+[ext_resource type="Texture2D" uid="uid://dx35o2r1usnta" path="res://assets/sprites/elements/occultism_bubble.png" id="6_fnujk"]
+[ext_resource type="Texture2D" uid="uid://bccn7v103x16a" path="res://assets/sprites/elements/default_drop.png" id="7_no3t3"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dm1pk"]
 radius = 36.4966
@@ -21,3 +26,5 @@ shape = SubResource("CircleShape2D_dm1pk")
 
 [node name="Item" type="Node" parent="."]
 script = ExtResource("2_41ebv")
+spriteArray = Array[Texture2D]([ExtResource("1_sxtuc"), ExtResource("3_bmka2"), ExtResource("4_1ehwj"), ExtResource("5_yn06n"), ExtResource("6_fnujk")])
+default_item_sprite = ExtResource("7_no3t3")
