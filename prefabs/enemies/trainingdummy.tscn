@@ -11,9 +11,8 @@ radius = 48.2597
 radius = 78.0
 height = 178.0
 
-[sub_resource type="Animation" id="Animation_b5n00"]
-resource_name = "base"
-length = 0.1
+[sub_resource type="Animation" id="Animation_gw6au"]
+length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -24,7 +23,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("3_isxtw")]
+"values": [null]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -51,8 +50,9 @@ tracks/2/keys = {
 "values": [0]
 }
 
-[sub_resource type="Animation" id="Animation_gw6au"]
-length = 0.001
+[sub_resource type="Animation" id="Animation_b5n00"]
+resource_name = "base"
+length = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -63,7 +63,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [null]
+"values": [ExtResource("3_isxtw")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false

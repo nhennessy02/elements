@@ -10,6 +10,9 @@ var player
 
 var interactable: bool = false
 
+# Interact UI
+@onready var interact_ui = $InteractUI
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	# Get player reference
@@ -41,6 +44,7 @@ func _process(_delta):
 
 # Check for when the player enters the altar's range
 func _on_area_2d_body_entered(body):
+	interact_ui.visible = true
 	anim_player.play("glowing")
 	for child in body.get_children():
 		if child is DamageablePlayer:
@@ -48,6 +52,7 @@ func _on_area_2d_body_entered(body):
 
 # Check for when the player leaves the altar's range
 func _on_area_2d_body_exited(body):
+	interact_ui.visible = false
 	anim_player.play("static")
 	for child in body.get_children():
 		if child is DamageablePlayer:

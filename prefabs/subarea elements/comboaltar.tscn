@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://drlkmigl88gcq"]
+[gd_scene load_steps=10 format=3 uid="uid://drlkmigl88gcq"]
 
 [ext_resource type="Texture2D" uid="uid://08ysnovu2kcd" path="res://assets/subarea room/comboaltar.png" id="1_7dj2q"]
 [ext_resource type="Script" path="res://scripts/comboaltar.gd" id="2_apvxk"]
+[ext_resource type="PackedScene" uid="uid://d2wj23eg2272h" path="res://prefabs/ui elements/interact_ui.tscn" id="3_sa8gq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3vw30"]
 radius = 74.6734
@@ -9,34 +10,6 @@ radius = 74.6734
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q2vuw"]
 radius = 12.7273
 height = 65.645
-
-[sub_resource type="Animation" id="Animation_oxm0h"]
-resource_name = "static"
-length = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("1_7dj2q")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:self_modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
 
 [sub_resource type="Animation" id="Animation_a5s1p"]
 length = 0.001
@@ -94,6 +67,34 @@ tracks/1/keys = {
 "values": [ExtResource("1_7dj2q")]
 }
 
+[sub_resource type="Animation" id="Animation_oxm0h"]
+resource_name = "static"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_7dj2q")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2rywo"]
 _data = {
 "RESET": SubResource("Animation_a5s1p"),
@@ -141,6 +142,9 @@ color = Color(0.372549, 0, 0.141176, 1)
 libraries = {
 "": SubResource("AnimationLibrary_2rywo")
 }
+
+[node name="InteractUI" parent="." instance=ExtResource("3_sa8gq")]
+visible = false
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
