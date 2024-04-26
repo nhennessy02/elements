@@ -15,7 +15,7 @@ rotation = 1.5708
 texture = ExtResource("2_enjdg")
 
 [node name="Area2D(Enemies)" type="Area2D" parent="."]
-collision_layer = 8
+collision_layer = 0
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D(Enemies)"]
@@ -24,7 +24,8 @@ shape = SubResource("CircleShape2D_p2m7k")
 debug_color = Color(0, 0.6, 0.701961, 0.419608)
 
 [node name="Area2D(Walls)" type="Area2D" parent="."]
-collision_layer = 8
+collision_layer = 0
+collision_mask = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D(Walls)"]
 position = Vector2(11, 0)

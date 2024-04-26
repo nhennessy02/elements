@@ -3,6 +3,7 @@ class_name Enemy extends CharacterBody2D
 # Used for every enemy
 # Change these variables in the Inspector
 @export var speed : float = 150.0
+const base_speed : float = 150.0
 @export var damage : int = 1
 
 # Pathfinding Variables

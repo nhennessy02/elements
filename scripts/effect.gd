@@ -19,13 +19,13 @@ func _ready():
 	iconContainer = get_node("../EffectIconContainer")
 	print(iconContainer)
 	icon = TextureRect.new()
-	icon.texture = effectIcons[1]
+	icon.texture = effectIcons[effect]
 	iconContainer.add_child(icon)
 	# applying effect to entity
 	durationTimer.start(duration)
 	match effect:
 		Effects.SPEED:
-			#character speed += value
+			get_parent().speed = get_parent().speed*1.5;
 			pass
 		Effects.BLEED:
 			get_parent().get_child(3).hit(1) #this has to be rewritten to work for anything and not just a damageable node in the 4th position of the node tree
@@ -33,6 +33,7 @@ func _ready():
 		Effects.REGEN:
 			pass
 		Effects.SLOW:
+			get_parent().speed = get_parent().speed/2;
 			pass
 		Effects.GHOSTING:
 			pass
@@ -88,13 +89,14 @@ func end(): #undoes the effects and removes itself from the node it's attached t
 	icon.queue_free()
 	match effect:
 		Effects.SPEED:
-			#character speed -= value
+			get_parent().speed = get_parent().base_speed
 			pass
 		Effects.BLEED:
 			pass
 		Effects.REGEN:
 			pass
 		Effects.SLOW:
+			get_parent().speed = get_parent().base_speed
 			pass
 		Effects.GHOSTING:
 			pass

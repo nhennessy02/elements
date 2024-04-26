@@ -28,7 +28,7 @@ var inventory_loaded: bool = false
 func _ready():
 #	inventory = [Element.DIVINE]
 #	inventory_changed.emit(inventory)
-	combo_created.emit("Rot",load("res://prefabs/player/spells/rot.tscn"),Color(0.012, 0.169, 0))
+	combo_created.emit("Osteokinesis",load("res://prefabs/player/spells/osteokinesis.tscn"),Color(0.58,0.56,0.50))
 	pass
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -129,6 +129,9 @@ func comboLookup(array):
 		[Element.PESTILENCE,Element.BONECRAFT]:
 			print("using Rot")
 			combo_created.emit("Rot",load("res://prefabs/player/spells/rot.tscn"),Color(0.012, 0.169, 0))
+		[Element.BONECRAFT,Element.OCCULTISM]:
+			print("using Osteokinesis")
+			combo_created.emit("Osteokinesis",load("res://prefabs/player/spells/osteokinesis.tscn"),Color(0.58,0.56,0.50))
 		_:
 			print("couldn't decipher combo")
 

@@ -5,7 +5,7 @@ var active : bool = true
 
 @export var speed : float = 500
 @export var damage : int = 3
-@export var cooldown : float = 0.3
+#@export var cooldown : float = 0.3
 
 var wand
 
@@ -15,7 +15,7 @@ var wand
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	wand = get_node("../Player/Wand")
-	wand.startCooldown(cooldown)
+	wand.startBasicCooldown()
 	wand.startFireAnimation()
 	$AnimationPlayer.play("basic")
 	pass

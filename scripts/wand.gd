@@ -2,6 +2,7 @@ extends Node2D
 
 # Firing delay & hold to fire
 var can_fire : bool = true
+var can_fire_basic : bool = true
 var mousePos
 @export var defaultSpell : PackedScene
 var currentSpell
@@ -29,16 +30,16 @@ func _process(_delta):
 	look_at(mousePos)
 	
 	# Input event
-	if Input.is_action_pressed("fire_wand") and can_fire: #left mouse click
+	print(can_fire)
+	if Input.is_action_pressed("fire_wand") and can_fire_basic: #left mouse click
 		fire(defaultSpell, true)
-	elif Input.is_action_pressed("fire_spell") and can_fire: #left mouse click
+	elif Input.is_action_pressed("fire_spell") and can_fire: #right mouse click
 		fire(currentSpell)
 	#if Input.is_action_just_pressed("reset_wand") and (can_fire or not cooldownTimer.is_stopped()):
 	#	reset_wand()
 
 func fire(spell: PackedScene = defaultSpell, base_fire: bool = false):
 	if currentSpell != defaultSpell or base_fire:
-		can_fire = false
 		var bullet = spell.instantiate()
 		get_tree().current_scene.add_child(bullet)
 		bullet.global_position = spawnPoint.global_position #sets spawnpoint at the spawnpoint node
@@ -48,7 +49,7 @@ func reset_wand():
 	currentSpell = defaultSpell
 
 func _on_inventory_combo_created(_spellName, scene, newWandColor):
-	fire(currentSpell)
+	#fire(currentSpell)
 	currentSpell = scene
 	sprite.material.set_shader_parameter("to",newWandColor)
 	print(Vector4(newWandColor.r,newWandColor.b,newWandColor.g,newWandColor.a))
@@ -61,14 +62,21 @@ func startChargingAnimation():
 
 # function to start the cooldown till next shot
 # should be triggered along with starting the fire animation
-func startCooldown(value): 
+func startCooldown(value):
 	print("started cooldown")
 	cooldownTimer.start(value)
+	can_fire = false 
 	animPlayer.play("cooldown")
 	$"../TextureProgressBar".max_value = value;
 	$"../TextureProgressBar".value = value;
 	if value > 1:
 		$CooldownSmoke.emitting = true
+
+func startBasicCooldown():
+	print("started basic cooldown")
+	basic_attack_timer.start()
+	can_fire_basic = false
+	animPlayer.play("cooldown")
 
 func startFireAnimation():
 	print("started firing animation")
@@ -88,3 +96,9 @@ func _on_cooldown_timer_timeout():
 	can_fire = true
 	animPlayer.play("idle")
 	$CooldownSmoke.emitting = false;
+
+
+func _on_basic_projectile_timer_timeout():
+	print("started idle animation")
+	can_fire_basic = true
+	animPlayer.play("idle")

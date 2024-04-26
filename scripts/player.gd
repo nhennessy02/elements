@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
-const speed : float = 300.0
+var speed : float = 300.0
+const base_speed : float = 300.0
 const max_speed : Vector2 = Vector2(400,400)
 
 var direction
