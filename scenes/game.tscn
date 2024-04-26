@@ -17,7 +17,8 @@ layer_0/tile_data = PackedInt32Array(-65536, 65536, 3, -65535, 0, 4, 1, 0, 1, 0,
 
 [node name="WaveManager" parent="." node_paths=PackedStringArray("spawn_points") instance=ExtResource("3_qug33")]
 spawn_points = [NodePath("../SpawnPts/spawnpoint"), NodePath("../SpawnPts/spawnpoint2"), NodePath("../SpawnPts/spawnpoint3"), NodePath("../SpawnPts/spawnpoint4"), NodePath("../SpawnPts/spawnpoint5"), NodePath("../SpawnPts/spawnpoint6"), NodePath("../SpawnPts/spawnpoint7"), NodePath("../SpawnPts/spawnpoint8"), NodePath("../SpawnPts/spawnpoint9")]
-r_stages_max = 7
+r_stages_min = 4
+r_stages_max = 6
 r_count_min = 2
 r_count_max = 5
 r_time_min = 3.0

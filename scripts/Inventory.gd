@@ -28,7 +28,7 @@ var inventory_loaded: bool = false
 func _ready():
 #	inventory = [Element.DIVINE]
 #	inventory_changed.emit(inventory)
-	combo_created.emit("Osteokinesis",load("res://prefabs/player/spells/osteokinesis.tscn"),Color(0.58,0.56,0.50))
+	#combo_created.emit("Osteokinesis",load("res://prefabs/player/spells/osteokinesis.tscn"),Color(0.58,0.56,0.50))
 	pass
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
